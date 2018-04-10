@@ -1,6 +1,6 @@
 # kejian
 
-> A Vue.js project
+> 科健工程管理有限公司企业官网 前端
 
 ## Build Setup
 
@@ -18,4 +18,4 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
