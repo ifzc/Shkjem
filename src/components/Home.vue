@@ -7,29 +7,23 @@
       h2 做中国最值得信赖的项目管理公司
       h2 Shanghai KeJian Engineering Management & Consulting Co.Ltd
       h5 点击进入下一页
-    //-
-      .section(style="background-image: url(/static/home_content.jpg)")
-        h2 科建文化
-        h3 Our culture
-        img(src="/static/home_font.png",style="margin: 8% 0")
-        h5 点击进入下一页
     .section(style="background-image: url(/static/home_anli.jpg)")
       h2 经典案例
       h3 Suecessful Cass
       el-row.newsbox.anli(:gutter="0",style="margin-top: 20px")
         el-col(:span="8")
-          img(v-bind:src="tableDataan[0].Img")
+          img(v-bind:src="imgserver + tableDataan[0].Img")
         el-col(:span="8")
           p {{ tableDataan[1].Title }}
           p {{ tableDataan[1].Content }}
         el-col(:span="8")
-          img(v-bind:src="tableDataan[2].Img")
+          img(v-bind:src="imgserver + tableDataan[2].Img")
       el-row.newsbox.anli(:gutter="0")
         el-col(:span="8")
           p {{ tableDataan[0].Title }}
           p {{ tableDataan[0].Content }}
         el-col(:span="8")
-          img(v-bind:src="tableDataan[1].Img")
+          img(v-bind:src="imgserver + tableDataan[1].Img")
         el-col(:span="8")
           p {{ tableDataan[2].Title }}
           p {{ tableDataan[2].Content }}
@@ -39,13 +33,13 @@
       h3 Latest News
       el-row.newsbox(:gutter="0",style="margin-top: 20px")
         el-col(:span="6",:offset="3")
-          img(v-bind:src="tableData[0].Img")
+          img(v-bind:src="imgserver + tableData[0].Img")
         el-col(:span="6")
           p {{ tableData[1].Title }}
           p {{ tableData[1].Content }}
           p {{ tableData[1].CreateTime.substring(0,10) }}
         el-col(:span="6")
-          img(v-bind:src="tableData[2].Img")
+          img(v-bind:src="imgserver + tableData[2].Img")
       .bar-row
         span
         span
@@ -56,7 +50,7 @@
           p {{ tableData[0].Content }}
           p {{ tableData[0].CreateTime.substring(0,10) }}
         el-col(:span="6")
-          img(v-bind:src="tableData[1].Img")
+          img(v-bind:src="imgserver + tableData[1].Img")
         el-col(:span="6")
           p {{ tableData[2].Title }}
           p {{ tableData[2].Content }}
@@ -65,11 +59,11 @@
 </template>
 
 <script>
-import axios from "../router/http"
+import axios from "../router/http";
 
-import "../../static/bli/jquery.fullPage.css"
-import "../../static/bli/jquery-1.8.3.min.js"
-import "../../static/bli/jquery.fullPage.min.js"
+import "../../static/bli/jquery.fullPage.css";
+import "../../static/bli/jquery-1.8.3.min.js";
+import "../../static/bli/jquery.fullPage.min.js";
 
 export default {
   name: "Home",
@@ -128,44 +122,31 @@ export default {
   },
   methods: {
     getdataall() {
-      var sessiondata = JSON.parse(sessionStorage.getItem("homenewdata"))
-      if (sessiondata != null) {
-        this.tableData = sessiondata;
-      } else {
-        axios
-          .get("/news/GetNewsAll", {
-            params: {
-              type: 0,
-              num: 3
-            }
-          })
-          .then(response => {
-            this.tableData = response.data;
-            sessionStorage.setItem(
-              "homenewdata",
-              JSON.stringify(response.data)
-            );
-            //console.log(this.tableData);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      }
+      axios
+        .get("/news/GetNewsAll", {
+          params: {
+            type: 0,
+            num: 3
+          }
+        })
+        .then(response => {
+          this.tableData = response.data;
+          sessionStorage.setItem("homenewdata", JSON.stringify(response.data));
+          //console.log(this.tableData);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
 
-      var sessiondataan = JSON.parse(sessionStorage.getItem("anlidata"));
-      if (sessiondataan != null) {
-        this.tableDataan = sessiondataan
-      } else {
-        axios
-          .get("/cases/GetCasesAll")
-          .then(response => {
-            this.tableDataan = response.data
-            sessionStorage.setItem("anlidata", JSON.stringify(response.data))
-          })
-          .catch(function(error) {
-            console.log(error)
-          });
-      }
+      axios
+        .get("/cases/GetCasesAll")
+        .then(response => {
+          this.tableDataan = response.data;
+          sessionStorage.setItem("anlidata", JSON.stringify(response.data));
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   },
   created: function() {
@@ -174,10 +155,10 @@ export default {
   },
   destroyed: function() {
     //禁用滚动
-  //$.fn.fullpage.setAllowScrolling(false)
-  //$.fn.fullpage.destroy();
-  //$.fn.fullpage.destroy('all');
-    //$.fn.fullpage.setAllowScrolling() 
+    //$.fn.fullpage.setAllowScrolling(false)
+    //$.fn.fullpage.destroy();
+    //$.fn.fullpage.destroy('all');
+    //$.fn.fullpage.setAllowScrolling()
     // moveSectionDown()
     //console.log("我已经离开了！");
   }
@@ -208,14 +189,14 @@ export default {
   height: 100%;
   text-align: center;
 }
-.anli{
+.anli {
   /* min-height: 300px; */
   width: 80%;
   margin: 0 auto;
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
-.anli .el-col{
-  padding: 2% 2% !important
+.anli .el-col {
+  padding: 2% 2% !important;
 }
 .newsbox .el-col {
   padding: 32px;

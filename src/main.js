@@ -12,6 +12,9 @@ import 'animate.css'
 //import VueFullpage from 'vue-fullpage'
 //Vue.use(VueFullpage)
 
+Vue.prototype.imgserver = 'http://120.79.76.250/'
+
+
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })
 

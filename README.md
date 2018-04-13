@@ -1,7 +1,21 @@
-# kejian
+# keJian
+
 
 > 科健工程管理有限公司企业官网 前端
-> 第二版
+
+
+## 组件列表
+
+1. Vue
+2. Vue-Router
+3. Element-UI
+4. Jade
+5. Axios
+
+## 静态引用
+
+1. animate.css
+2. fullPage.js
 
 ## Build Setup
 

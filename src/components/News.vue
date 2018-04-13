@@ -6,7 +6,7 @@
         p.p-2(@click="cktopbtn(2)") 行业动态
     el-row.content
         el-col.new-item(:span="7",v-for="newdata in newsdata",:key="newdata.Id")
-            img(v-bind:src='newdata.Img')
+            img(v-bind:src='imgserver + newdata.Img')
             h4 {{ newdata.Title }}
             p {{ newdata.Content }}
             p 
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     cktopbtn: function(i) {
-      console.log(i);
+      //console.log(i);
       var ps = document.querySelectorAll(".topbtn p");
       ps.forEach(element => {
         element.classList.remove("action");
@@ -37,10 +37,7 @@ export default {
       this.getdataall(i);
     },
     getdataall(type) {
-      var sessiondata = JSON.parse(sessionStorage.getItem('newsdata_'+type))
-      if(sessiondata != null){
-        this.newsdata = sessiondata
-      }else{
+      
       axios
         .get("/news/GetNewsAll", {
           params: {
@@ -55,7 +52,7 @@ export default {
         .catch(function(error) {
           console.log(error);
         })
-      }
+      
     }
   },
   created: function() {
