@@ -7,11 +7,11 @@
     el-row.content
         el-col.new-item(:span="7",v-for="newdata in newsdata",:key="newdata.Id")
             img(v-bind:src='imgserver + newdata.Img')
-            h4 {{ newdata.Title }}
-            p {{ newdata.Content }}
+            h4.newtitle {{ newdata.Title }}
+            p.newcontent {{ newdata.Content }}
             p 
                 i.el-icon-caret-right
-                span MORE
+                span.newsbtn MORE
 </template>
 
 <script>
@@ -37,22 +37,23 @@ export default {
       this.getdataall(i);
     },
     getdataall(type) {
-      
       axios
         .get("/news/GetNewsAll", {
           params: {
             type: type,
-            num : 12
+            num: 12
           }
         })
         .then(response => {
-          this.newsdata = response.data
-          sessionStorage.setItem('newsdata_'+ type, JSON.stringify(response.data))
+          this.newsdata = response.data;
+          sessionStorage.setItem(
+            "newsdata_" + type,
+            JSON.stringify(response.data)
+          );
         })
         .catch(function(error) {
           console.log(error);
-        })
-      
+        });
     }
   },
   created: function() {
@@ -64,7 +65,8 @@ export default {
 <style scoped>
 #news {
   background-image: url(/static/waitanbg.png);
-  background-color: rgba(105, 200, 245, 0.2);
+  /* background-color: rgba(105, 200, 245, 0.2); */
+  background-color: #14679f;
 }
 .topbtn {
   position: relative;
@@ -77,21 +79,43 @@ export default {
   float: left;
   margin: 0;
   padding: 4% 16%;
-  background-color: #fff;
+  background-color: #e4e4e4;
 }
 .action {
   color: #fff;
-  background-color: #1767a1 !important;
+  background-color: #e13834 !important;
 }
 .content {
   padding: 5%;
+  background-color: #fff;
+  box-sizing: border-box;
+  width: 85%;
+  margin: 0 auto;
 }
 .new-item {
   padding: 20px;
   margin-left: 3%;
+  border: 1px solid #15669e;
+  min-height: 390px;
+  margin-bottom: 15px;
 }
 .new-item img {
   width: 100%;
+  max-height: 144px;
+}
+.newtitle {
+  padding: 0px 10px;
+  border-left: 1px solid #15669e;
+  color: #15669e;
+}
+.newcontent {
+  font-size: 14px;
+  color: #808080;
+}
+.newsbtn {
+  margin: 0;
+  padding: 0;
+  color: #e13834;
 }
 </style>
 

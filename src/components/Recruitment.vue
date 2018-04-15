@@ -69,7 +69,7 @@ export default {
   float: left;
   margin: 0;
   padding: 3% 11%;
-  background-color: #fff;
+  background-color: #e4e4e4;
 }
 .action {
   color: #fff;
