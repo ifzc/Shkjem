@@ -3,59 +3,58 @@
   .fullpage-wp(v-fullpage="opts")
 #fullpage
     .section(style="background-image: url(/static/home_top.jpg)")
-      h1 立人立己 达人达己
-      h2 做中国最值得信赖的项目管理公司
-      h2 Shanghai KeJian Engineering Management & Consulting Co.Ltd
-      h5 点击进入下一页
-    .section(style="background-image: url(/static/home_anli.jpg)")
-      h2 经典案例
-      h3 Suecessful Cass
-      el-row.newsbox.anli(:gutter="0",style="margin-top: 20px")
-        el-col(:span="8")
-          img(v-bind:src="imgserver + tableDataan[0].Img")
-        el-col(:span="8")
-          p {{ tableDataan[1].Title }}
-          p {{ tableDataan[1].Content }}
-        el-col(:span="8")
-          img(v-bind:src="imgserver + tableDataan[2].Img")
-      el-row.newsbox.anli(:gutter="0")
-        el-col(:span="8")
-          p {{ tableDataan[0].Title }}
-          p {{ tableDataan[0].Content }}
-        el-col(:span="8")
-          img(v-bind:src="imgserver + tableDataan[1].Img")
-        el-col(:span="8")
-          p {{ tableDataan[2].Title }}
-          p {{ tableDataan[2].Content }}
-      h5 点击进入下一页
+        h1 {{ hometitle }}
+        h2 {{ hometitlesub }}
+        h2 {{ hometitlesuben }}
+        h5 点击进入下一页
     .section(style="background-image: url(/static/home_do.jpg)")
-      h2 最新资讯
-      h3 Latest News
-      el-row.newsbox(:gutter="0",style="margin-top: 20px")
-        el-col(:span="6",:offset="3")
-          img(v-bind:src="imgserver + tableData[0].Img")
-        el-col(:span="6")
-          p {{ tableData[1].Title }}
-          p {{ tableData[1].Content }}
-          p {{ tableData[1].CreateTime.substring(0,10) }}
-        el-col(:span="6")
-          img(v-bind:src="imgserver + tableData[2].Img")
-      .bar-row
-        span
-        span
-        span
-      el-row.newsbox(:gutter="0")
-        el-col(:span="6",:offset="3")
-          p {{ tableData[0].Title }}
-          p {{ tableData[0].Content }}
-          p {{ tableData[0].CreateTime.substring(0,10) }}
-        el-col(:span="6")
-          img(v-bind:src="imgserver + tableData[1].Img")
-        el-col(:span="6")
-          p {{ tableData[2].Title }}
-          p {{ tableData[2].Content }}
-          p {{ tableData[2].CreateTime.substring(0,10) }}
-      h5 点击回到顶部
+        h2 经典案例
+        h3 Suecessful Cass
+        el-row.newsbox.anli(:gutter="0",style="margin-top: 20px")
+            el-col(:span="8")
+                img(v-bind:src="imgserver + tableDataan[0].Img")
+                div.divbox(style="background-color: #14679f;margin-top: 5px;")
+                    p {{ tableDataan[0].Title }}
+                    p {{ tableDataan[0].Content }}
+            el-col(:span="8")
+                div.divbox
+                    p {{ tableDataan[1].Title }}
+                    p {{ tableDataan[1].Content }}
+                img(v-bind:src="imgserver + tableDataan[1].Img")
+            el-col(:span="8")
+                img(v-bind:src="imgserver + tableDataan[2].Img")
+                div.divbox(style="background-color: #14679f;margin-top: 5px;")
+                    p {{ tableDataan[2].Title }}
+                    p {{ tableDataan[2].Content }}
+        h5 点击进入下一页
+    .section(style="background-image: url(/static/home_anli.jpg)")
+        h2 最新资讯
+        h3 Latest News
+        el-row.newsbox(:gutter="0",style="margin-top: 20px")
+            el-col(:span="6",:offset="3")
+                img(v-bind:src="imgserver + tableData[0].Img")
+            el-col(:span="6")
+                p {{ tableData[1].Title }}
+                p {{ tableData[1].Content }}
+                p {{ tableData[1].CreateTime.substring(0,10) }}
+            el-col(:span="6")
+                img(v-bind:src="imgserver + tableData[2].Img")
+        .bar-row
+            span
+            span
+            span
+        el-row.newsbox(:gutter="0")
+            el-col(:span="6",:offset="3")
+                p {{ tableData[0].Title }}
+                p {{ tableData[0].Content }}
+                p {{ tableData[0].CreateTime.substring(0,10) }}
+            el-col(:span="6")
+                img(v-bind:src="imgserver + tableData[1].Img")
+            el-col(:span="6")
+                p {{ tableData[2].Title }}
+                p {{ tableData[2].Content }}
+                p {{ tableData[2].CreateTime.substring(0,10) }}
+        h5 点击回到顶部
 </template>
 
 <script>
@@ -105,7 +104,10 @@ export default {
           Title: "",
           Content: ""
         }
-      ]
+      ],
+      hometitle: "",
+      hometitlesub: "",
+      hometitlesuben: ""
     };
   },
   mounted() {
@@ -128,7 +130,7 @@ export default {
         })
         .then(response => {
           this.tableData = response.data;
-          
+
           //console.log(this.tableData);
         })
         .catch(function(error) {
@@ -139,28 +141,55 @@ export default {
         .get("/cases/GetCasesAll")
         .then(response => {
           this.tableDataan = response.data;
-          
         })
         .catch(function(error) {
           console.log(error);
-        })
+        });
+      this.findtext();
+      
+    },
+    findtext() {
       axios
         .get("/DataDictionary/GetDataDictionaryAll", {
           params: {
-            key: ""
+            key: "首页主标题"
           }
         })
         .then(response => {
-          this.tableData = response.data;
+          this.hometitle = response.data[0].Content;
         })
         .catch(function(error) {
           console.log(error);
+        });
+      axios
+        .get("/DataDictionary/GetDataDictionaryAll", {
+          params: {
+            key: "首页副标题"
+          }
         })
+        .then(response => {
+          this.hometitlesub = response.data[0].Content;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      axios
+        .get("/DataDictionary/GetDataDictionaryAll", {
+          params: {
+            key: "首页副标题英文"
+          }
+        })
+        .then(response => {
+          this.hometitlesuben = response.data[0].Content;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   },
   created: function() {
     console.log("联系开发者: #Source https://github.com/Smileioc");
-   this.getdataall()
+    this.getdataall();
   },
   destroyed: function() {
     //禁用滚动
@@ -190,6 +219,17 @@ export default {
   width: 40%;
   margin: 1% 1%;
 }
+.divbox {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  background-color: #e13834;
+}
+
+.divbox p {
+  padding: 0px 10px;
+}
 
 .section {
   background-size: 100% 100%;
@@ -202,13 +242,12 @@ export default {
   /* min-height: 300px; */
   width: 80%;
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.2);
+  padding: 4%;
+  /* background-color: rgba(255, 255, 255, 0.2); */
 }
-.anli .el-col {
-  padding: 2% 2% !important;
-}
+
 .newsbox .el-col {
-  padding: 32px;
+  padding: 10px;
   color: #dedddd;
 }
 .newsbox p {
@@ -219,11 +258,12 @@ export default {
 }
 .newsbox img {
   width: 100%;
+  height: 210px;
 }
 .bar-row {
   border-bottom: 2px #fff solid;
   width: 80%;
-  margin: 0 auto;
+  margin: 10px auto;
   position: relative;
 }
 .bar-row span {

@@ -1,43 +1,39 @@
 <template lang="jade">
 #porbox
-  img.topimg(src="/static/pro_top.jpg")
-  el-container
-    el-aside(width="20%")
-      h4.action 模式的不同
-        span
-      h4 平台目标
-        span
-      h4 功能模块
-        span
-    el-main
-      h2 模式的不足
-      img.imgbottom(src="/static/tobottom.png")
-      el-row(style="padding: 6%;")
-        el-col(:span="8")
-          .boxitem
-            img(src="/static/model1.png")
-            p 质量检查、安全检查以抽查为主、难免存在遗漏，留下安全隐患
-        el-col(:span="8")
-          .boxitem
-            img(src="/static/model2.png")
-            p 数据统计、数据分析的缺失，无法为统计、分析、项目评估等工作提供数据支撑
-        el-col(:span="8")
-          .boxitem
-            img(src="/static/model3.png")
-            p 检查工作和检查记录文件脱节，无法做到同步对应；缺少镜像文档，无法做到可追溯性
-      h2(style="margin-top: 80px") 平台目标
-      h2 TARGET
-      img.imgbottom(src="/static/tobottom.png")
-      .imgsbox 
-        img(src="/static/sanjiao0.png")
-        img(src="/static/sanjiao1.png")
-        img(src="/static/sanjiao2.png")
-        img(src="/static/sanjiao3.png")
-      h2 功能模块
-      h2 MODULAR
-      img.imgbottom(src="/static/tobottom.png")
-      .gongnen(style="text-align: center;")
-        img(src="/static/denpao.png",style="width: 60%;margin: 50px 0;margin-left: -3%;") 
+    img.topimg(src="/static/pro_top.jpg")
+    el-container
+        el-aside(width="20%")
+            h4.action 模式的不同
+                span
+            h4 平台目标
+                span
+            h4 功能模块
+                span
+        el-main
+            h2 模式的不足
+            img.imgbottom(src="/static/tobottom.png")
+            el-row(style="padding: 6%;")
+                el-col(:span="8")
+                    .boxitem
+                        img(src="/static/model1.png")
+                        p 质量检查、安全检查以抽查为主、难免存在遗漏，留下安全隐患
+                el-col(:span="8")
+                    .boxitem
+                        img(src="/static/model2.png")
+                        p 数据统计、数据分析的缺失，无法为统计、分析、项目评估等工作提供数据支撑
+                el-col(:span="8")
+                    .boxitem
+                        img(src="/static/model3.png")
+                        p 检查工作和检查记录文件脱节，无法做到同步对应；缺少镜像文档，无法做到可追溯性
+            h2(style="margin-top: 80px") 平台目标
+            h2 TARGET
+            img.imgbottom(src="/static/tobottom.png")
+            img.imgsanjiao(src="/static/sanjiao.png")
+            h2 功能模块
+            h2 MODULAR
+            img.imgbottom(src="/static/tobottom.png")
+            .gongnen(style="text-align: center;")
+                img(src="/static/denpao.png",style="width: 60%;margin: 50px 0;margin-left: -3%;") 
 </template>
 <script>
 export default {};
@@ -96,13 +92,13 @@ export default {};
   width: 28px;
 }
 .boxitem {
-      width: 250px;
-    height: 250px;
-    background-color: #15669e;
-    margin: 0 auto;
-    margin-top: 20px;
-    border: #ffffff solid 2px;
-    color: #fff;
+  width: 250px;
+  height: 250px;
+  background-color: #15669e;
+  margin: 0 auto;
+  margin-top: 20px;
+  border: #ffffff solid 2px;
+  color: #fff;
 }
 .boxitem img {
   display: block;
@@ -114,34 +110,10 @@ export default {};
   font-size: 14px;
 }
 
-.imgsbox {
-  position: relative;
-    /* overflow: hidden; */
-    height: 650px;
-    margin: 0 auto;
-    margin-left: -7%;
-    margin-top: 10px;
-    -webkit-transform: scale(0.6);
-    -ms-transform: scale(0.6);
-    transform: scale(0.6);
-}
-.imgsbox img {
-  position: absolute;
-}
-.imgsbox img:nth-of-type(1) {
-  top: 300px;
-  left: 350px;
-}
-.imgsbox img:nth-of-type(2) {
-  left: 350px;
-}
-.imgsbox img:nth-of-type(3) {
-  top: 320px;
-  left: 144px;
-}
-.imgsbox img:nth-of-type(4) {
-  left: 557px;
-  top: 320px;
+.imgsanjiao {
+  width: 60%;
+  display: block;
+  margin: 40px auto;
 }
 .gongnen {
   text-align: center;

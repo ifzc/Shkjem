@@ -16,7 +16,7 @@
           el-form-item(label="邮箱",prop="emali")
             el-input(v-model="formInline.emali",placeholder="邮箱")
           el-form-item(label="留言",prop="content")
-            el-input(type="textarea",rows="4",v-model="formInline.content")
+            el-input(type="textarea",v-model="formInline.content")
             el-button(type="primary",@click="onSubmit('formInline')",style="margin-top: 10px") 发送
       el-col(:span='12')
         img(src="/static/xuqui.jpg",style="width:100%;height: 369px")
@@ -102,12 +102,12 @@ export default {
 #about {
   background-color: rgb(20, 103, 159);
 }
-#conbox{
+#conbox {
   width: 85%;
   background-color: #fff;
   background-image: url(/static/waitanbg.png);
   margin: 0 auto;
-      padding-top: 100px;
+  padding-top: 100px;
 }
 h1,
 h3 {

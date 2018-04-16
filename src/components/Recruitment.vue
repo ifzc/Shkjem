@@ -54,10 +54,6 @@ export default {
 </script>
 <style scoped>
 #rec {
-  /* background-image: url(/static/waitanbg.png);
-  background-color: rgba(105, 200, 245, 0.2); */
-  background-repeat: no-repeat;
-  background-position-y: 00px;
   background-color: #14679f;
 }
 #conbox{

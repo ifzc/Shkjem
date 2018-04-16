@@ -4,7 +4,7 @@
     <el-button @click="createBtn" type="primary">新增</el-button>
   </el-row>
   <el-row>
-    <h4 style="color: rgb(255, 111, 111);margin: 0">页面将会按照年份展示前五项</h4>
+    <h4 style="color: rgb(255, 111, 111);margin: 0">页面将会按照年份展示前7项</h4>
     <el-table
       :data="tableData"
       border

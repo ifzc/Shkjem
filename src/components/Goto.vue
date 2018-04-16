@@ -10,6 +10,8 @@
           img(src="/static/jianjietopmin.jpg",style="width: 100%")
       //- .titlestyle
         .colorbox
+    .zaifenge
+        i.el-icon-arrow-down
     el-row.fazhan
         el-col(:span='3')
             img(src='/static/lc_l.png',style="width: 100%")
@@ -19,11 +21,11 @@
             .hrstyle
             el-row.lichengtext(:gutter="20")
                 el-col(:span="6",:offset="3")
-                    p 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
+                    p {{ courses[0].Content }}
                 el-col(:span="6")
-                    p(style="background-color: #e13834;") 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
+                    p(style="background-color: #e13834;") {{ courses[1].Content }}
                 el-col(:span="6")
-                    p 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
+                    p {{ courses[2].Content }}
             .fenge
                 span
                 span
@@ -34,17 +36,15 @@
                 span
             el-row.lichengtext(:gutter="20")
                 el-col(:span="5",:offset="2")
-                    p 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
+                    p {{ courses[3].Content }}
                 el-col(:span="5")
-                    p 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
+                    p {{ courses[4].Content }}
                 el-col(:span="5")
-                    p 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
+                    p {{ courses[5].Content }}
                 el-col(:span="5")
-                    p 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
+                    p {{ courses[6].Content }}
         el-col(:span='3')
             img(src='/static/lc_r.png',style="width: 100%")
-    .zaifenge
-        i.el-icon-arrow-down
     .wenhua 
         h1 企业文化
         h2 CULTURE
@@ -53,24 +53,22 @@
         h3 确保工程施工单位不返工
         h3 确保工程施工材料无伪劣品
         h3 确保工程管理留下痕迹、实施过程可追溯
-    .zaifenge
-        i.el-icon-arrow-down
     .rongyu
         h1 公司荣誉
         h2 HONOR
         el-row(:gutter="0")
-            el-col(:span="6",:offset="3")
+            el-col(:span="6",:offset="3",style="padding: 1%")
                 img(v-bind:src="imgserver + honorimgs[0].Img",style="width:100%")
-            el-col(:span="6")
+            el-col(:span="6",style="padding: 1%")
                 img(v-bind:src="imgserver + honorimgs[1].Img",style="width:100%")
-            el-col(:span="6")
+            el-col(:span="6",style="padding: 1%")
                 img(v-bind:src="imgserver + honorimgs[2].Img",style="width:100%")
         el-row(:gutter="0")
-            el-col(:span="6",:offset="3")
+            el-col(:span="6",:offset="3",style="padding: 1%")
                 img(v-bind:src="imgserver + honorimgs[3].Img",style="width:100%")
-            el-col(:span="6")
+            el-col(:span="6",style="padding: 1%")
                 img(v-bind:src="imgserver + honorimgs[4].Img",style="width:100%")
-            el-col(:span="6")
+            el-col(:span="6",style="padding: 1%")
                 img(v-bind:src="imgserver + honorimgs[5].Img",style="width:100%")
     .tuandui
         h1 团队风采
@@ -127,6 +125,29 @@ export default {
         {
           Img: ""
         }
+      ],
+      courses: [
+        {
+          Content: ""
+        },
+        {
+          Content: ""
+        },
+        {
+          Content: ""
+        },
+        {
+          Content: ""
+        },
+        {
+          Content: ""
+        },
+        {
+          Content: ""
+        },
+        {
+          Content: ""
+        }
       ]
     };
   },
@@ -146,8 +167,16 @@ export default {
           this.honorimgs = response.data;
         })
         .catch(function(error) {
-          console.log(error)
+          console.log(error);
+        });
+      axios
+        .get("/course/GetCourseAll")
+        .then(response => {
+          this.courses = response.data;
         })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   },
   created: function() {
@@ -277,7 +306,7 @@ export default {
 }
 .zaifenge {
   border-top: #3c6088 2px solid;
-  margin-top: 20px;
+  margin-top: 40px;
   height: 10px;
   position: relative;
 }
@@ -342,5 +371,8 @@ export default {
   color: #3c6088;
   text-align: center;
   font-weight: 400;
+}
+.hezuo .el-row .el-col{
+    padding: 1%
 }
 </style>
