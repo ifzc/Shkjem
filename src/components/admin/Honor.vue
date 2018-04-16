@@ -1,5 +1,5 @@
 <template>
-<div id="adminpecbox">
+<div id="adminnewsbox">
   <el-row style="margin-bottom: 10px">
     <el-button @click="createBtn" type="primary">新增</el-button>
   </el-row>
@@ -15,26 +15,20 @@
         width="100">
       </el-table-column>
       <el-table-column
-        prop="Title"
-        label="招聘标题"
+        prop="Img"
+        label="图片"
         width="220">
-      </el-table-column>
-      <el-table-column
-        prop="Content"
-        label="招聘内容">
-      </el-table-column>
-      <el-table-column
-        prop="Type"
-        label="招聘类别"
-        width="300">
-        <template slot-scope="scope">
-          {{ scope.row.Type === 1 ? '研发类': scope.row.Type === 2 ? '服务类' : '营销类' }}
+        <template slot-scope="scope" >
+            <img style="width:100%" :src="imgserver + scope.row.Img" alt="">
         </template>
       </el-table-column>
       <el-table-column
+        prop="Remark"
+        label="备注">
+      </el-table-column>
+      <el-table-column
         fixed="right"
-        label="操作"
-        width="150">
+        label="操作">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
           <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
@@ -44,23 +38,12 @@
   </el-row>
   <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
     <el-form :model="form">
-      <el-form-item label="招聘标题" :label-width="formLabelWidth">
-        <el-input v-model="form.title" auto-complete="off"></el-input>
+      <el-form-item label="荣誉图片" :label-width="formLabelWidth">
+        <el-input v-model="form.img" auto-complete="off" disabled></el-input>
+        <input accept="image/*" name="upimage" @change="upload" id="upload_file" type="file">
       </el-form-item>
-       <el-form-item label="招聘内容" :label-width="formLabelWidth">
-        <el-input
-            type="textarea"
-            :rows="5"
-            placeholder="请输入内容"
-            v-model="form.content">
-        </el-input>
-      </el-form-item>
-      <el-form-item label="新闻类别" :label-width="formLabelWidth">
-        <el-select v-model="form.type" placeholder="请选择招聘类型">
-        <el-option label="研发类" value="1"></el-option>
-        <el-option label="服务类" value="2"></el-option>
-        <el-option label="营销类" value="3"></el-option>
-      </el-select>
+       <el-form-item label="备注" :label-width="formLabelWidth">
+        <el-input v-model="form.remark" auto-complete="off"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -71,8 +54,8 @@
 </div>
 </template>
 <script>
-import axios from "../../router/http";
-import { Message } from "element-ui";
+import axios from "../../router/http"
+import { Message } from "element-ui"
 
 export default {
   data() {
@@ -81,23 +64,45 @@ export default {
       dialogFormVisible: false,
       form: {
         id: 0,
-        title: "",
-        content: "",
-        type: ""
+        img: "",
+        remark: ""
       },
       formLabelWidth: "120px",
-      tableData: [] //this.getdataall()
+      tableData: []
     };
   },
   methods: {
+    upload(e) {
+      let file = e.target.files[0]
+      //创建form对象
+      let param = new FormData();
+      //通过append向form对象添加数据
+      param.append("file", file, file.name)
+      //添加form表单中其他数据
+      //param.append("chunk", "0")
+      //FormData私有类对象，访问不到，可以通过get判断值是否传进去
+      //console.log(param.get("file"))
+      //添加请求头
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "BasicAuth " + localStorage.getItem("Ticket")
+        }
+      }
+      //axios.defaults.headers.common["Authorization"] =
+      //  "BasicAuth " + localStorage.getItem("Ticket");
+      axios.post("/UpLoad/UploadImage", param, config).then(response => {
+        //console.log(response.data)
+        this.form.img = response.data
+      });
+    },
     handleClick(row) {
-      console.log(row);
-      this.dialogTitle = "修改招聘信息";
-      this.form.id = row.Id;
-      this.form.title = row.Title;
-      this.form.type = row.Type;
-      this.form.content = row.Content;
-      this.dialogFormVisible = true;
+      console.log(row)
+      this.dialogTitle = "修改荣誉"
+      this.form.id = row.Id
+      this.form.img = row.Img
+      this.form.remark = row.Remark
+      this.dialogFormVisible = true
     },
     deleteClick(row) {
       console.log(row);
@@ -108,81 +113,74 @@ export default {
       })
         .then(() => {
           axios.defaults.headers.common["Authorization"] =
-            "BasicAuth " + localStorage.getItem("Ticket");
+            "BasicAuth " + localStorage.getItem("Ticket")
           axios
-            .post("/recruitment/DeleteRecruitment/" + row.Id)
+            .post("/honor/DeleteHonor/" + row.Id)
             .then(response => {
-              console.log(response.status);
+              console.log(response.status)
               this.$message({
                 type: "success",
                 message: "删除成功!"
-              });
-              this.getdataall();
+              })
+              this.getdataall()
             })
             .catch(function(error) {
-              console.log(error);
+              console.log(error)
               this.$message({
                 type: "info",
                 message: "删除失败!"
-              });
-            });
+              })
+            })
         })
         .catch(() => {
           this.$message({
             type: "info",
             message: "已取消删除"
-          });
-        });
+          })
+        })
     },
     createBtn() {
-      this.dialogTitle = "新增招聘信息";
-      this.form.id = 0;
-      this.form.title = "";
-      this.form.content = "";
-      this.form.type = "";
-      this.dialogFormVisible = true;
+      this.dialogTitle = "新增荣誉"
+      this.form.id = 0
+      this.form.img = ""
+      this.form.remark = ""
+      this.dialogFormVisible = true
     },
     createEntity() {
-      //console.log(this.form)
       axios.defaults.headers.common["Authorization"] =
-        "BasicAuth " + localStorage.getItem("Ticket");
+        "BasicAuth " + localStorage.getItem("Ticket")
       axios
-        .post("/recruitment/CreateofModified", {
+        .post("/honor/CreatedofModied", {
           Id: this.form.id,
-          Title: this.form.title,
-          Content: this.form.content,
-          Type: this.form.type
+          Img: this.form.img,
+          Remark: this.form.remark
         })
         .then(response => {
           console.log(response.status);
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          this.getdataall();
+          })
+          this.getdataall()
         })
         .catch(function(error) {
-          console.log(error);
-        });
-      this.dialogFormVisible = false;
+          console.log(error)
+        })
+      this.dialogFormVisible = false
     },
     getdataall() {
       axios
-        .get("/recruitment/GetRecruitmentAll", {
-          params: {
-            type: 0
-          }
-        })
+        .get("/honor/GetHonorAll")
         .then(response => {
           this.tableData = response.data;
         })
         .catch(function(error) {
-          console.log(error);
-        });
+          console.log(error)
+        })
     }
   },
   created: function() {
-    this.getdataall();
+    this.getdataall()
   }
 };
 </script>

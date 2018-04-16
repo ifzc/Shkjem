@@ -16,7 +16,7 @@
       </el-table-column>
       <el-table-column
         prop="Title"
-        label="新闻标题">
+        label="案例标题">
       </el-table-column>
       <el-table-column
         prop="Img"
@@ -103,7 +103,7 @@ export default {
       axios.post("/UpLoad/UploadImage", param, config).then(response => {
         //console.log(response.data)
         this.form.img = response.data
-      });
+      })
     },
     handleClick(row) {
       console.log(row);

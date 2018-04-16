@@ -93,20 +93,17 @@ export default {
         {
           Img: "",
           Title: "",
-          Content: "",
-          CreateTime: ""
+          Content: ""
         },
         {
           Img: "",
           Title: "",
-          Content: "",
-          CreateTime: ""
+          Content: ""
         },
         {
           Img: "",
           Title: "",
-          Content: "",
-          CreateTime: ""
+          Content: ""
         }
       ]
     };
@@ -146,12 +143,24 @@ export default {
         })
         .catch(function(error) {
           console.log(error);
-        });
+        })
+      axios
+        .get("/DataDictionary/GetDataDictionaryAll", {
+          params: {
+            key: ""
+          }
+        })
+        .then(response => {
+          this.tableData = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        })
     }
   },
   created: function() {
     console.log("联系开发者: #Source https://github.com/Smileioc");
-    this.getdataall();
+   this.getdataall()
   },
   destroyed: function() {
     //禁用滚动

@@ -26,6 +26,10 @@ el-container(v-if="islogin",style="height: 1000px; border: 1px solid #eee")
         template(slot="title")
           i.el-icon-time
           发展历程管理
+      el-menu-item(index="/admin/honor")
+        template(slot="title")
+          i.el-icon-edit-outline
+          荣誉墙管理
       el-menu-item(index="/admin/dictionary")
         template(slot="title")
           i.el-icon-setting

@@ -121,6 +121,12 @@ const router = new Router({
             component: (resolve) => {
                 require(['../components/admin/DataDictionary'], resolve)
             }
+        }, {
+            path: '/admin/honor',
+            name: 'Honor',
+            component: (resolve) => {
+                require(['../components/admin/Honor'], resolve)
+            }
         }]
     }]
 })
