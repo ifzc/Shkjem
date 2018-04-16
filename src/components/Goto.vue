@@ -116,20 +116,14 @@ export default {
   },
   methods: {
     getdataall() {
-      var sessiondata = JSON.parse(sessionStorage.getItem("fencaiimgs"));
-      if (sessiondata != null) {
-        this.newsdata = sessiondata;
-      } else {
-        axios
-          .get("/team/GetTeamAll")
-          .then(response => {
-            this.fencaiimgs = response.data;
-            sessionStorage.setItem("fencaiimgs", JSON.stringify(response.data));
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      }
+      axios
+        .get("/team/GetTeamAll")
+        .then(response => {
+          this.fencaiimgs = response.data;
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     }
   },
   created: function() {
