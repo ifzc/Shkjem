@@ -1,14 +1,15 @@
 <template lang="jade">
 #goto
-    img(src="/static/gotokejiantop.jpg",style="width: 100%")
+  img(src="/static/gotokejiantop.jpg",style="width: 100%")
+  #conbox
     .jianjie
-        h2 公司简介
-        h3 ABOUT US
-        p.one 科建简介上海科建成立于1995年，总部位于（台湾桃园市）科建管理顾问股份有限公司（成立于1987年），并在大陆有处分公司。上海科建通过国家认证认可监督管理委员会审批之合法咨询机构，大中华地区最早通过ISO9001验证的管理咨询公司；全世界第一家通过ISO14001验证的管理顾问公司，并在2008年通过ISO27001信息安全管理系统。科建的服务项目：ISO国际标准的辅导培训；企业经营管理辅导；系统的整合服务；教育训练。科建的资源：科建拥有完整的服务系统，流程管理。自主的顾问师系统（每位顾问师都有资深的实际授课经验）。自主的教材资料（拥有自主的课程研发系统）。科建特色：拥有多年的辅导经验，其中不乏国际著名企业至今保持良好合作。擅长多系统整合和一系统多厂整合，还是国内为数不多能辅导：CQT.CQE.CRE的辅导公司，并努力推行企业社会责任，环境体系（温室气体盘查也减量管理），企业节能等各个方面！科建立志于同企业共同成长，为企业合理资源，营造双赢的氛围！
-        .topimgbox
-            img(src="/static/jianjietopmin.jpg",style="width: 100%")
-        .titlestyle
-    .colorbox
+      h1(style="color: #e13834") 公司简介
+      h2(style="color: #e13834;margin: 0;") ABOUT US
+      p.one 科建简介上海科建成立于1995年，总部位于（台湾桃园市）科建管理顾问股份有限公司（成立于1987年），并在大陆有处分公司。上海科建通过国家认证认可监督管理委员会审批之合法咨询机构，大中华地区最早通过ISO9001验证的管理咨询公司；全世界第一家通过ISO14001验证的管理顾问公司，并在2008年通过ISO27001信息安全管理系统。科建的服务项目：ISO国际标准的辅导培训；企业经营管理辅导；系统的整合服务；教育训练。科建的资源：科建拥有完整的服务系统，流程管理。自主的顾问师系统（每位顾问师都有资深的实际授课经验）。自主的教材资料（拥有自主的课程研发系统）。科建特色：拥有多年的辅导经验，其中不乏国际著名企业至今保持良好合作。擅长多系统整合和一系统多厂整合，还是国内为数不多能辅导：CQT.CQE.CRE的辅导公司，并努力推行企业社会责任，环境体系（温室气体盘查也减量管理），企业节能等各个方面！科建立志于同企业共同成长，为企业合理资源，营造双赢的氛围！
+      .topimgbox
+          img(src="/static/jianjietopmin.jpg",style="width: 100%")
+      //- .titlestyle
+        .colorbox
     el-row.fazhan
         el-col(:span='3')
             img(src='/static/lc_l.png',style="width: 100%")
@@ -20,7 +21,7 @@
                 el-col(:span="6",:offset="3")
                     p 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
                 el-col(:span="6")
-                    p 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
+                    p(style="background-color: #e13834;") 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
                 el-col(:span="6")
                     p 公司成立，承接了中国第一条全程使用BIM技术的数字化地铁---上海轨道交通13号线的BIM服务
             .fenge
@@ -44,10 +45,6 @@
             img(src='/static/lc_r.png',style="width: 100%")
     .zaifenge
         i.el-icon-arrow-down
-    .jiegou
-        h1 组织结构
-        h2 STRUCTURE
-        img(src="/static/zuzhi.png",style="width:70%")
     .wenhua 
         h1 企业文化
         h2 CULTURE
@@ -63,24 +60,24 @@
         h2 HONOR
         el-row(:gutter="0")
             el-col(:span="6",:offset="3")
-                img(src="/static/rongyu.jpg",style="width:100%")
+                img(v-bind:src="imgserver + honorimgs[0].Img",style="width:100%")
             el-col(:span="6")
-                img(src="/static/rongyu.jpg",style="width:100%")
+                img(v-bind:src="imgserver + honorimgs[1].Img",style="width:100%")
             el-col(:span="6")
-                img(src="/static/rongyu.jpg",style="width:100%")
+                img(v-bind:src="imgserver + honorimgs[2].Img",style="width:100%")
         el-row(:gutter="0")
             el-col(:span="6",:offset="3")
-                img(src="/static/rongyu.jpg",style="width:100%")
+                img(v-bind:src="imgserver + honorimgs[3].Img",style="width:100%")
             el-col(:span="6")
-                img(src="/static/rongyu.jpg",style="width:100%")
+                img(v-bind:src="imgserver + honorimgs[4].Img",style="width:100%")
             el-col(:span="6")
-                img(src="/static/rongyu.jpg",style="width:100%")
+                img(v-bind:src="imgserver + honorimgs[5].Img",style="width:100%")
     .tuandui
         h1 团队风采
         h2 TEAM
         el-carousel(:interval="4000",type="card",height="400px")
             el-carousel-item(v-for="item in fencaiimgs",:key="item.Id")
-                img(v-bind:src="item.Img",style="width:100%")
+                img(v-bind:src="imgserver + item.Img",style="width:100%")
     .hezuo
         h1 合作伙伴
         h2 RARTNERS
@@ -107,11 +104,30 @@
 </template>
 <script>
 import axios from "../router/http";
-
 export default {
   data() {
     return {
-      fencaiimgs: []
+      fencaiimgs: [],
+      honorimgs: [
+        {
+          Img: ""
+        },
+        {
+          Img: ""
+        },
+        {
+          Img: ""
+        },
+        {
+          Img: ""
+        },
+        {
+          Img: ""
+        },
+        {
+          Img: ""
+        }
+      ]
     };
   },
   methods: {
@@ -120,6 +136,14 @@ export default {
         .get("/team/GetTeamAll")
         .then(response => {
           this.fencaiimgs = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      axios
+        .get("/honor/GetHonorAll")
+        .then(response => {
+          this.honorimgs = response.data;
         })
         .catch(function(error) {
           console.log(error)
@@ -133,27 +157,31 @@ export default {
 </script>
 <style scoped>
 #goto {
+  background-color: rgb(20, 103, 159);
+}
+#conbox {
+  width: 85%;
+  background: #fff;
+  margin: 0 auto;
   background-image: url(/static/waitanbg.png);
-  background-color: rgba(105, 200, 245, 0.2);
-  background-repeat: no-repeat;
-  background-position-y: 3400px;
 }
 .jianjie {
   position: relative;
   padding-top: 80px;
   z-index: 10;
 }
+.jianjie h1,
 .jianjie h2,
-.jianjie h3,
 .jianjie p {
   width: 50%;
   padding: 0 2%;
   text-align: center;
-  color: #3c6088;
+  font-weight: 400;
 }
 .jianjie p.one {
-  margin-top: 4%;
-  color: #fff;
+  /* margin-top: 4%; */
+  margin-left: 2%;
+  color: #14679f;
   font-weight: 400;
 }
 .topimgbox {
@@ -205,9 +233,12 @@ export default {
 }
 .lichengtext .el-col p {
   padding: 10px;
-  border: 1px #808080 solid;
-  border-radius: 5px;
-  background-color: #fff;
+  /* border: 1px #808080 solid; */
+  /* border-radius: 5px; */
+  background-color: #15669e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
 }
 .fenge {
   height: 1px;

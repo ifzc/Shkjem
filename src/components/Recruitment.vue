@@ -1,10 +1,11 @@
 <template lang="jade">
 #rec
-    img(src="/static/zhaopin.jpg",style='width:100%')
-    .topbtn
-        p.p-1.action(@click="cktopbtn(1)") 研发类
-        p.p-2(@click="cktopbtn(2)") 服务类
-        p.p-3(@click="cktopbtn(3)") 营销类
+  img(src="/static/zhaopin.jpg",style='width:100%')
+  .topbtn
+    p.p-1.action(@click="cktopbtn(1)") 研发类
+    p.p-2(@click="cktopbtn(2)") 服务类
+    p.p-3(@click="cktopbtn(3)") 营销类
+  #conbox
     .content(v-for="pec in pecdata")
         .zitem
             h3 {{ pec.Title }}
@@ -43,7 +44,7 @@ export default {
         })
         .catch(function(error) {
           console.log(error);
-        })
+        });
     }
   },
   created: function() {
@@ -53,10 +54,17 @@ export default {
 </script>
 <style scoped>
 #rec {
-  background-image: url(/static/waitanbg.png);
-  background-color: rgba(105, 200, 245, 0.2);
+  /* background-image: url(/static/waitanbg.png);
+  background-color: rgba(105, 200, 245, 0.2); */
   background-repeat: no-repeat;
   background-position-y: 00px;
+  background-color: #14679f;
+}
+#conbox{
+  background-image: url(/static/waitanbg.png);
+  background-color: #fff;
+      width: 85%;
+    margin: 0 auto;
 }
 .topbtn {
   margin: 0 auto;
@@ -73,7 +81,7 @@ export default {
 }
 .action {
   color: #fff;
-  background-color: #1767a1 !important;
+  background-color: #e13834 !important;
 }
 .content {
   padding: 8% 10%;
@@ -82,12 +90,12 @@ export default {
   font-weight: 400;
 }
 .zitem {
-  border-bottom: 2px solid #1767a1;
+  border-bottom: 2px solid #e13834;
 }
 .zitem h3 {
   display: inline-block;
   padding: 4px 10px;
-  background: #1767a1;
+  background: #e13834;
   color: #fff;
   margin-bottom: 0;
   font-weight: 400;

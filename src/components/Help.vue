@@ -1,22 +1,22 @@
 <template lang="jade">
 #helpbox
-    img(src="/static/helptop.jpg",style="width:100%")
+  img(src="/static/helptop.jpg",style="width:100%")
+  #conboxx
     h1 留言板
     h4 MESSAGE
     el-form(:inline="true",:rules="rules",ref="formInline",:model="formInline",class="demo-form-inline")
-        el-form-item(label="姓名",prop="name")
-            el-input(v-model="formInline.name",placeholder="姓名")
-        el-form-item(label="电话",prop="phone")
-            el-input(v-model="formInline.phone",placeholder="电话")
-        el-form-item(label="邮箱",prop="emali")
-            el-input(v-model="formInline.emali",placeholder="邮箱")
-        br
-        el-form-item(label="留言",prop="content")
-            el-input(type="textarea",v-model="formInline.content",style="width: 649px;")
-        br
-        el-form-item(style="margin-left: 350px;")
-            el-button(type="primary",@click="onSubmit('formInline')") 发送
-  </el-form-item>
+      el-form-item(label="姓名",prop="name")
+        el-input(v-model="formInline.name",placeholder="姓名")
+      el-form-item(label="电话",prop="phone")
+        el-input(v-model="formInline.phone",placeholder="电话")
+      el-form-item(label="邮箱",prop="emali")
+        el-input(v-model="formInline.emali",placeholder="邮箱")
+      br
+      el-form-item(label="留言",prop="content")
+        el-input(type="textarea",v-model="formInline.content",style="width: 649px;")
+      br
+      el-form-item(style="margin-left: 350px;")
+        el-button(type="primary",@click="onSubmit('formInline')") 发送
 </template>
 <script>
 import axios from "../router/http";
@@ -81,10 +81,14 @@ export default {
 </script>
 <style scoped>
 #helpbox {
+  background-color: rgb(20, 103, 159);
+}
+#conboxx{
+  background-color: #fff;
   background-image: url(/static/waitanbg.png);
-  background-color: rgba(105, 200, 245, 0.2);
-  background-repeat: no-repeat;
-  background-position-y: 00px;
+  width:  85%;
+  margin: 0 auto;
+  padding-top: 25px;
 }
 h1,
 h4 {

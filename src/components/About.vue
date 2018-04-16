@@ -1,35 +1,35 @@
 <template lang="jade">
 #about
-    img(src="/static/abouttop.jpg",style='width:100%')
-    h1(style="margin-top: 100px") 您的需求
+  img(src="/static/abouttop.jpg",style='width:100%')
+  #conbox
+    h1 您的需求
     h3 BEQUIREMNT
     el-row.xuquibox
-        el-col(:span='12')
-            el-form(:inline="true",:rules="rules",ref="formInline",:model="formInline",label-width="80px",class="demo-form-inline")
-                el-form-item(label="姓名",prop="name")
-                    el-input(v-model="formInline.name",placeholder="姓名")
-                el-form-item(label="电话",prop="phone")
-                    el-input(v-model="formInline.phone",placeholder="电话")
-                el-form-item(label="公司",prop="company")
-                    el-input(v-model="formInline.company",placeholder="公司")
-                el-form-item(label="邮箱",prop="emali")
-                    el-input(v-model="formInline.emali",placeholder="邮箱")
-                el-form-item(label="留言",prop="content")
-                    el-input(type="textarea",v-model="formInline.content",style="width: 400px;")
-                el-form-item(style="margin-left: 410px;")
-                    el-button(type="primary",@click="onSubmit('formInline')") 发送
-        el-col(:span='12')
-            img(src="/static/xuqui.jpg",style="width:100%;height: 369px")
+      el-col(:span='12')
+        el-form(:inline="true",:rules="rules",ref="formInline",:model="formInline",label-width="80px",class="demo-form-inline")
+          el-form-item(label="姓名",prop="name")
+            el-input(v-model="formInline.name",placeholder="姓名")
+          el-form-item(label="电话",prop="phone")
+            el-input(v-model="formInline.phone",placeholder="电话")
+          el-form-item(label="公司",prop="company")
+            el-input(v-model="formInline.company",placeholder="公司")
+          el-form-item(label="邮箱",prop="emali")
+            el-input(v-model="formInline.emali",placeholder="邮箱")
+          el-form-item(label="留言",prop="content")
+            el-input(type="textarea",rows="4",v-model="formInline.content")
+            el-button(type="primary",@click="onSubmit('formInline')",style="margin-top: 10px") 发送
+      el-col(:span='12')
+        img(src="/static/xuqui.jpg",style="width:100%;height: 369px")
     h1(style="margin-top: 100px") 我们的地址
     h3 ADDRESS
     el-row(style="padding: 5%")
-        el-col(:span="14",:offset="1")
-            img(src="/static/address.jpg",style="width:95%")
-        el-col(:span="8")
-            p 邮箱:Smileioc@163.com
-            p 电话:182****2176
-            p 传真:182****2176
-            p 地址:上海市松花区新松江路909号丰源大厦16F
+      el-col(:span="14",:offset="1")
+        img(src="/static/address.jpg",style="width:95%")
+      el-col(:span="8")
+        p 邮箱:Smileioc@163.com
+        p 电话:182****2176
+        p 传真:182****2176
+        p 地址:上海市松花区新松江路909号丰源大厦16F
 </template>
 <script>
 import axios from "../router/http";
@@ -100,11 +100,14 @@ export default {
 </script>
 <style scoped>
 #about {
+  background-color: rgb(20, 103, 159);
+}
+#conbox{
+  width: 85%;
+  background-color: #fff;
   background-image: url(/static/waitanbg.png);
-  background-color: rgba(105, 200, 245, 0.2);
-  background-repeat: no-repeat;
-  background-position-y: 400px;
-  padding-bottom: 20px;
+  margin: 0 auto;
+      padding-top: 100px;
 }
 h1,
 h3 {

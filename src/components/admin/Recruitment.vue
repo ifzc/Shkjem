@@ -145,7 +145,7 @@ export default {
     createEntity() {
       //console.log(this.form)
       axios.defaults.headers.common["Authorization"] =
-        "BasicAuth " + localStorage.getItem("Ticket");
+        "BasicAuth " + localStorage.getItem("Ticket")
       axios
         .post("/recruitment/CreateofModified", {
           Id: this.form.id,

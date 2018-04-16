@@ -87,6 +87,7 @@ export default {
   box-sizing: border-box;
   width: 85%;
   margin: 0 auto;
+  background-image: url(/static/waitanbg.png);
 }
 .new-item {
   padding: 20px;
