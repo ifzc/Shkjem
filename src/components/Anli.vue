@@ -36,7 +36,7 @@ export default {
         .get("/cases/GetCasesAll")
         .then(response => {
           this.tbdata = response.data;
-          sessionStorage.setItem("anlidata", JSON.stringify(response.data));
+          //sessionStorage.setItem("anlidata", JSON.stringify(response.data));
         })
         .catch(function(error) {
           console.log(error);

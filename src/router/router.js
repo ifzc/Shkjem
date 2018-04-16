@@ -109,6 +109,18 @@ const router = new Router({
             component: (resolve) => {
                 require(['../components/admin/Team'], resolve)
             }
+        }, {
+            path: '/admin/course',
+            name: 'Course',
+            component: (resolve) => {
+                require(['../components/admin/Course'], resolve)
+            }
+        }, {
+            path: '/admin/dictionary',
+            name: 'Course',
+            component: (resolve) => {
+                require(['../components/admin/DataDictionary'], resolve)
+            }
         }]
     }]
 })

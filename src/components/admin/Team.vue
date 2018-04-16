@@ -19,7 +19,7 @@
         label="图片"
         width="220">
         <template slot-scope="scope" >
-            <img style="width:100%" :src="scope.row.Img" alt="">
+            <img style="width:100%" :src="imgserver + scope.row.Img" alt="">
         </template>
       </el-table-column>
       <el-table-column
@@ -40,7 +40,7 @@
     <el-form :model="form">
       <el-form-item label="风采图片" :label-width="formLabelWidth">
         <el-input v-model="form.img" auto-complete="off" disabled></el-input>
-        <input accept="image/*" name="upimage" @change="gen_base64" id="upload_file" type="file">
+        <input accept="image/*" name="upimage" @change="upload" id="upload_file" type="file">
       </el-form-item>
        <el-form-item label="备注" :label-width="formLabelWidth">
         <el-input v-model="form.remark" auto-complete="off"></el-input>
@@ -72,21 +72,29 @@ export default {
     };
   },
   methods: {
-    $_(id) {
-      return document.getElementById(id)
-    },
-    gen_base64() {
-      if (typeof FileReader == "undefined") {
-        alert("你的浏览器不支持FileReader")
-        return
+    upload(e) {
+      let file = e.target.files[0]
+      //创建form对象
+      let param = new FormData();
+      //通过append向form对象添加数据
+      param.append("file", file, file.name)
+      //添加form表单中其他数据
+      //param.append("chunk", "0")
+      //FormData私有类对象，访问不到，可以通过get判断值是否传进去
+      //console.log(param.get("file"))
+      //添加请求头
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "BasicAuth " + localStorage.getItem("Ticket")
+        }
       }
-      var file = this.$_("upload_file").files[0]
-      let r = new FileReader(); //本地预览
-      r.onload = () => {
-        //console.log(r.result)
-        this.form.img = r.result
-      }
-      r.readAsDataURL(file) //Base64
+      //axios.defaults.headers.common["Authorization"] =
+      //  "BasicAuth " + localStorage.getItem("Ticket");
+      axios.post("/UpLoad/UploadImage", param, config).then(response => {
+        //console.log(response.data)
+        this.form.img = response.data
+      });
     },
     handleClick(row) {
       console.log(row)

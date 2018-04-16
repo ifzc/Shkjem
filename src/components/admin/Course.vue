@@ -4,6 +4,7 @@
     <el-button @click="createBtn" type="primary">新增</el-button>
   </el-row>
   <el-row>
+    <h4 style="color: rgb(255, 111, 111);margin: 0">页面将会按照年份展示前五项</h4>
     <el-table
       :data="tableData"
       border
@@ -15,21 +16,13 @@
         width="100">
       </el-table-column>
       <el-table-column
-        prop="Title"
-        label="招聘标题"
+        prop="Year"
+        label="历程年份"
         width="220">
       </el-table-column>
       <el-table-column
         prop="Content"
-        label="招聘内容">
-      </el-table-column>
-      <el-table-column
-        prop="Type"
-        label="招聘类别"
-        width="300">
-        <template slot-scope="scope">
-          {{ scope.row.Type === 1 ? '研发类': scope.row.Type === 2 ? '服务类' : '营销类' }}
-        </template>
+        label="历程内容">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -44,23 +37,16 @@
   </el-row>
   <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
     <el-form :model="form">
-      <el-form-item label="招聘标题" :label-width="formLabelWidth">
-        <el-input v-model="form.title" auto-complete="off"></el-input>
+      <el-form-item label="历程年份" :label-width="formLabelWidth">
+        <el-input v-model="form.year" auto-complete="off"></el-input>
       </el-form-item>
-       <el-form-item label="招聘内容" :label-width="formLabelWidth">
+       <el-form-item label="历程内容" :label-width="formLabelWidth">
         <el-input
             type="textarea"
             :rows="5"
             placeholder="请输入内容"
             v-model="form.content">
         </el-input>
-      </el-form-item>
-      <el-form-item label="新闻类别" :label-width="formLabelWidth">
-        <el-select v-model="form.type" placeholder="请选择新闻类型">
-        <el-option label="研发类" value="1"></el-option>
-        <el-option label="服务类" value="2"></el-option>
-        <el-option label="营销类" value="3"></el-option>
-      </el-select>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -81,9 +67,8 @@ export default {
       dialogFormVisible: false,
       form: {
         id: 0,
-        title: "",
-        content: "",
-        type: ""
+        year: "",
+        content: ""
       },
       formLabelWidth: "120px",
       tableData: [] //this.getdataall()
@@ -92,15 +77,14 @@ export default {
   methods: {
     handleClick(row) {
       console.log(row);
-      this.dialogTitle = "修改招聘信息";
+      this.dialogTitle = "修改发展历程信息";
       this.form.id = row.Id;
-      this.form.title = row.Title;
-      this.form.type = row.Type;
+      this.form.year = row.Year;
       this.form.content = row.Content;
       this.dialogFormVisible = true;
     },
     deleteClick(row) {
-      console.log(row);
+      //console.log(row);
       this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -110,7 +94,7 @@ export default {
           axios.defaults.headers.common["Authorization"] =
             "BasicAuth " + localStorage.getItem("Ticket");
           axios
-            .post("/recruitment/DeleteRecruitment/" + row.Id)
+            .post("/course/DeleteCourse/" + row.Id)
             .then(response => {
               console.log(response.status);
               this.$message({
@@ -135,11 +119,10 @@ export default {
         });
     },
     createBtn() {
-      this.dialogTitle = "新增招聘信息";
+      this.dialogTitle = "新增发展历程信息";
       this.form.id = 0;
-      this.form.title = "";
+      this.form.year = "";
       this.form.content = "";
-      this.form.type = "";
       this.dialogFormVisible = true;
     },
     createEntity() {
@@ -147,11 +130,10 @@ export default {
       axios.defaults.headers.common["Authorization"] =
         "BasicAuth " + localStorage.getItem("Ticket");
       axios
-        .post("/recruitment/CreateofModified", {
+        .post("/course/CreatedofModied", {
           Id: this.form.id,
-          Title: this.form.title,
-          Content: this.form.content,
-          Type: this.form.type
+          Year: this.form.year,
+          Content: this.form.content
         })
         .then(response => {
           console.log(response.status);
@@ -168,11 +150,7 @@ export default {
     },
     getdataall() {
       axios
-        .get("/recruitment/GetRecruitmentAll", {
-          params: {
-            type: 0
-          }
-        })
+        .get("/course/GetCourseAll")
         .then(response => {
           this.tableData = response.data;
         })

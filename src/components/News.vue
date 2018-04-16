@@ -41,15 +41,11 @@ export default {
         .get("/news/GetNewsAll", {
           params: {
             type: type,
-            num: 12
+            num: 999
           }
         })
         .then(response => {
           this.newsdata = response.data;
-          sessionStorage.setItem(
-            "newsdata_" + type,
-            JSON.stringify(response.data)
-          );
         })
         .catch(function(error) {
           console.log(error);

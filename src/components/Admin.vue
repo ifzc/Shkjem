@@ -5,7 +5,7 @@ el-container(v-if="islogin",style="height: 1000px; border: 1px solid #eee")
       el-menu-item(index="/admin/user")
         template(slot="title")
           i.el-icon-star-off
-          用户管理
+          后台用户管理
       el-menu-item(index="/admin/news")
         template(slot="title")
           i.el-icon-news
@@ -21,7 +21,15 @@ el-container(v-if="islogin",style="height: 1000px; border: 1px solid #eee")
       el-menu-item(index="/admin/team")
         template(slot="title")
           i.el-icon-picture-outline
-          团队风采
+          团队风采管理
+      el-menu-item(index="/admin/course")
+        template(slot="title")
+          i.el-icon-time
+          发展历程管理
+      el-menu-item(index="/admin/dictionary")
+        template(slot="title")
+          i.el-icon-setting
+          数据字典管理
       el-submenu(index="3")
         template(slot="title")
           i.el-icon-message

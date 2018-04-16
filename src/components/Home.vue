@@ -131,7 +131,7 @@ export default {
         })
         .then(response => {
           this.tableData = response.data;
-          sessionStorage.setItem("homenewdata", JSON.stringify(response.data));
+          
           //console.log(this.tableData);
         })
         .catch(function(error) {
@@ -142,7 +142,7 @@ export default {
         .get("/cases/GetCasesAll")
         .then(response => {
           this.tableDataan = response.data;
-          sessionStorage.setItem("anlidata", JSON.stringify(response.data));
+          
         })
         .catch(function(error) {
           console.log(error);
