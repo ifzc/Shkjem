@@ -163,6 +163,19 @@ body {
 * {
   font-family: "华文黑体";
 }
+.pagetop{
+    width: 100%;
+    height: 500px;
+    background-size: 100% 100%;
+}
+.pagetop h1{
+    margin: 0;
+    line-height: 500px;
+    text-align: center;
+    color: #fff;
+     font-size: 45px;
+    font-weight: 400;
+}
 </style>
 
 <style scoped>

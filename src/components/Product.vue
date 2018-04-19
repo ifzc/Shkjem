@@ -1,6 +1,7 @@
 <template lang="jade">
 #porbox
-    img.topimg(src="/static/pro_top.jpg")
+    .pagetop(style="background-image: url(/static/pro_top.jpg)")
+        h1 {{ pagetitle }}
     el-container
         el-aside(width="20%")
             h4.action 模式的不同
@@ -36,7 +37,28 @@
                 img(src="/static/denpao.png",style="width: 60%;margin: 50px 0;margin-left: -3%;") 
 </template>
 <script>
-export default {};
+import axios from "../router/http";
+export default {
+    data(){
+        return{
+            pagetitle:''
+        }
+    },
+    created: function() {
+    axios
+            .get("/DataDictionary/GetDataDictionaryAll", {
+                params: {
+                    key: "经典案例标题"
+                }
+            })
+            .then(response => {
+                this.pagetitle = response.data[0].Content;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+  }
+};
 </script>
 <style scoped>
 #porbox {

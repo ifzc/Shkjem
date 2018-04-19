@@ -1,6 +1,7 @@
 <template lang="jade">
 #anlibox
-    img.topimg(src="/static/anlitop.jpg")
+    .pagetop(style="background-image: url(/static/anlitop.jpg)")
+        h1 {{ pagetitle }}
     #conbox
         el-row(v-for="(rdata,index) in tbdata",:key="rdata.Id")
             el-col.imgbox(:span="15",v-if="(index + 1) % 2 == 1")
@@ -24,6 +25,7 @@ import axios from "../router/http";
 export default {
   data() {
     return {
+        pagetitle:'',
       tbdata: []
     };
   },
@@ -47,6 +49,18 @@ export default {
   },
   created: function() {
     this.getdataall();
+    axios
+            .get("/DataDictionary/GetDataDictionaryAll", {
+                params: {
+                    key: "经典案例标题"
+                }
+            })
+            .then(response => {
+                this.pagetitle = response.data[0].Content;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
   }
 };
 </script>

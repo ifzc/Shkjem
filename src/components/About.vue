@@ -1,6 +1,7 @@
 <template lang="jade">
 #about
-  img(src="/static/abouttop.jpg",style='width:100%')
+  .pagetop(style="background-image: url(/static/abouttop.jpg)")
+        h1 {{ pagetitle }}
   #conbox
     h1 您的需求
     h3 BEQUIREMNT
@@ -37,6 +38,7 @@ export default {
   name: "About",
   data() {
     return {
+        pagetitle:'',
       formInline: {
         name: "",
         phone: "",
@@ -95,6 +97,20 @@ export default {
           console.log(error);
         });
     }
+  },
+  created: function() {
+    axios
+            .get("/DataDictionary/GetDataDictionaryAll", {
+                params: {
+                    key: "联系我们标题"
+                }
+            })
+            .then(response => {
+                this.pagetitle = response.data[0].Content;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
   }
 };
 </script>
@@ -109,8 +125,8 @@ export default {
   margin: 0 auto;
   padding-top: 100px;
 }
-h1,
-h3 {
+#conbox h1,
+#conbox h3 {
   text-align: center;
   font-weight: 400;
   color: #1767a1;

@@ -1,6 +1,7 @@
 <template lang="jade">
 #rec
-  img(src="/static/zhaopin.jpg",style='width:100%')
+  .pagetop(style="background-image: url(/static/zhaopin.jpg)")
+        h1 {{ pagetitle }}
   .topbtn
     p.p-1.action(@click="cktopbtn(1)") 研发类
     p.p-2(@click="cktopbtn(2)") 服务类
@@ -16,6 +17,7 @@ import axios from "../router/http";
 export default {
   data() {
     return {
+        pagetitle:'',
       pecdata: []
     };
   },
@@ -49,6 +51,18 @@ export default {
   },
   created: function() {
     this.getdataall(1);
+    axios
+            .get("/DataDictionary/GetDataDictionaryAll", {
+                params: {
+                    key: "诚聘英才标题"
+                }
+            })
+            .then(response => {
+                this.pagetitle = response.data[0].Content;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
   }
 };
 </script>

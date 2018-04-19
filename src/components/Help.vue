@@ -1,6 +1,7 @@
 <template lang="jade">
 #helpbox
-  img(src="/static/helptop.jpg",style="width:100%")
+  .pagetop(style="background-image: url(/static/helptop.jpg)")
+        h1 {{ pagetitle }}
   #conboxx
     h1 留言板
     h4 MESSAGE
@@ -23,6 +24,7 @@ import axios from "../router/http";
 export default {
   data() {
     return {
+        pagetitle:'',
       formInline: {
         name: "",
         phone: "",
@@ -76,6 +78,20 @@ export default {
           console.log(error);
         });
     }
+  },
+  created:function(){
+      axios
+            .get("/DataDictionary/GetDataDictionaryAll", {
+                params: {
+                    key: "帮助中心标题"
+                }
+            })
+            .then(response => {
+                this.pagetitle = response.data[0].Content;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
   }
 };
 </script>
@@ -90,8 +106,8 @@ export default {
   margin: 0 auto;
   padding-top: 25px;
 }
-h1,
-h4 {
+#conboxx h1,
+#conboxx h4 {
   color: #808080;
   text-align: center;
   font-weight: 400;

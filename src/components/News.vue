@@ -1,6 +1,7 @@
 <template lang="jade">
 #news
-    img(src="/static/news_top.jpg",style=" width: 100%")
+    .pagetop(style="background-image: url(/static/news_top.jpg)")
+        h1 {{ pagetitle }}
     .topbtn
         p.p-1(@click="cktopbtn(1)").action 公司新闻
         p.p-2(@click="cktopbtn(2)") 行业动态
@@ -21,6 +22,7 @@ export default {
   isShow: true,
   data() {
     return {
+        pagetitle:'',
       newsdata: []
     };
   },
@@ -54,6 +56,18 @@ export default {
   },
   created: function() {
     this.getdataall(1);
+    axios
+            .get("/DataDictionary/GetDataDictionaryAll", {
+                params: {
+                    key: "新闻资讯标题"
+                }
+            })
+            .then(response => {
+                this.pagetitle = response.data[0].Content;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
   }
 };
 </script>

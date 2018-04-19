@@ -6,13 +6,12 @@
 import axios from 'axios'
 import { Loading, Message } from 'element-ui'
 
-axios.defaults.baseURL = "http://120.79.76.250/api/"
+axios.defaults.baseURL = 'http://120.79.76.250/api/'
 
 //axios.defaults.baseURL = "http://192.168.1.13/api/"
 
-//axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 //设置超时时间
-axios.defaults.timeout = 40000
+axios.defaults.timeout = 5000
 
 // 指定允许其他域名访问    
 
