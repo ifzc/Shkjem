@@ -1,67 +1,52 @@
 <template>
-<div id="adminnewsbox">
-  <el-row style="margin-bottom: 10px">
-    <el-button @click="createBtn" type="primary">新增</el-button>
-    <el-button @click="cleanBtn" type="warning">清除浏览器缓存</el-button>
-    <el-button @click="cleanuserBtn" type="danger">清除用户身份票据</el-button>
-  </el-row>
-  <el-row>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        fixed
-        prop="Id"
-        label="#">
-      </el-table-column>
-      <el-table-column
-        prop="LoginName"
-        label="登录名">
-      </el-table-column>
-      <el-table-column
-        prop="Password"
-        label="密码">
-      </el-table-column>
-      <el-table-column
-        prop="IsAction"
-        label="是否激活">
-        <template slot-scope="scope">
-          {{ scope.row.IsAction ? '是':'否' }}
-        </template>
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作"
-        width="150">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
-          <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </el-row>
-  <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
-    <el-form :model="form">
-      <el-form-item label="用户名" :label-width="formLabelWidth">
-        <el-input v-model="form.loginName" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" :label-width="formLabelWidth">
-        <el-input v-model="form.password" auto-complete="off"></el-input>
-      </el-form-item>
-       <el-form-item label="是否启用" :label-width="formLabelWidth">
-        <el-select v-model="form.isAction" placeholder="请选择新闻类型">
-            <el-option label="启用" value="true"></el-option>
-            <el-option label="禁用" value="false"></el-option>
-        </el-select>
-      </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click="createEntity">确 定</el-button>
+    <div id="adminnewsbox">
+        <el-row style="margin-bottom: 10px">
+            <el-button @click="createBtn" type="primary">新增</el-button>
+            <el-button @click="cleanBtn" type="warning">清除浏览器缓存</el-button>
+            <el-button @click="cleanuserBtn" type="danger">清除用户身份票据</el-button>
+        </el-row>
+        <el-row>
+            <el-table :data="tableData" border style="width: 100%">
+                <el-table-column fixed prop="Id" label="#">
+                </el-table-column>
+                <el-table-column prop="LoginName" label="登录名">
+                </el-table-column>
+                <el-table-column prop="Password" label="密码">
+                </el-table-column>
+                <el-table-column prop="IsAction" label="是否激活">
+                    <template slot-scope="scope">
+                        {{ scope.row.IsAction ? '是':'否' }}
+                    </template>
+                </el-table-column>
+                <el-table-column fixed="right" label="操作" width="150">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
+                        <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-row>
+        <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+                <el-form-item label="用户名" :label-width="formLabelWidth">
+                    <el-input v-model="form.loginName" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" :label-width="formLabelWidth">
+                    <el-input v-model="form.password" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="是否启用" :label-width="formLabelWidth">
+                    <el-select v-model="form.isAction" placeholder="请选择新闻类型">
+                        <el-option label="启用" value="true"></el-option>
+                        <el-option label="禁用" value="false"></el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="createEntity">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
-  </el-dialog>
-</div>
 </template>
 <script>
 import axios from "../../router/http";
@@ -185,23 +170,22 @@ export default {
       axios
         .post("/user/GetUserAll")
         .then(response => {
-
           this.tableData = response.data;
         })
         .catch(function(error) {
           console.log(error);
         });
     },
-    cleanBtn(){
-      sessionStorage.clear()
+    cleanBtn() {
+      sessionStorage.clear();
     },
-    cleanuserBtn(){
-      localStorage.clear()
-      this.$router.push('/login')
+    cleanuserBtn() {
+      localStorage.clear();
+      this.$router.push("/login");
     }
   },
   created: function() {
-    this.getdataall()
+    this.getdataall();
   }
-}
+};
 </script>

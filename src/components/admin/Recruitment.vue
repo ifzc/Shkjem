@@ -1,74 +1,52 @@
 <template>
-<div id="adminpecbox">
-  <el-row style="margin-bottom: 10px">
-    <el-button @click="createBtn" type="primary">新增</el-button>
-  </el-row>
-  <el-row>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        fixed
-        prop="Id"
-        label="#"
-        width="100">
-      </el-table-column>
-      <el-table-column
-        prop="Title"
-        label="招聘标题"
-        width="220">
-      </el-table-column>
-      <el-table-column
-        prop="Content"
-        label="招聘内容">
-      </el-table-column>
-      <el-table-column
-        prop="Type"
-        label="招聘类别"
-        width="300">
-        <template slot-scope="scope">
-          {{ scope.row.Type === 1 ? '研发类': scope.row.Type === 2 ? '服务类' : '营销类' }}
-        </template>
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作"
-        width="150">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
-          <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </el-row>
-  <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
-    <el-form :model="form">
-      <el-form-item label="招聘标题" :label-width="formLabelWidth">
-        <el-input v-model="form.title" auto-complete="off"></el-input>
-      </el-form-item>
-       <el-form-item label="招聘内容" :label-width="formLabelWidth">
-        <el-input
-            type="textarea"
-            :rows="5"
-            placeholder="请输入内容"
-            v-model="form.content">
-        </el-input>
-      </el-form-item>
-      <el-form-item label="新闻类别" :label-width="formLabelWidth">
-        <el-select v-model="form.type" placeholder="请选择招聘类型">
-        <el-option label="研发类" value="1"></el-option>
-        <el-option label="服务类" value="2"></el-option>
-        <el-option label="营销类" value="3"></el-option>
-      </el-select>
-      </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click="createEntity">确 定</el-button>
+    <div id="adminpecbox">
+        <el-row style="margin-bottom: 10px">
+            <el-button @click="createBtn" type="primary">新增</el-button>
+        </el-row>
+        <el-row>
+            <el-table :data="tableData" border style="width: 100%">
+                <el-table-column fixed prop="Id" label="#" width="100">
+                </el-table-column>
+                <el-table-column prop="Title" label="招聘标题" width="220">
+                </el-table-column>
+                <el-table-column prop="Content" label="招聘内容">
+                </el-table-column>
+                <el-table-column prop="Type" label="招聘类别" width="300">
+                    <template slot-scope="scope">
+                        {{ scope.row.Type === 1 ? '研发类': scope.row.Type === 2 ? '服务类' : '营销类' }}
+                    </template>
+                </el-table-column>
+                <el-table-column fixed="right" label="操作" width="150">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
+                        <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-row>
+        <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+                <el-form-item label="招聘标题" :label-width="formLabelWidth">
+                    <el-input v-model="form.title" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="招聘内容" :label-width="formLabelWidth">
+                    <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="form.content">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="新闻类别" :label-width="formLabelWidth">
+                    <el-select v-model="form.type" placeholder="请选择招聘类型">
+                        <el-option label="研发类" value="1"></el-option>
+                        <el-option label="服务类" value="2"></el-option>
+                        <el-option label="营销类" value="3"></el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="createEntity">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
-  </el-dialog>
-</div>
 </template>
 <script>
 import axios from "../../router/http";
@@ -145,7 +123,7 @@ export default {
     createEntity() {
       //console.log(this.form)
       axios.defaults.headers.common["Authorization"] =
-        "BasicAuth " + localStorage.getItem("Ticket")
+        "BasicAuth " + localStorage.getItem("Ticket");
       axios
         .post("/recruitment/CreateofModified", {
           Id: this.form.id,

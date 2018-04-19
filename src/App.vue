@@ -147,9 +147,9 @@ export default {
     handleSelect(key) {
       //, keyPath
       if (key == "logo") {
-        window.location = "http://www.smilef.cn"
+        window.location = "http://www.smilef.cn";
       }
-      this.$router.push(key)
+      this.$router.push(key);
     }
   }
 };
@@ -160,16 +160,16 @@ body {
   padding: 0;
   margin: 0;
 }
-*{
-  font-family: '华文黑体'
+* {
+  font-family: "华文黑体";
 }
 </style>
 
 <style scoped>
-.toppost{
-    position: absolute;
-    z-index: 999;
-    width: 100% !important;
+.toppost {
+  position: absolute;
+  z-index: 999;
+  width: 100% !important;
 }
 .el-menu {
   border-bottom: none;
@@ -192,7 +192,7 @@ body {
   margin-left: 3%;
   max-width: 230px;
 }
-.bottombox ul:nth-of-type(1){
+.bottombox ul:nth-of-type(1) {
   margin-left: 5%;
 }
 .bottombox ul li a {

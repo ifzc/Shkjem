@@ -1,57 +1,43 @@
 <template>
-<div id="adminnewsbox">
-  <el-row style="margin-bottom: 10px">
-    <el-button @click="createBtn" type="primary">新增</el-button>
-  </el-row>
-  <el-row>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        fixed
-        prop="Id"
-        label="#"
-        width="100">
-      </el-table-column>
-      <el-table-column
-        prop="Img"
-        label="图片"
-        width="220">
-        <template slot-scope="scope" >
-            <img style="width:100%" :src="imgserver + scope.row.Img" alt="">
-        </template>
-      </el-table-column>
-      <el-table-column
-        prop="Remark"
-        label="备注">
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
-          <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </el-row>
-  <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
-    <el-form :model="form">
-      <el-form-item label="风采图片" :label-width="formLabelWidth">
-        <el-input v-model="form.img" auto-complete="off" disabled></el-input>
-        <input accept="image/*" name="upimage" @change="upload" id="upload_file" type="file">
-      </el-form-item>
-       <el-form-item label="备注" :label-width="formLabelWidth">
-        <el-input v-model="form.remark" auto-complete="off"></el-input>
-      </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click="createEntity">确 定</el-button>
+    <div id="adminnewsbox">
+        <el-row style="margin-bottom: 10px">
+            <el-button @click="createBtn" type="primary">新增</el-button>
+        </el-row>
+        <el-row>
+            <el-table :data="tableData" border style="width: 100%">
+                <el-table-column fixed prop="Id" label="#" width="100">
+                </el-table-column>
+                <el-table-column prop="Img" label="图片" width="220">
+                    <template slot-scope="scope">
+                        <img style="width:100%" :src="imgserver + scope.row.Img" alt="">
+                    </template>
+                </el-table-column>
+                <el-table-column prop="Remark" label="备注">
+                </el-table-column>
+                <el-table-column fixed="right" label="操作">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
+                        <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-row>
+        <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+                <el-form-item label="风采图片" :label-width="formLabelWidth">
+                    <el-input v-model="form.img" auto-complete="off" disabled></el-input>
+                    <input accept="image/*" name="upimage" @change="upload" id="upload_file" type="file">
+                </el-form-item>
+                <el-form-item label="备注" :label-width="formLabelWidth">
+                    <el-input v-model="form.remark" auto-complete="off"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="createEntity">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
-  </el-dialog>
-</div>
 </template>
 <script>
 import axios from "../../router/http";

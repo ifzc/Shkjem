@@ -1,60 +1,41 @@
 <template>
-<div id="adminpecbox">
-  <el-row style="margin-bottom: 10px">
-    <el-button @click="createBtn" type="primary">新增</el-button>
-  </el-row>
-  <el-row>
-    <h4 style="color: rgb(255, 111, 111);margin: 0">页面将会按照年份展示前7项</h4>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        fixed
-        prop="Id"
-        label="#"
-        width="100">
-      </el-table-column>
-      <el-table-column
-        prop="Year"
-        label="历程年份"
-        width="220">
-      </el-table-column>
-      <el-table-column
-        prop="Content"
-        label="历程内容">
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作"
-        width="150">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
-          <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </el-row>
-  <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
-    <el-form :model="form">
-      <el-form-item label="历程年份" :label-width="formLabelWidth">
-        <el-input v-model="form.year" auto-complete="off"></el-input>
-      </el-form-item>
-       <el-form-item label="历程内容" :label-width="formLabelWidth">
-        <el-input
-            type="textarea"
-            :rows="5"
-            placeholder="请输入内容"
-            v-model="form.content">
-        </el-input>
-      </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click="createEntity">确 定</el-button>
+    <div id="adminpecbox">
+        <el-row style="margin-bottom: 10px">
+            <el-button @click="createBtn" type="primary">新增</el-button>
+        </el-row>
+        <el-row>
+            <h4 style="color: rgb(255, 111, 111);margin: 0">页面将会按照年份展示前7项</h4>
+            <el-table :data="tableData" border style="width: 100%">
+                <el-table-column fixed prop="Id" label="#" width="100">
+                </el-table-column>
+                <el-table-column prop="Year" label="历程年份" width="220">
+                </el-table-column>
+                <el-table-column prop="Content" label="历程内容">
+                </el-table-column>
+                <el-table-column fixed="right" label="操作" width="150">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
+                        <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-row>
+        <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+                <el-form-item label="历程年份" :label-width="formLabelWidth">
+                    <el-input v-model="form.year" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="历程内容" :label-width="formLabelWidth">
+                    <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="form.content">
+                    </el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="createEntity">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
-  </el-dialog>
-</div>
 </template>
 <script>
 import axios from "../../router/http";

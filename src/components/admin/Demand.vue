@@ -1,48 +1,30 @@
 <template>
-<div id="adminpecbox">
-  <el-row style="margin-bottom: 10px">
-    <h3>需求投递</h3>
-  </el-row>
-  <el-row>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        fixed
-        prop="Id"
-        label="#">
-      </el-table-column>
-      <el-table-column
-        prop="Name"
-        label="姓名">
-      </el-table-column>
-      <el-table-column
-        prop="Phone"
-        label="电话">
-      </el-table-column>
-      <el-table-column
-        prop="Company"
-        label="公司">
-      </el-table-column>
-      <el-table-column
-        prop="Email"
-        label="邮箱">
-      </el-table-column>
-      <el-table-column
-        prop="Content"
-        label="留言内容">
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作">
-        <template slot-scope="scope">
-          <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </el-row>
-</div>
+    <div id="adminpecbox">
+        <el-row style="margin-bottom: 10px">
+            <h3>需求投递</h3>
+        </el-row>
+        <el-row>
+            <el-table :data="tableData" border style="width: 100%">
+                <el-table-column fixed prop="Id" label="#">
+                </el-table-column>
+                <el-table-column prop="Name" label="姓名">
+                </el-table-column>
+                <el-table-column prop="Phone" label="电话">
+                </el-table-column>
+                <el-table-column prop="Company" label="公司">
+                </el-table-column>
+                <el-table-column prop="Email" label="邮箱">
+                </el-table-column>
+                <el-table-column prop="Content" label="留言内容">
+                </el-table-column>
+                <el-table-column fixed="right" label="操作">
+                    <template slot-scope="scope">
+                        <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-row>
+    </div>
 </template>
 <script>
 import axios from "../../router/http";

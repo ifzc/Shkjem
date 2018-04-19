@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import App from './App'
 import router from './router/router'
@@ -11,6 +12,12 @@ import 'animate.css'
 //import 'vue-fullpage/vue-fullpage.css'
 //import VueFullpage from 'vue-fullpage'
 //Vue.use(VueFullpage)
+
+import 'babel-polyfill';
+import promise from 'es6-promise';
+
+promise.polyfill();
+
 
 Vue.prototype.imgserver = 'http://120.79.76.250/'
 
