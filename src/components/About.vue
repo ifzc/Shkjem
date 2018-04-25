@@ -35,71 +35,71 @@
 <script>
 import axios from "../router/http";
 export default {
-  name: "About",
-  data() {
-    return {
-        pagetitle:'',
-      formInline: {
-        name: "",
-        phone: "",
-        company: "",
-        emali: "",
-        content: ""
-      },
-      rules: {
-        name: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
-        ],
-        phone: [{ required: true, message: "请输入联系电话", trigger: "blur" }],
-        emali: [{ required: true, message: "请输入联系邮箱", trigger: "blur" }],
-        company: [
-          { required: true, message: "请输入公司名称", trigger: "blur" }
-        ],
-        content: [{ required: true, message: "请输入留言", trigger: "blur" }]
-      }
-    };
-  },
-  methods: {
-    onSubmit(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.createEntity();
-          this.$refs[formName].resetFields();
-        } else {
-          this.$message({
-            type: "error",
-            message: "请检查填写要求"
-          });
-          return false;
-        }
-      });
+    name: "About",
+    data () {
+        return {
+            pagetitle: '',
+            formInline: {
+                name: "",
+                phone: "",
+                company: "",
+                emali: "",
+                content: ""
+            },
+            rules: {
+                name: [
+                    { required: true, message: "请输入姓名", trigger: "blur" },
+                    { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+                ],
+                phone: [{ required: true, message: "请输入联系电话", trigger: "blur" }],
+                emali: [{ required: true, message: "请输入联系邮箱", trigger: "blur" }],
+                company: [
+                    { required: true, message: "请输入公司名称", trigger: "blur" }
+                ],
+                content: [{ required: true, message: "请输入留言", trigger: "blur" }]
+            }
+        };
     },
-    createEntity() {
-      axios
-        .post("/message/CreateMessage", {
-          Id: this.formInline.id,
-          IsMess: false,
-          Name: this.formInline.name,
-          Phone: this.formInline.phone,
-          Email: this.formInline.emali,
-          Company: this.formInline.company,
-          Content: this.formInline.content
-        })
-        .then(response => {
-          console.log(response.status);
-          this.$message({
-            type: "success",
-            message: "留言成功!"
-          });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    }
-  },
-  created: function() {
-    axios
+    methods: {
+        onSubmit (formName) {
+            this.$refs[formName].validate(valid => {
+                if (valid) {
+                    this.createEntity();
+                    this.$refs[formName].resetFields();
+                } else {
+                    this.$message({
+                        type: "error",
+                        message: "请检查填写要求"
+                    });
+                    return false;
+                }
+            });
+        },
+        createEntity () {
+            axios
+                .post("/message/CreateMessage", {
+                    Id: this.formInline.id,
+                    IsMess: false,
+                    Name: this.formInline.name,
+                    Phone: this.formInline.phone,
+                    Email: this.formInline.emali,
+                    Company: this.formInline.company,
+                    Content: this.formInline.content
+                })
+                .then(response => {
+                    console.log(response.status);
+                    this.$message({
+                        type: "success",
+                        message: "留言成功!"
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    },
+    created: function () {
+        axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
                     key: "联系我们标题"
@@ -108,10 +108,10 @@ export default {
             .then(response => {
                 this.pagetitle = response.data[0].Content;
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
-  }
+    }
 };
 </script>
 <style scoped>

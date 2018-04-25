@@ -18,45 +18,47 @@
 <script>
 import axios from "../router/http";
 export default {
-  name: "News",
-  isShow: true,
-  data() {
-    return {
-        pagetitle:'',
-      newsdata: []
-    };
-  },
-  methods: {
-    cktopbtn: function(i) {
-      //console.log(i);
-      var ps = document.querySelectorAll(".topbtn p");
-      ps.forEach(element => {
-        element.classList.remove("action");
-      });
-      let p = document.querySelector(".p-" + i);
-      p.classList.add("action");
-
-      this.getdataall(i);
+    name: "News",
+    isShow: true,
+    data () {
+        return {
+            pagetitle: '',
+            newsdata: []
+        };
     },
-    getdataall(type) {
-      axios
-        .get("/news/GetNewsAll", {
-          params: {
-            type: type,
-            num: 999
-          }
-        })
-        .then(response => {
-          this.newsdata = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    }
-  },
-  created: function() {
-    this.getdataall(1);
-    axios
+    methods: {
+        cktopbtn: function (i) {
+            //console.log(i);
+            var ps = document.querySelectorAll(".topbtn p");
+            ps.forEach(element => {
+                element.classList.remove("action");
+            });
+            let p = document.querySelector(".p-" + i);
+            p.classList.add("action");
+
+            this.getdataall(i);
+
+            console.log(this.pagetitle)
+        },
+        getdataall (type) {
+            axios
+                .get("/news/GetNewsAll", {
+                    params: {
+                        type: type,
+                        num: 999
+                    }
+                })
+                .then(response => {
+                    this.newsdata = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    },
+    created: function () {
+        this.getdataall(1);
+        axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
                     key: "新闻资讯标题"
@@ -65,10 +67,10 @@ export default {
             .then(response => {
                 this.pagetitle = response.data[0].Content;
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
-  }
+    }
 };
 </script>
 

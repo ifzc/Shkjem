@@ -42,110 +42,110 @@ import axios from "../../router/http";
 import { Message } from "element-ui";
 
 export default {
-  data() {
-    return {
-      dialogTitle: "",
-      dialogFormVisible: false,
-      form: {
-        id: 0,
-        key: "",
-        content: ""
-      },
-      formLabelWidth: "120px",
-      tableData: [] //this.getdataall()
-    };
-  },
-  methods: {
-    handleClick(row) {
-      console.log(row);
-      this.dialogTitle = "修改数据字典";
-      this.form.id = row.Id;
-      this.form.key = row.Key;
-      this.form.content = row.Content;
-      this.dialogFormVisible = true;
+    data () {
+        return {
+            dialogTitle: "",
+            dialogFormVisible: false,
+            form: {
+                id: 0,
+                key: "",
+                content: ""
+            },
+            formLabelWidth: "120px",
+            tableData: [] //this.getdataall()
+        };
     },
-    deleteClick(row) {
-      console.log(row);
-      this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          axios.defaults.headers.common["Authorization"] =
-            "BasicAuth " + localStorage.getItem("Ticket");
-          axios
-            .post("/DataDictionary/DeleteDataDictionary/" + row.Id)
-            .then(response => {
-              console.log(response.status);
-              this.$message({
-                type: "success",
-                message: "删除成功!"
-              });
-              this.getdataall();
+    methods: {
+        handleClick (row) {
+            console.log(row);
+            this.dialogTitle = "修改数据字典";
+            this.form.id = row.Id;
+            this.form.key = row.Key;
+            this.form.content = row.Content;
+            this.dialogFormVisible = true;
+        },
+        deleteClick (row) {
+            console.log(row);
+            this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
             })
-            .catch(function(error) {
-              console.log(error);
-              this.$message({
-                type: "info",
-                message: "删除失败!"
-              });
-            });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
+                .then(() => {
+                    axios.defaults.headers.common["Authorization"] =
+                        "BasicAuth " + localStorage.getItem("Ticket");
+                    axios
+                        .post("/DataDictionary/DeleteDataDictionary/" + row.Id)
+                        .then(response => {
+                            console.log(response.status);
+                            this.$message({
+                                type: "success",
+                                message: "删除成功!"
+                            });
+                            this.getdataall();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            this.$message({
+                                type: "info",
+                                message: "删除失败!"
+                            });
+                        });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
+        },
+        createBtn () {
+            this.dialogTitle = "新增数据字典";
+            this.form.id = 0;
+            this.form.key = "";
+            this.form.content = "";
+            this.dialogFormVisible = true;
+        },
+        createEntity () {
+            //console.log(this.form)
+            axios.defaults.headers.common["Authorization"] =
+                "BasicAuth " + localStorage.getItem("Ticket");
+            axios
+                .post("/DataDictionary/CreatedofModied", {
+                    Id: this.form.id,
+                    Key: this.form.key,
+                    Content: this.form.content
+                })
+                .then(response => {
+                    console.log(response.status);
+                    this.$message({
+                        type: "success",
+                        message: "操作成功!"
+                    });
+                    this.getdataall();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            this.dialogFormVisible = false;
+        },
+        getdataall () {
+            axios
+                .get("/DataDictionary/GetDataDictionaryAll", {
+                    params: {
+                        key: ""
+                    }
+                })
+                .then(response => {
+                    this.tableData = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     },
-    createBtn() {
-      this.dialogTitle = "新增数据字典";
-      this.form.id = 0;
-      this.form.key = "";
-      this.form.content = "";
-      this.dialogFormVisible = true;
-    },
-    createEntity() {
-      //console.log(this.form)
-      axios.defaults.headers.common["Authorization"] =
-        "BasicAuth " + localStorage.getItem("Ticket");
-      axios
-        .post("/DataDictionary/CreatedofModied", {
-          Id: this.form.id,
-          Key: this.form.key,
-          Content: this.form.content
-        })
-        .then(response => {
-          console.log(response.status);
-          this.$message({
-            type: "success",
-            message: "操作成功!"
-          });
-          this.getdataall();
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      this.dialogFormVisible = false;
-    },
-    getdataall() {
-      axios
-        .get("/DataDictionary/GetDataDictionaryAll", {
-          params: {
-            key: ""
-          }
-        })
-        .then(response => {
-          this.tableData = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    created: function () {
+        this.getdataall();
     }
-  },
-  created: function() {
-    this.getdataall();
-  }
 };
 </script>

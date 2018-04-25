@@ -22,136 +22,136 @@
 
 <script>
 export default {
-  name: "App",
-  data() {
-    return {
-      activeIndex: "/",
-      hrefdata: [
-        [
-          {
-            href: "#",
-            text: "走进科建"
-          },
-          {
-            href: "#",
-            text: "公司简介"
-          },
-          {
-            href: "#",
-            text: "发展历程"
-          },
-          {
-            href: "#",
-            text: "组织结构"
-          },
-          {
-            href: "#",
-            text: "企业文化"
-          },
-          {
-            href: "#",
-            text: "资质荣誉"
-          },
-          {
-            href: "#",
-            text: "合作伙伴"
-          }
-        ],
-        [
-          {
-            href: "#",
-            text: "新闻资讯"
-          },
-          {
-            href: "#",
-            text: "公司新闻"
-          },
-          {
-            href: "#",
-            text: "行业动态"
-          }
-        ],
-        [
-          {
-            href: "#",
-            text: "产品中心"
-          }
-        ],
-        [
-          {
-            href: "#",
-            text: "经典案例"
-          },
-          {
-            href: "#",
-            text: "高层办公楼"
-          },
-          {
-            href: "#",
-            text: "轨道交通"
-          },
-          {
-            href: "#",
-            text: "市政工程"
-          },
-          {
-            href: "#",
-            text: "城市综合体"
-          }
-        ],
-        [
-          {
-            href: "#",
-            text: "帮助中心"
-          },
-          {
-            href: "#",
-            text: "常见问题"
-          },
-          {
-            href: "#",
-            text: "技术支持"
-          }
-        ],
-        [
-          {
-            href: "#",
-            text: "联系我们"
-          },
-          {
-            href: "#",
-            text: "邮箱:Smileioc@163.com"
-          },
-          {
-            href: "#",
-            text: "电话:182****2176"
-          },
-          {
-            href: "#",
-            text: "传真:182****2176"
-          },
-          {
-            href: "#",
-            text: "地址:上海市松花区新松江路909号丰源大厦16F"
-          }
-        ]
-      ]
-    };
-  },
-  created: function() {
-    //console.log( this.$route.path.substring(0,6))
-    //let actionpath =
-    //console.log(this.$route.path)
-  },
-  methods: {
-    handleSelect(key) {
-      //, keyPath
-      if (key == "logo") {
-        window.location = "http://www.smilef.cn";
-      }
-      this.$router.push(key);
+    name: "App",
+    data () {
+        return {
+            activeIndex: "/",
+            hrefdata: [
+                [
+                    {
+                        href: "#",
+                        text: "走进科建"
+                    },
+                    {
+                        href: "#",
+                        text: "公司简介"
+                    },
+                    {
+                        href: "#",
+                        text: "发展历程"
+                    },
+                    {
+                        href: "#",
+                        text: "组织结构"
+                    },
+                    {
+                        href: "#",
+                        text: "企业文化"
+                    },
+                    {
+                        href: "#",
+                        text: "资质荣誉"
+                    },
+                    {
+                        href: "#",
+                        text: "合作伙伴"
+                    }
+                ],
+                [
+                    {
+                        href: "#",
+                        text: "新闻资讯"
+                    },
+                    {
+                        href: "#",
+                        text: "公司新闻"
+                    },
+                    {
+                        href: "#",
+                        text: "行业动态"
+                    }
+                ],
+                [
+                    {
+                        href: "#",
+                        text: "产品中心"
+                    }
+                ],
+                [
+                    {
+                        href: "#",
+                        text: "经典案例"
+                    },
+                    {
+                        href: "#",
+                        text: "高层办公楼"
+                    },
+                    {
+                        href: "#",
+                        text: "轨道交通"
+                    },
+                    {
+                        href: "#",
+                        text: "市政工程"
+                    },
+                    {
+                        href: "#",
+                        text: "城市综合体"
+                    }
+                ],
+                [
+                    {
+                        href: "#",
+                        text: "帮助中心"
+                    },
+                    {
+                        href: "#",
+                        text: "常见问题"
+                    },
+                    {
+                        href: "#",
+                        text: "技术支持"
+                    }
+                ],
+                [
+                    {
+                        href: "#",
+                        text: "联系我们"
+                    },
+                    {
+                        href: "#",
+                        text: "邮箱:Smileioc@163.com"
+                    },
+                    {
+                        href: "#",
+                        text: "电话:182****2176"
+                    },
+                    {
+                        href: "#",
+                        text: "传真:182****2176"
+                    },
+                    {
+                        href: "#",
+                        text: "地址:上海市松花区新松江路909号丰源大厦16F"
+                    }
+                ]
+            ]
+        };
+    },
+    created: function () {
+        //console.log( this.$route.path.substring(0,6))
+        //let actionpath =
+        //console.log(this.$route.path)
+    },
+    methods: {
+        handleSelect (key) {
+            //, keyPath
+            if (key == "logo") {
+                window.location = "http://www.smilef.cn";
+            }
+            this.$router.push(key);
+        }
     }
-  }
 };
 </script>
 
@@ -163,18 +163,18 @@ body {
 * {
   font-family: "华文黑体";
 }
-.pagetop{
-    width: 100%;
-    height: 500px;
-    background-size: 100% 100%;
+.pagetop {
+  width: 100%;
+  height: 500px;
+  background-size: 100% 100%;
 }
-.pagetop h1{
-    margin: 0;
-    line-height: 500px;
-    text-align: center;
-    color: #fff;
-     font-size: 45px;
-    font-weight: 400;
+.pagetop h1 {
+  margin: 0;
+  line-height: 500px;
+  text-align: center;
+  color: #fff;
+  font-size: 45px;
+  font-weight: 400;
 }
 </style>
 

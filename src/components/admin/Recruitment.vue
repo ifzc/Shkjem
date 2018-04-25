@@ -53,114 +53,114 @@ import axios from "../../router/http";
 import { Message } from "element-ui";
 
 export default {
-  data() {
-    return {
-      dialogTitle: "",
-      dialogFormVisible: false,
-      form: {
-        id: 0,
-        title: "",
-        content: "",
-        type: ""
-      },
-      formLabelWidth: "120px",
-      tableData: [] //this.getdataall()
-    };
-  },
-  methods: {
-    handleClick(row) {
-      console.log(row);
-      this.dialogTitle = "修改招聘信息";
-      this.form.id = row.Id;
-      this.form.title = row.Title;
-      this.form.type = row.Type;
-      this.form.content = row.Content;
-      this.dialogFormVisible = true;
+    data () {
+        return {
+            dialogTitle: "",
+            dialogFormVisible: false,
+            form: {
+                id: 0,
+                title: "",
+                content: "",
+                type: ""
+            },
+            formLabelWidth: "120px",
+            tableData: [] //this.getdataall()
+        };
     },
-    deleteClick(row) {
-      console.log(row);
-      this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          axios.defaults.headers.common["Authorization"] =
-            "BasicAuth " + localStorage.getItem("Ticket");
-          axios
-            .post("/recruitment/DeleteRecruitment/" + row.Id)
-            .then(response => {
-              console.log(response.status);
-              this.$message({
-                type: "success",
-                message: "删除成功!"
-              });
-              this.getdataall();
+    methods: {
+        handleClick (row) {
+            console.log(row);
+            this.dialogTitle = "修改招聘信息";
+            this.form.id = row.Id;
+            this.form.title = row.Title;
+            this.form.type = row.Type;
+            this.form.content = row.Content;
+            this.dialogFormVisible = true;
+        },
+        deleteClick (row) {
+            console.log(row);
+            this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
             })
-            .catch(function(error) {
-              console.log(error);
-              this.$message({
-                type: "info",
-                message: "删除失败!"
-              });
-            });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
+                .then(() => {
+                    axios.defaults.headers.common["Authorization"] =
+                        "BasicAuth " + localStorage.getItem("Ticket");
+                    axios
+                        .post("/recruitment/DeleteRecruitment/" + row.Id)
+                        .then(response => {
+                            console.log(response.status);
+                            this.$message({
+                                type: "success",
+                                message: "删除成功!"
+                            });
+                            this.getdataall();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            this.$message({
+                                type: "info",
+                                message: "删除失败!"
+                            });
+                        });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
+        },
+        createBtn () {
+            this.dialogTitle = "新增招聘信息";
+            this.form.id = 0;
+            this.form.title = "";
+            this.form.content = "";
+            this.form.type = "";
+            this.dialogFormVisible = true;
+        },
+        createEntity () {
+            //console.log(this.form)
+            axios.defaults.headers.common["Authorization"] =
+                "BasicAuth " + localStorage.getItem("Ticket");
+            axios
+                .post("/recruitment/CreateofModified", {
+                    Id: this.form.id,
+                    Title: this.form.title,
+                    Content: this.form.content,
+                    Type: this.form.type
+                })
+                .then(response => {
+                    console.log(response.status);
+                    this.$message({
+                        type: "success",
+                        message: "操作成功!"
+                    });
+                    this.getdataall();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            this.dialogFormVisible = false;
+        },
+        getdataall () {
+            axios
+                .get("/recruitment/GetRecruitmentAll", {
+                    params: {
+                        type: 0
+                    }
+                })
+                .then(response => {
+                    this.tableData = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     },
-    createBtn() {
-      this.dialogTitle = "新增招聘信息";
-      this.form.id = 0;
-      this.form.title = "";
-      this.form.content = "";
-      this.form.type = "";
-      this.dialogFormVisible = true;
-    },
-    createEntity() {
-      //console.log(this.form)
-      axios.defaults.headers.common["Authorization"] =
-        "BasicAuth " + localStorage.getItem("Ticket");
-      axios
-        .post("/recruitment/CreateofModified", {
-          Id: this.form.id,
-          Title: this.form.title,
-          Content: this.form.content,
-          Type: this.form.type
-        })
-        .then(response => {
-          console.log(response.status);
-          this.$message({
-            type: "success",
-            message: "操作成功!"
-          });
-          this.getdataall();
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      this.dialogFormVisible = false;
-    },
-    getdataall() {
-      axios
-        .get("/recruitment/GetRecruitmentAll", {
-          params: {
-            type: 0
-          }
-        })
-        .then(response => {
-          this.tableData = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    created: function () {
+        this.getdataall();
     }
-  },
-  created: function() {
-    this.getdataall();
-  }
 };
 </script>

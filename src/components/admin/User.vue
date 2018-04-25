@@ -53,139 +53,139 @@ import axios from "../../router/http";
 import { Message } from "element-ui";
 
 export default {
-  data() {
-    return {
-      dialogTitle: "",
-      dialogFormVisible: false,
-      form: {
-        id: 0,
-        loginName: "",
-        password: "",
-        isAction: ""
-      },
-      formLabelWidth: "120px",
-      tableData: [] //this.getdataall()
-    };
-  },
-  methods: {
-    $_(id) {
-      return document.getElementById(id);
+    data () {
+        return {
+            dialogTitle: "",
+            dialogFormVisible: false,
+            form: {
+                id: 0,
+                loginName: "",
+                password: "",
+                isAction: ""
+            },
+            formLabelWidth: "120px",
+            tableData: [] //this.getdataall()
+        };
     },
-    gen_base64() {
-      //判断浏览器是否支持FileRader接口
-      if (typeof FileReader == "undefined") {
-        alert("你的浏览器不支持FileReader");
-        //fileInput.setAttribute('disabled', 'disabled')
-        return;
-      }
-      var file = this.$_("upload_file").files[0];
-      let r = new FileReader(); //本地预览
-      r.onload = () => {
-        //console.log(r.result)
-        this.form.img = r.result;
-      };
-      r.readAsDataURL(file); //Base64
-    },
-    handleClick(row) {
-      console.log(row);
-      this.dialogTitle = "修改新闻";
-      this.form.id = row.Id;
-      this.form.loginName = row.LoginName;
-      this.form.password = row.Password;
-      this.form.isAction = row.IsAction;
+    methods: {
+        $_ (id) {
+            return document.getElementById(id);
+        },
+        gen_base64 () {
+            //判断浏览器是否支持FileRader接口
+            if (typeof FileReader == "undefined") {
+                alert("你的浏览器不支持FileReader");
+                //fileInput.setAttribute('disabled', 'disabled')
+                return;
+            }
+            var file = this.$_("upload_file").files[0];
+            let r = new FileReader(); //本地预览
+            r.onload = () => {
+                //console.log(r.result)
+                this.form.img = r.result;
+            };
+            r.readAsDataURL(file); //Base64
+        },
+        handleClick (row) {
+            console.log(row);
+            this.dialogTitle = "修改新闻";
+            this.form.id = row.Id;
+            this.form.loginName = row.LoginName;
+            this.form.password = row.Password;
+            this.form.isAction = row.IsAction;
 
-      this.dialogFormVisible = true;
-    },
-    deleteClick(row) {
-      console.log(row);
-      this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          axios.defaults.headers.common["Authorization"] =
-            "BasicAuth " + localStorage.getItem("Ticket");
-          axios
-            .post("/user/DeleteUser/" + row.Id)
-            .then(response => {
-              console.log(response.status);
-              this.$message({
-                type: "success",
-                message: "删除成功!"
-              });
-              this.getdataall();
+            this.dialogFormVisible = true;
+        },
+        deleteClick (row) {
+            console.log(row);
+            this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
             })
-            .catch(function(error) {
-              console.log(error);
-              this.$message({
-                type: "info",
-                message: "删除失败!"
-              });
-            });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
-    },
-    createBtn() {
-      this.dialogTitle = "新增新闻";
-      this.form.id = 0;
-      this.form.loginName = "";
-      this.form.password = "";
-      this.form.isAction = true;
+                .then(() => {
+                    axios.defaults.headers.common["Authorization"] =
+                        "BasicAuth " + localStorage.getItem("Ticket");
+                    axios
+                        .post("/user/DeleteUser/" + row.Id)
+                        .then(response => {
+                            console.log(response.status);
+                            this.$message({
+                                type: "success",
+                                message: "删除成功!"
+                            });
+                            this.getdataall();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            this.$message({
+                                type: "info",
+                                message: "删除失败!"
+                            });
+                        });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
+        },
+        createBtn () {
+            this.dialogTitle = "新增新闻";
+            this.form.id = 0;
+            this.form.loginName = "";
+            this.form.password = "";
+            this.form.isAction = true;
 
-      this.dialogFormVisible = true;
+            this.dialogFormVisible = true;
+        },
+        createEntity () {
+            //console.log(this.form)
+            axios.defaults.headers.common["Authorization"] =
+                "BasicAuth " + localStorage.getItem("Ticket");
+            axios
+                .post("/user/CreateofModified", {
+                    Id: this.form.id,
+                    LoginName: this.form.loginName,
+                    Password: this.form.password,
+                    IsAction: this.form.isAction
+                })
+                .then(response => {
+                    console.log(response.status);
+                    this.$message({
+                        type: "success",
+                        message: "操作成功!"
+                    });
+                    this.getdataall();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            this.dialogFormVisible = false;
+        },
+        getdataall () {
+            axios.defaults.headers.common["Authorization"] =
+                "BasicAuth " + localStorage.getItem("Ticket");
+            axios
+                .post("/user/GetUserAll")
+                .then(response => {
+                    this.tableData = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        cleanBtn () {
+            sessionStorage.clear();
+        },
+        cleanuserBtn () {
+            localStorage.clear();
+            this.$router.push("/login");
+        }
     },
-    createEntity() {
-      //console.log(this.form)
-      axios.defaults.headers.common["Authorization"] =
-        "BasicAuth " + localStorage.getItem("Ticket");
-      axios
-        .post("/user/CreateofModified", {
-          Id: this.form.id,
-          LoginName: this.form.loginName,
-          Password: this.form.password,
-          IsAction: this.form.isAction
-        })
-        .then(response => {
-          console.log(response.status);
-          this.$message({
-            type: "success",
-            message: "操作成功!"
-          });
-          this.getdataall();
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      this.dialogFormVisible = false;
-    },
-    getdataall() {
-      axios.defaults.headers.common["Authorization"] =
-        "BasicAuth " + localStorage.getItem("Ticket");
-      axios
-        .post("/user/GetUserAll")
-        .then(response => {
-          this.tableData = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
-    cleanBtn() {
-      sessionStorage.clear();
-    },
-    cleanuserBtn() {
-      localStorage.clear();
-      this.$router.push("/login");
+    created: function () {
+        this.getdataall();
     }
-  },
-  created: function() {
-    this.getdataall();
-  }
 };
 </script>

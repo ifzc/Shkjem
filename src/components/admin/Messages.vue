@@ -29,72 +29,72 @@ import axios from "../../router/http";
 import { Message } from "element-ui";
 
 export default {
-  data() {
-    return {
-      dialogTitle: "",
-      dialogFormVisible: false,
-      form: {
-        id: 0,
-        title: "",
-        content: ""
-      },
-      formLabelWidth: "120px",
-      tableData: [] //this.getdataall()
-    };
-  },
-  methods: {
-    deleteClick(row) {
-      console.log(row);
-      this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          axios.defaults.headers.common["Authorization"] =
-            "BasicAuth " + localStorage.getItem("Ticket");
-          axios
-            .post("/message/DeleteMessage/" + row.Id)
-            .then(response => {
-              console.log(response.status);
-              this.$message({
-                type: "success",
-                message: "删除成功!"
-              });
-              this.getdataall();
-            })
-            .catch(function(error) {
-              console.log(error);
-              this.$message({
-                type: "info",
-                message: "删除失败!"
-              });
-            });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
+    data () {
+        return {
+            dialogTitle: "",
+            dialogFormVisible: false,
+            form: {
+                id: 0,
+                title: "",
+                content: ""
+            },
+            formLabelWidth: "120px",
+            tableData: [] //this.getdataall()
+        };
     },
-    getdataall() {
-      axios
-        .get("/message/GetMessageAll", {
-          params: {
-            ismess: true
-          }
-        })
-        .then(response => {
-          this.tableData = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    methods: {
+        deleteClick (row) {
+            console.log(row);
+            this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    axios.defaults.headers.common["Authorization"] =
+                        "BasicAuth " + localStorage.getItem("Ticket");
+                    axios
+                        .post("/message/DeleteMessage/" + row.Id)
+                        .then(response => {
+                            console.log(response.status);
+                            this.$message({
+                                type: "success",
+                                message: "删除成功!"
+                            });
+                            this.getdataall();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            this.$message({
+                                type: "info",
+                                message: "删除失败!"
+                            });
+                        });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
+        },
+        getdataall () {
+            axios
+                .get("/message/GetMessageAll", {
+                    params: {
+                        ismess: true
+                    }
+                })
+                .then(response => {
+                    this.tableData = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    },
+    created: function () {
+        this.getdataall();
     }
-  },
-  created: function() {
-    this.getdataall();
-  }
 };
 </script>

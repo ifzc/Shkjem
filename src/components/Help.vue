@@ -22,65 +22,65 @@
 <script>
 import axios from "../router/http";
 export default {
-  data() {
-    return {
-        pagetitle:'',
-      formInline: {
-        name: "",
-        phone: "",
-        emali: "",
-        content: ""
-      },
-      rules: {
-        name: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
-        ],
-        phone: [{ required: true, message: "请输入联系电话", trigger: "blur" }],
-        emali: [{ required: true, message: "请输入联系邮箱", trigger: "blur" }],
-        content: [{ required: true, message: "请输入留言", trigger: "blur" }]
-      }
-    };
-  },
-  methods: {
-    onSubmit(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.createEntity();
-          this.$refs[formName].resetFields();
-        } else {
-          this.$message({
-            type: "error",
-            message: "请检查填写要求"
-          });
-          return false;
-        }
-      });
+    data () {
+        return {
+            pagetitle: '',
+            formInline: {
+                name: "",
+                phone: "",
+                emali: "",
+                content: ""
+            },
+            rules: {
+                name: [
+                    { required: true, message: "请输入姓名", trigger: "blur" },
+                    { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+                ],
+                phone: [{ required: true, message: "请输入联系电话", trigger: "blur" }],
+                emali: [{ required: true, message: "请输入联系邮箱", trigger: "blur" }],
+                content: [{ required: true, message: "请输入留言", trigger: "blur" }]
+            }
+        };
     },
-    createEntity() {
-      axios
-        .post("/message/CreateMessage", {
-          Id: this.formInline.id,
-          IsMess: true,
-          Name: this.formInline.name,
-          Phone: this.formInline.phone,
-          Email: this.formInline.emali,
-          Content: this.formInline.content
-        })
-        .then(response => {
-          console.log(response.status);
-          this.$message({
-            type: "success",
-            message: "留言成功!"
-          });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    }
-  },
-  created:function(){
-      axios
+    methods: {
+        onSubmit (formName) {
+            this.$refs[formName].validate(valid => {
+                if (valid) {
+                    this.createEntity();
+                    this.$refs[formName].resetFields();
+                } else {
+                    this.$message({
+                        type: "error",
+                        message: "请检查填写要求"
+                    });
+                    return false;
+                }
+            });
+        },
+        createEntity () {
+            axios
+                .post("/message/CreateMessage", {
+                    Id: this.formInline.id,
+                    IsMess: true,
+                    Name: this.formInline.name,
+                    Phone: this.formInline.phone,
+                    Email: this.formInline.emali,
+                    Content: this.formInline.content
+                })
+                .then(response => {
+                    console.log(response.status);
+                    this.$message({
+                        type: "success",
+                        message: "留言成功!"
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    },
+    created: function () {
+        axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
                     key: "帮助中心标题"
@@ -89,20 +89,20 @@ export default {
             .then(response => {
                 this.pagetitle = response.data[0].Content;
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
-  }
+    }
 };
 </script>
 <style scoped>
 #helpbox {
   background-color: rgb(20, 103, 159);
 }
-#conboxx{
+#conboxx {
   background-color: #fff;
   background-image: url(/static/waitanbg.png);
-  width:  85%;
+  width: 85%;
   margin: 0 auto;
   padding-top: 25px;
 }

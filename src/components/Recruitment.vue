@@ -15,43 +15,43 @@
 <script>
 import axios from "../router/http";
 export default {
-  data() {
-    return {
-        pagetitle:'',
-      pecdata: []
-    };
-  },
-  methods: {
-    cktopbtn: function(i) {
-      //console.log(i)
-      var ps = document.querySelectorAll(".topbtn p");
-      ps.forEach(element => {
-        element.classList.remove("action");
-      });
-      let p = document.querySelector(".p-" + i);
-      p.classList.add("action");
-
-      this.getdataall(i);
+    data () {
+        return {
+            pagetitle: '',
+            pecdata: []
+        };
     },
-    getdataall(type) {
-      axios
-        .get("/recruitment/GetRecruitmentAll", {
-          params: {
-            type: type
-          }
-        })
-        .then(response => {
-          //console.log(response)
-          this.pecdata = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    }
-  },
-  created: function() {
-    this.getdataall(1);
-    axios
+    methods: {
+        cktopbtn: function (i) {
+            //console.log(i)
+            var ps = document.querySelectorAll(".topbtn p");
+            ps.forEach(element => {
+                element.classList.remove("action");
+            });
+            let p = document.querySelector(".p-" + i);
+            p.classList.add("action");
+
+            this.getdataall(i);
+        },
+        getdataall (type) {
+            axios
+                .get("/recruitment/GetRecruitmentAll", {
+                    params: {
+                        type: type
+                    }
+                })
+                .then(response => {
+                    //console.log(response)
+                    this.pecdata = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    },
+    created: function () {
+        this.getdataall(1);
+        axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
                     key: "诚聘英才标题"
@@ -60,21 +60,21 @@ export default {
             .then(response => {
                 this.pagetitle = response.data[0].Content;
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
-  }
+    }
 };
 </script>
 <style scoped>
 #rec {
   background-color: #14679f;
 }
-#conbox{
+#conbox {
   background-image: url(/static/waitanbg.png);
   background-color: #fff;
-      width: 85%;
-    margin: 0 auto;
+  width: 85%;
+  margin: 0 auto;
 }
 .topbtn {
   margin: 0 auto;

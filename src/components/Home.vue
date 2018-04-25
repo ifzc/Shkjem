@@ -65,141 +65,141 @@ import "../../static/bli/jquery-1.8.3.min.js";
 import "../../static/bli/jquery.fullPage.min.js";
 
 export default {
-  name: "Home",
-  data() {
-    return {
-      tableData: [
-        {
-          Img: "",
-          Title: "",
-          Content: "",
-          CreateTime: ""
-        },
-        {
-          Img: "",
-          Title: "",
-          Content: "",
-          CreateTime: ""
-        },
-        {
-          Img: "",
-          Title: "",
-          Content: "",
-          CreateTime: ""
-        }
-      ],
-      tableDataan: [
-        {
-          Img: "",
-          Title: "",
-          Content: ""
-        },
-        {
-          Img: "",
-          Title: "",
-          Content: ""
-        },
-        {
-          Img: "",
-          Title: "",
-          Content: ""
-        }
-      ],
-      hometitle: "",
-      hometitlesub: "",
-      hometitlesuben: ""
-    };
-  },
-  mounted() {
-    $("#fullpage").fullpage({
-      autoScrolling: false,
-      loopBottom: true
-    });
-    $(".section").click(function() {
-      $.fn.fullpage.moveSectionDown();
-    });
-  },
-  methods: {
-    getdataall() {
-      axios
-        .get("/news/GetNewsAll", {
-          params: {
-            type: 0,
-            num: 3
-          }
-        })
-        .then(response => {
-          this.tableData = response.data;
-
-          //console.log(this.tableData);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-
-      axios
-        .get("/cases/GetCasesAll")
-        .then(response => {
-          this.tableDataan = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      this.findtext();
-      
+    name: "Home",
+    data () {
+        return {
+            tableData: [
+                {
+                    Img: "",
+                    Title: "",
+                    Content: "",
+                    CreateTime: ""
+                },
+                {
+                    Img: "",
+                    Title: "",
+                    Content: "",
+                    CreateTime: ""
+                },
+                {
+                    Img: "",
+                    Title: "",
+                    Content: "",
+                    CreateTime: ""
+                }
+            ],
+            tableDataan: [
+                {
+                    Img: "",
+                    Title: "",
+                    Content: ""
+                },
+                {
+                    Img: "",
+                    Title: "",
+                    Content: ""
+                },
+                {
+                    Img: "",
+                    Title: "",
+                    Content: ""
+                }
+            ],
+            hometitle: "",
+            hometitlesub: "",
+            hometitlesuben: ""
+        };
     },
-    findtext() {
-      axios
-        .get("/DataDictionary/GetDataDictionaryAll", {
-          params: {
-            key: "首页主标题"
-          }
-        })
-        .then(response => {
-          this.hometitle = response.data[0].Content;
-        })
-        .catch(function(error) {
-          console.log(error);
+    mounted () {
+        $("#fullpage").fullpage({
+            autoScrolling: false,
+            loopBottom: true
         });
-      axios
-        .get("/DataDictionary/GetDataDictionaryAll", {
-          params: {
-            key: "首页副标题"
-          }
-        })
-        .then(response => {
-          this.hometitlesub = response.data[0].Content;
-        })
-        .catch(function(error) {
-          console.log(error);
+        $(".section").click(function () {
+            $.fn.fullpage.moveSectionDown();
         });
-      axios
-        .get("/DataDictionary/GetDataDictionaryAll", {
-          params: {
-            key: "首页副标题英文"
-          }
-        })
-        .then(response => {
-          this.hometitlesuben = response.data[0].Content;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    },
+    methods: {
+        getdataall () {
+            axios
+                .get("/news/GetNewsAll", {
+                    params: {
+                        type: 0,
+                        num: 3
+                    }
+                })
+                .then(response => {
+                    this.tableData = response.data;
+
+                    //console.log(this.tableData);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+            axios
+                .get("/cases/GetCasesAll")
+                .then(response => {
+                    this.tableDataan = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            this.findtext();
+
+        },
+        findtext () {
+            axios
+                .get("/DataDictionary/GetDataDictionaryAll", {
+                    params: {
+                        key: "首页主标题"
+                    }
+                })
+                .then(response => {
+                    this.hometitle = response.data[0].Content;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            axios
+                .get("/DataDictionary/GetDataDictionaryAll", {
+                    params: {
+                        key: "首页副标题"
+                    }
+                })
+                .then(response => {
+                    this.hometitlesub = response.data[0].Content;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            axios
+                .get("/DataDictionary/GetDataDictionaryAll", {
+                    params: {
+                        key: "首页副标题英文"
+                    }
+                })
+                .then(response => {
+                    this.hometitlesuben = response.data[0].Content;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    },
+    created: function () {
+        console.log("联系开发者: #Source https://github.com/Smileioc");
+        this.getdataall();
+    },
+    destroyed: function () {
+        //禁用滚动
+        //$.fn.fullpage.setAllowScrolling(false)
+        //$.fn.fullpage.destroy();
+        //$.fn.fullpage.destroy('all');
+        //$.fn.fullpage.setAllowScrolling()
+        // moveSectionDown()
+        //console.log("我已经离开了！");
     }
-  },
-  created: function() {
-    console.log("联系开发者: #Source https://github.com/Smileioc");
-    this.getdataall();
-  },
-  destroyed: function() {
-    //禁用滚动
-    //$.fn.fullpage.setAllowScrolling(false)
-    //$.fn.fullpage.destroy();
-    //$.fn.fullpage.destroy('all');
-    //$.fn.fullpage.setAllowScrolling()
-    // moveSectionDown()
-    //console.log("我已经离开了！");
-  }
 };
 </script>
 

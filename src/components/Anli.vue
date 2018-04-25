@@ -23,33 +23,33 @@
 <script>
 import axios from "../router/http";
 export default {
-  data() {
-    return {
-        pagetitle:'',
-      tbdata: []
-    };
-  },
-  methods: {
-    getdataall() {
-      // var sessiondata = JSON.parse(sessionStorage.getItem("anlidata"));
-      // if (sessiondata != null) {
-      //   this.tbdata = sessiondata;
-      // } else {
-      axios
-        .get("/cases/GetCasesAll")
-        .then(response => {
-          this.tbdata = response.data;
-          //sessionStorage.setItem("anlidata", JSON.stringify(response.data));
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      // }
-    }
-  },
-  created: function() {
-    this.getdataall();
-    axios
+    data () {
+        return {
+            pagetitle: '',
+            tbdata: []
+        };
+    },
+    methods: {
+        getdataall () {
+            // var sessiondata = JSON.parse(sessionStorage.getItem("anlidata"));
+            // if (sessiondata != null) {
+            //   this.tbdata = sessiondata;
+            // } else {
+            axios
+                .get("/cases/GetCasesAll")
+                .then(response => {
+                    this.tbdata = response.data;
+                    //sessionStorage.setItem("anlidata", JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            // }
+        }
+    },
+    created: function () {
+        this.getdataall();
+        axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
                     key: "经典案例标题"
@@ -58,10 +58,10 @@ export default {
             .then(response => {
                 this.pagetitle = response.data[0].Content;
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
-  }
+    }
 };
 </script>
 

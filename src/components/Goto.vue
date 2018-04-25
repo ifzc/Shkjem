@@ -104,99 +104,99 @@
 <script>
 import axios from "../router/http";
 export default {
-  data() {
-    return {
-        pagetitle:'',
-      fencaiimgs: [],
-      honorimgs: [
-        {
-          Img: ""
-        },
-        {
-          Img: ""
-        },
-        {
-          Img: ""
-        },
-        {
-          Img: ""
-        },
-        {
-          Img: ""
-        },
-        {
-          Img: ""
-        }
-      ],
-      courses: [
-        {
-          Content: ""
-        },
-        {
-          Content: ""
-        },
-        {
-          Content: ""
-        },
-        {
-          Content: ""
-        },
-        {
-          Content: ""
-        },
-        {
-          Content: ""
-        },
-        {
-          Content: ""
-        }
-      ]
-    };
-  },
-  methods: {
-    getdataall() {
-        axios
-            .get("/team/GetTeamAll")
-            .then(response => {
-            this.fencaiimgs = response.data;
-            })
-            .catch(function(error) {
-            console.log(error);
-            });
-        axios
-            .get("/honor/GetHonorAll")
-            .then(response => {
-            this.honorimgs = response.data;
-            })
-            .catch(function(error) {
-            console.log(error);
-            });
-        axios
-            .get("/course/GetCourseAll")
-            .then(response => {
-            this.courses = response.data;
-            })
-            .catch(function(error) {
-            console.log(error);
-            });
-
-        axios
-            .get("/DataDictionary/GetDataDictionaryAll", {
-                params: {
-                    key: "走进科健标题"
+    data () {
+        return {
+            pagetitle: '',
+            fencaiimgs: [],
+            honorimgs: [
+                {
+                    Img: ""
+                },
+                {
+                    Img: ""
+                },
+                {
+                    Img: ""
+                },
+                {
+                    Img: ""
+                },
+                {
+                    Img: ""
+                },
+                {
+                    Img: ""
                 }
-            })
-            .then(response => {
-                this.pagetitle = response.data[0].Content;
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+            ],
+            courses: [
+                {
+                    Content: ""
+                },
+                {
+                    Content: ""
+                },
+                {
+                    Content: ""
+                },
+                {
+                    Content: ""
+                },
+                {
+                    Content: ""
+                },
+                {
+                    Content: ""
+                },
+                {
+                    Content: ""
+                }
+            ]
+        };
+    },
+    methods: {
+        getdataall () {
+            axios
+                .get("/team/GetTeamAll")
+                .then(response => {
+                    this.fencaiimgs = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            axios
+                .get("/honor/GetHonorAll")
+                .then(response => {
+                    this.honorimgs = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            axios
+                .get("/course/GetCourseAll")
+                .then(response => {
+                    this.courses = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+            axios
+                .get("/DataDictionary/GetDataDictionaryAll", {
+                    params: {
+                        key: "走进科健标题"
+                    }
+                })
+                .then(response => {
+                    this.pagetitle = response.data[0].Content;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    },
+    created: function () {
+        this.getdataall();
     }
-  },
-  created: function() {
-    this.getdataall();
-  }
 };
 </script>
 <style scoped>

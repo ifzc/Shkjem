@@ -15,43 +15,43 @@ el-card.box-card
 import axios from "../router/http";
 import { Message } from "element-ui";
 export default {
-  name: "Login",
-  data() {
-    return {
-      form: {
-        name: "",
-        passwrod: ""
-      }
-    };
-  },
-  methods: {
-    onSubmit() {
-      axios
-        .get("/user/login", {
-          params: {
-            strUser: this.form.name,
-            strPwd: this.form.passwrod
-          }
-        })
-        .then(response => {
-          if (response.data.bRes) {
-            localStorage.setItem("Ticket", response.data.Ticket);
-            if (this.$route.query.length > 0) {
-              this.$router.push(this.$route.query.redirect);
-            } else {
-              this.$router.push("/admin/news");
+    name: "Login",
+    data () {
+        return {
+            form: {
+                name: "",
+                passwrod: ""
             }
-          } else {
-            Message.error({
-              message: "身份验证失败"
-            });
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+        };
+    },
+    methods: {
+        onSubmit () {
+            axios
+                .get("/user/login", {
+                    params: {
+                        strUser: this.form.name,
+                        strPwd: this.form.passwrod
+                    }
+                })
+                .then(response => {
+                    if (response.data.bRes) {
+                        localStorage.setItem("Ticket", response.data.Ticket);
+                        if (this.$route.query.length > 0) {
+                            this.$router.push(this.$route.query.redirect);
+                        } else {
+                            this.$router.push("/admin/news");
+                        }
+                    } else {
+                        Message.error({
+                            message: "身份验证失败"
+                        });
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
-  }
 };
 </script>
 <style scoped>

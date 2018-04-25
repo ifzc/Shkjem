@@ -5,39 +5,39 @@ el-container(v-if="islogin",style="height: 1000px; border: 1px solid #eee")
       el-menu-item(index="/admin/user")
         template(slot="title")
           i.el-icon-star-off 
-          后台用户管理
+          span 后台用户管理
       el-menu-item(index="/admin/news")
         template(slot="title")
           i.el-icon-news 
-          新闻咨询管理
+          apan 新闻咨询管理
       el-menu-item(index="/admin/recruitment")
         template(slot="title")
           i.el-icon-document 
-          招聘信息管理
+          apan 招聘信息管理
       el-menu-item(index="/admin/cases")
         template(slot="title")
           i.el-icon-location-outline 
-          案例信息管理
+          apan 案例信息管理
       el-menu-item(index="/admin/team")
         template(slot="title")
           i.el-icon-picture-outline 
-          团队风采管理
+          apan 团队风采管理
       el-menu-item(index="/admin/course")
         template(slot="title")
           i.el-icon-time 
-          发展历程管理
+          apan 发展历程管理
       el-menu-item(index="/admin/honor")
         template(slot="title")
           i.el-icon-edit-outline 
-          荣誉墙管理
+          apan 荣誉墙管理
       el-menu-item(index="/admin/dictionary")
         template(slot="title")
           i.el-icon-setting 
-          数据字典管理
+          apan 数据字典管理
       el-submenu(index="3")
         template(slot="title")
           i.el-icon-message 
-          留言中心
+          apan 留言中心
         el-menu-item(index="/admin/messages") 留言板
         el-menu-item(index="/admin/demand") 需求投递
   el-main
@@ -45,34 +45,34 @@ el-container(v-if="islogin",style="height: 1000px; border: 1px solid #eee")
 </template>
 <script>
 export default {
-  data() {
-    const item = {
-      date: "2016-05-02",
-      name: "王小虎",
-      address: "上海市普陀区金沙江路 1518 弄"
-    };
-    return {
-      tableData: Array(20).fill(item),
-      islogin: true
-    };
-  },
-  created: function() {},
-  methods: {
-    handleSelect(key) {
-      //, keyPath
-      if (key == "logo") {
-        window.location.href = "http://localhost:8080";
-      }
-      /*
-      if(key == "/"){
-        this.isShow = false;
-      }else{
-        this.isShow = true;
-      }
-      */
-      this.$router.push(key);
+    data () {
+        const item = {
+            date: "2016-05-02",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1518 弄"
+        };
+        return {
+            tableData: Array(20).fill(item),
+            islogin: true
+        };
+    },
+    created: function () { },
+    methods: {
+        handleSelect (key) {
+            //, keyPath
+            if (key == "logo") {
+                window.location.href = "http://localhost:8080";
+            }
+            /*
+            if(key == "/"){
+              this.isShow = false;
+            }else{
+              this.isShow = true;
+            }
+            */
+            this.$router.push(key);
+        }
     }
-  }
 };
 </script>
 <style scoped>

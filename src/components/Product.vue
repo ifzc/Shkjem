@@ -39,13 +39,13 @@
 <script>
 import axios from "../router/http";
 export default {
-    data(){
-        return{
-            pagetitle:''
+    data () {
+        return {
+            pagetitle: ''
         }
     },
-    created: function() {
-    axios
+    created: function () {
+        axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
                     key: "经典案例标题"
@@ -54,10 +54,10 @@ export default {
             .then(response => {
                 this.pagetitle = response.data[0].Content;
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
-  }
+    }
 };
 </script>
 <style scoped>

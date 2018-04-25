@@ -44,129 +44,129 @@ import axios from "../../router/http";
 import { Message } from "element-ui";
 
 export default {
-  data() {
-    return {
-      dialogTitle: "",
-      dialogFormVisible: false,
-      form: {
-        id: 0,
-        img: "",
-        remark: ""
-      },
-      formLabelWidth: "120px",
-      tableData: []
-    };
-  },
-  methods: {
-    upload(e) {
-      let file = e.target.files[0];
-      //创建form对象
-      let param = new FormData();
-      //通过append向form对象添加数据
-      param.append("file", file, file.name);
-      //添加form表单中其他数据
-      //param.append("chunk", "0")
-      //FormData私有类对象，访问不到，可以通过get判断值是否传进去
-      //console.log(param.get("file"))
-      //添加请求头
-      let config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "BasicAuth " + localStorage.getItem("Ticket")
-        }
-      };
-      //axios.defaults.headers.common["Authorization"] =
-      //  "BasicAuth " + localStorage.getItem("Ticket");
-      axios.post("/UpLoad/UploadImage", param, config).then(response => {
-        //console.log(response.data)
-        this.form.img = response.data;
-      });
+    data () {
+        return {
+            dialogTitle: "",
+            dialogFormVisible: false,
+            form: {
+                id: 0,
+                img: "",
+                remark: ""
+            },
+            formLabelWidth: "120px",
+            tableData: []
+        };
     },
-    handleClick(row) {
-      console.log(row);
-      this.dialogTitle = "修改团队风采";
-      this.form.id = row.Id;
-      this.form.img = row.Img;
-      this.form.remark = row.Remark;
-      this.dialogFormVisible = true;
-    },
-    deleteClick(row) {
-      console.log(row);
-      this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          axios.defaults.headers.common["Authorization"] =
-            "BasicAuth " + localStorage.getItem("Ticket");
-          axios
-            .post("/team/DeleteTeam/" + row.Id)
-            .then(response => {
-              console.log(response.status);
-              this.$message({
-                type: "success",
-                message: "删除成功!"
-              });
-              this.getdataall();
-            })
-            .catch(function(error) {
-              console.log(error);
-              this.$message({
-                type: "info",
-                message: "删除失败!"
-              });
+    methods: {
+        upload (e) {
+            let file = e.target.files[0];
+            //创建form对象
+            let param = new FormData();
+            //通过append向form对象添加数据
+            param.append("file", file, file.name);
+            //添加form表单中其他数据
+            //param.append("chunk", "0")
+            //FormData私有类对象，访问不到，可以通过get判断值是否传进去
+            //console.log(param.get("file"))
+            //添加请求头
+            let config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: "BasicAuth " + localStorage.getItem("Ticket")
+                }
+            };
+            //axios.defaults.headers.common["Authorization"] =
+            //  "BasicAuth " + localStorage.getItem("Ticket");
+            axios.post("/UpLoad/UploadImage", param, config).then(response => {
+                //console.log(response.data)
+                this.form.img = response.data;
             });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
+        },
+        handleClick (row) {
+            console.log(row);
+            this.dialogTitle = "修改团队风采";
+            this.form.id = row.Id;
+            this.form.img = row.Img;
+            this.form.remark = row.Remark;
+            this.dialogFormVisible = true;
+        },
+        deleteClick (row) {
+            console.log(row);
+            this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    axios.defaults.headers.common["Authorization"] =
+                        "BasicAuth " + localStorage.getItem("Ticket");
+                    axios
+                        .post("/team/DeleteTeam/" + row.Id)
+                        .then(response => {
+                            console.log(response.status);
+                            this.$message({
+                                type: "success",
+                                message: "删除成功!"
+                            });
+                            this.getdataall();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            this.$message({
+                                type: "info",
+                                message: "删除失败!"
+                            });
+                        });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
+        },
+        createBtn () {
+            this.dialogTitle = "新增团队风采";
+            this.form.id = 0;
+            this.form.img = "";
+            this.form.remark = "";
+            this.dialogFormVisible = true;
+        },
+        createEntity () {
+            axios.defaults.headers.common["Authorization"] =
+                "BasicAuth " + localStorage.getItem("Ticket");
+            axios
+                .post("/team/CreatedofModied", {
+                    Id: this.form.id,
+                    Img: this.form.img,
+                    Remark: this.form.remark
+                })
+                .then(response => {
+                    console.log(response.status);
+                    this.$message({
+                        type: "success",
+                        message: "操作成功!"
+                    });
+                    this.getdataall();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            this.dialogFormVisible = false;
+        },
+        getdataall () {
+            axios
+                .get("/team/GetTeamAll")
+                .then(response => {
+                    this.tableData = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     },
-    createBtn() {
-      this.dialogTitle = "新增团队风采";
-      this.form.id = 0;
-      this.form.img = "";
-      this.form.remark = "";
-      this.dialogFormVisible = true;
-    },
-    createEntity() {
-      axios.defaults.headers.common["Authorization"] =
-        "BasicAuth " + localStorage.getItem("Ticket");
-      axios
-        .post("/team/CreatedofModied", {
-          Id: this.form.id,
-          Img: this.form.img,
-          Remark: this.form.remark
-        })
-        .then(response => {
-          console.log(response.status);
-          this.$message({
-            type: "success",
-            message: "操作成功!"
-          });
-          this.getdataall();
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      this.dialogFormVisible = false;
-    },
-    getdataall() {
-      axios
-        .get("/team/GetTeamAll")
-        .then(response => {
-          this.tableData = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    created: function () {
+        this.getdataall();
     }
-  },
-  created: function() {
-    this.getdataall();
-  }
 };
 </script>

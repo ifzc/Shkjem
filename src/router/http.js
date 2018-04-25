@@ -4,7 +4,10 @@
 'use strict'
 
 import axios from 'axios'
-import { Loading, Message } from 'element-ui'
+import {
+    Loading,
+    Message
+} from 'element-ui'
 
 axios.defaults.baseURL = 'http://120.79.76.250/api/'
 
@@ -20,7 +23,9 @@ var loadinginstace
 
 axios.interceptors.request.use(config => {
     // element ui Loading方法
-    loadinginstace = Loading.service({ fullscreen: true })
+    loadinginstace = Loading.service({
+        fullscreen: true
+    })
 
     //axios.defaults.headers.common['Authorization'] = localStorage.getItem('Ticket')
     return config
