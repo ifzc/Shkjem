@@ -27,16 +27,16 @@ axios.interceptors.request.use(config => {
         config.url.substring(0, 5) === '/recr') {
         return config
     }
-    config.headers = {
-        Authorization: "BasicAuth " + localStorage.getItem("Ticket")
+    if (localStorage.getItem("Ticket") != null) {
+        config.headers = {
+            "Authorization": "BasicAuth " + localStorage.getItem("Ticket")
+        }
     }
     //console.log(config.url)
     // element ui Loading方法
     loadinginstace = Loading.service({
         fullscreen: true
     })
-
-    //axios.defaults.headers.common['Authorization'] = localStorage.getItem('Ticket')
     return config
 }, error => {
     loadinginstace.close()
