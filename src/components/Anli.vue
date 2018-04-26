@@ -78,19 +78,31 @@ export default {
 .topimg {
   width: 100%;
 }
+.imgbox img:hover {
+  animation: tada 1s;
+}
 .imgbox {
   text-align: center;
 }
 .el-row {
   padding: 6% 10%;
+  animation: flipInX 1s;
 }
 .el-col h4 {
   font-size: 16px;
   color: #4e4e4e;
+  transition: 0.4s;
+}
+.el-col h4:hover {
+  color: #e13834;
 }
 .el-col p {
   color: #484848;
   font-size: 15px;
+  transition: 0.4s;
+}
+.el-col p:hover {
+  color: #14679f;
 }
 .el-col h5 {
   font-size: 18px;

@@ -48,7 +48,7 @@ export default {
         axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
-                    key: "经典案例标题"
+                    key: "产品中心标题"
                 }
             })
             .then(response => {

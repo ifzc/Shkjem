@@ -88,6 +88,7 @@ export default {
   margin: 0;
   padding: 3% 11%;
   background-color: #e4e4e4;
+  transition: 0.8s;
 }
 .action {
   color: #fff;
@@ -96,9 +97,26 @@ export default {
 .content {
   padding: 8% 10%;
 }
-.content h2 {
-  font-weight: 400;
+
+.content p {
+  transition: 0.4s;
+  margin: 0;
+  line-height: 40px;
 }
+
+.content p:hover {
+  margin-left: 10px;
+  color: #9a3b3b;
+}
+
+.zitem h3 {
+  transition: 0.4s;
+}
+
+.content:hover .zitem h3 {
+  margin-left: 2%;
+}
+
 .zitem {
   border-bottom: 2px solid #e13834;
 }

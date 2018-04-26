@@ -3,16 +3,17 @@
   .fullpage-wp(v-fullpage="opts")
 #fullpage
     .section(style="background-image: url(/static/home_top.jpg)")
-        h1 {{ hometitle }}
-        h2 {{ hometitlesub }}
-        h2 {{ hometitlesuben }}
-        h5 点击进入下一页
+        h1.toptitle {{ hometitle }}
+        h2.toptitlesub {{ hometitlesub }}
+        h2.toptitleen {{ hometitlesuben }}
+        h5.toptitleup 点击进入下一页
     .section(style="background-image: url(/static/home_do.jpg)")
         h2 经典案例
         h3 Suecessful Cass
         el-row.newsbox.anli(:gutter="0",style="margin-top: 20px")
             el-col(:span="8")
-                img(v-bind:src="imgserver + tableDataan[0].Img")
+                div.imgcss
+                    img(v-bind:src="imgserver + tableDataan[0].Img")
                 div.divbox(style="background-color: #14679f;margin-top: 5px;")
                     p {{ tableDataan[0].Title }}
                     p {{ tableDataan[0].Content }}
@@ -20,9 +21,11 @@
                 div.divbox
                     p {{ tableDataan[1].Title }}
                     p {{ tableDataan[1].Content }}
-                img(v-bind:src="imgserver + tableDataan[1].Img")
+                div.imgcss
+                    img(v-bind:src="imgserver + tableDataan[1].Img")
             el-col(:span="8")
-                img(v-bind:src="imgserver + tableDataan[2].Img")
+                div.imgcss
+                    img(v-bind:src="imgserver + tableDataan[2].Img")
                 div.divbox(style="background-color: #14679f;margin-top: 5px;")
                     p {{ tableDataan[2].Title }}
                     p {{ tableDataan[2].Content }}
@@ -32,13 +35,15 @@
         h3 Latest News
         el-row.newsbox(:gutter="0",style="margin-top: 20px")
             el-col(:span="6",:offset="3")
-                img(v-bind:src="imgserver + tableData[0].Img")
+                div.imgcss
+                    img(v-bind:src="imgserver + tableData[0].Img")
             el-col(:span="6")
                 p {{ tableData[1].Title }}
                 p {{ tableData[1].Content }}
                 p {{ tableData[1].CreateTime.substring(0,10) }}
             el-col(:span="6")
-                img(v-bind:src="imgserver + tableData[2].Img")
+                div.imgcss
+                    img(v-bind:src="imgserver + tableData[2].Img")
         .bar-row
             span
             span
@@ -49,7 +54,8 @@
                 p {{ tableData[0].Content }}
                 p {{ tableData[0].CreateTime.substring(0,10) }}
             el-col(:span="6")
-                img(v-bind:src="imgserver + tableData[1].Img")
+                div.imgcss
+                    img(v-bind:src="imgserver + tableData[1].Img")
             el-col(:span="6")
                 p {{ tableData[2].Title }}
                 p {{ tableData[2].Content }}
@@ -117,6 +123,7 @@ export default {
         });
         $(".section").click(function () {
             $.fn.fullpage.moveSectionDown();
+
         });
     },
     methods: {
@@ -226,7 +233,13 @@ export default {
   padding-top: 10px;
   background-color: #e13834;
 }
-
+.divbox {
+  transition: 1s;
+}
+.divbox:hover {
+  animation-name: bounce;
+  animation-duration: 1s;
+}
 .divbox p {
   padding: 0px 10px;
 }
@@ -284,5 +297,37 @@ export default {
 }
 .bar-row span:nth-of-type(3) {
   right: 10%;
+}
+
+/* 动画效果 */
+
+.imgcss {
+  overflow: hidden;
+}
+
+.imgcss img {
+  transition: all 0.4s;
+}
+
+.imgcss img:hover {
+  transform: scale(1.2);
+}
+
+.toptitle {
+  animation-name: bounceInDown;
+  animation-duration: 1s;
+  /* animation-delay: 0.5s; */
+}
+.toptitlesub {
+  animation-name: bounceInLeft;
+  animation-duration: 1s;
+}
+.toptitleen {
+  animation-name: bounceInRight;
+  animation-duration: 1s;
+}
+.toptitleup {
+  animation-name: bounceInUp;
+  animation-duration: 1s;
 }
 </style>

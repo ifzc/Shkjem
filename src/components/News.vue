@@ -37,8 +37,6 @@ export default {
             p.classList.add("action");
 
             this.getdataall(i);
-
-            console.log(this.pagetitle)
         },
         getdataall (type) {
             axios
@@ -92,6 +90,7 @@ export default {
   margin: 0;
   padding: 4% 16%;
   background-color: #e4e4e4;
+  transition: 0.8s;
 }
 .action {
   color: #fff;
@@ -111,6 +110,7 @@ export default {
   border: 1px solid #15669e;
   min-height: 390px;
   margin-bottom: 15px;
+  animation: flipInY 1s;
 }
 .new-item img {
   width: 100%;

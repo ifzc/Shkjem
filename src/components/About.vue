@@ -25,7 +25,7 @@
     h3 ADDRESS
     el-row(style="padding: 5%")
       el-col(:span="14",:offset="1")
-        img(src="/static/address.jpg",style="width:95%")
+        img.aboutimg(src="/static/address.jpg",style="width:95%")
       el-col(:span="8")
         p 邮箱:Smileioc@163.com
         p 电话:182****2176
@@ -139,5 +139,8 @@ p {
   width: 80%;
   margin: 0 auto;
   padding: 20px;
+}
+.aboutimg:hover {
+  animation: tada 1s;
 }
 </style>

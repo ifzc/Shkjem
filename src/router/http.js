@@ -22,6 +22,12 @@ axios.defaults.timeout = 5000
 var loadinginstace
 
 axios.interceptors.request.use(config => {
+    if (
+        config.url.substring(0, 5) === '/news' ||
+        config.url.substring(0, 5) === '/recr') {
+        return config
+    }
+    //console.log(config.url)
     // element ui Loading方法
     loadinginstace = Loading.service({
         fullscreen: true

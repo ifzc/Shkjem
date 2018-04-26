@@ -1,23 +1,24 @@
 <template lang="jade">
 #app
-  el-menu(:default-active="activeIndex",class="el-menu-demo",mode="horizontal",active-text-color="#409eff",v-bind:class="{ toppost : $route.path == '/' }",@select="handleSelect")
-    el-menu-item(index="logo",style="padding-left: 9%")
-      img(src="static/toplogo.png",style="width: 280px")
-    el-menu-item(index="/") 首页
-    el-menu-item(index="/news") 新闻资讯
-    el-menu-item(index="/product") 产品中心
-    el-menu-item(index="/anli") 经典案例
-    el-menu-item(index="/goto") 走进科建
-    el-menu-item(index="/help") 帮助中心
-    el-menu-item(index="/recruitment") 诚聘英才
-    el-menu-item(index="/about") 联系我们
-    el-menu-item(index="/model") 学习模块
-  router-view
-  .bottombox(v-if="$route.path != '/' && $route.path.substring(0,6) != '/admin'")
-    ul(v-for="hrefs in hrefdata")
-      li(v-for="item in hrefs") 
-        a(v-bind:href="item.href") {{ item.text }}
-    img.bottomercode(src="../static/ercode.png")
+    el-menu(:default-active="activeIndex",class="el-menu-demo",mode="horizontal",active-text-color="#409eff",v-bind:class="{ toppost : $route.path == '/' }",@select="handleSelect")
+        el-menu-item(index="logo",style="padding-left: 9%")
+            img(src="static/toplogo.png",style="width: 280px")
+        el-menu-item(index="/") 首页
+        el-menu-item(index="/news") 新闻资讯
+        el-menu-item(index="/product") 产品中心
+        el-menu-item(index="/anli") 经典案例
+        el-menu-item(index="/goto") 走进科建
+        el-menu-item(index="/help") 帮助中心
+        el-menu-item(index="/recruitment") 诚聘英才
+        el-menu-item(index="/about") 联系我们
+        el-menu-item(index="/studymodel") 学习模块
+    transition(enter-active-class="animated fadeIn")
+        router-view
+    .bottombox(v-if="$route.path != '/' && $route.path.substring(0,6) != '/admin'")
+        ul(v-for="hrefs in hrefdata")
+            li(v-for="item in hrefs")
+                a(v-bind:href="item.href") {{ item.text }}
+        img.bottomercode(src="../static/ercode.png")
 </template>
 
 <script>
@@ -25,6 +26,7 @@ export default {
     name: "App",
     data () {
         return {
+            transitionName: '',
             activeIndex: "/",
             hrefdata: [
                 [
@@ -161,7 +163,7 @@ body {
   margin: 0;
 }
 * {
-  font-family: "华文黑体";
+  font-family: "微软雅黑";
 }
 .pagetop {
   width: 100%;

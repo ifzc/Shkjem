@@ -74,7 +74,7 @@
         .tuandui
             h1 团队风采
             h2 TEAM
-            el-carousel(:interval="4000",type="card",height="400px")
+            el-carousel(:interval="2000",type="card",height="400px")
                 el-carousel-item(v-for="item in fencaiimgs",:key="item.Id")
                     img(v-bind:src="imgserver + item.Img",style="width:100%")
         .hezuo
@@ -237,6 +237,40 @@ export default {
   top: 20%;
   left: 59%;
   background: #fff;
+  animation: imgboxkey 4s infinite;
+  border-radius: 10px;
+}
+.topimgbox img {
+  animation: imgbo 4s infinite;
+  border-radius: 10px;
+}
+@keyframes imgbo {
+  0% {
+    transform: scale(1);
+    box-shadow: 0px 0px 0px 0px #ababab;
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px 5px #ababab;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0px 0px 0px 0px #ababab;
+  }
+}
+@keyframes imgboxkey {
+  0% {
+    border: solid rgb(29, 66, 185) 2px;
+  }
+  40% {
+    border: solid rgb(255, 255, 255) 2px;
+  }
+  60% {
+    border: solid rgb(255, 255, 255) 2px;
+  }
+  100% {
+    border: solid rgb(29, 66, 185) 2px;
+  }
 }
 .titlestyle {
   width: 130px;
@@ -283,6 +317,10 @@ export default {
   color: #fff;
   font-size: 14px;
   font-weight: 300;
+  transition: 0.6s;
+}
+.lichengtext .el-col p:hover {
+  background-color: #e13834;
 }
 .fenge {
   height: 1px;
@@ -368,6 +406,10 @@ export default {
 .rongyu h2 {
   color: #3c6088;
   font-weight: 400;
+}
+
+.rongyu img:hover {
+  animation: rubberBand 1s;
 }
 .tuandui {
   padding: 5% 10%;
