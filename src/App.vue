@@ -163,7 +163,7 @@ body {
   margin: 0;
 }
 * {
-  font-family: "微软雅黑";
+  font-family: "Helvetica";
 }
 .pagetop {
   width: 100%;
