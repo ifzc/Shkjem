@@ -98,8 +98,6 @@ export default {
                 type: "warning"
             })
                 .then(() => {
-                    axios.defaults.headers.common["Authorization"] =
-                        "BasicAuth " + localStorage.getItem("Ticket");
                     axios
                         .post("/honor/DeleteHonor/" + row.Id)
                         .then(response => {
@@ -133,8 +131,6 @@ export default {
             this.dialogFormVisible = true;
         },
         createEntity () {
-            axios.defaults.headers.common["Authorization"] =
-                "BasicAuth " + localStorage.getItem("Ticket");
             axios
                 .post("/honor/CreatedofModied", {
                     Id: this.form.id,

@@ -53,8 +53,6 @@ export default {
                 type: "warning"
             })
                 .then(() => {
-                    axios.defaults.headers.common["Authorization"] =
-                        "BasicAuth " + localStorage.getItem("Ticket");
                     axios
                         .post("/message/DeleteMessage/" + row.Id)
                         .then(response => {

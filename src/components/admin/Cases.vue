@@ -34,7 +34,8 @@
                     <input accept="image/*" name="upimage" @change="upload" id="upload_file" type="file">
                 </el-form-item>
                 <el-form-item label="案例内容" :label-width="formLabelWidth">
-                    <el-input v-model="form.content" auto-complete="off"></el-input>
+                    <el-input type="textarea" :rows="5" v-model="form.content">
+                    </el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -106,8 +107,6 @@ export default {
                 type: "warning"
             })
                 .then(() => {
-                    axios.defaults.headers.common["Authorization"] =
-                        "BasicAuth " + localStorage.getItem("Ticket");
                     axios
                         .post("/cases/DeleteCases/" + row.Id)
                         .then(response => {
@@ -143,9 +142,6 @@ export default {
             this.dialogFormVisible = true;
         },
         createEntity () {
-            //console.log(this.form)
-            axios.defaults.headers.common["Authorization"] =
-                "BasicAuth " + localStorage.getItem("Ticket");
             axios
                 .post("/cases/CreatedofModied", {
                     Id: this.form.id,

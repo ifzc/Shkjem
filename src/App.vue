@@ -1,6 +1,6 @@
 <template lang="jade">
 #app
-    el-menu(:default-active="activeIndex",class="el-menu-demo",mode="horizontal",active-text-color="#409eff",v-bind:class="{ toppost : $route.path == '/' }",@select="handleSelect")
+    el-menu(:default-active="activeIndex",actionpath="$route.path",class="el-menu-demo",mode="horizontal",active-text-color="#409eff",v-bind:class="{ toppost : $route.path == '/' }",@select="handleSelect")
         el-menu-item(index="logo",style="padding-left: 9%")
             img(src="static/toplogo.png",style="width: 280px")
         el-menu-item(index="/") 首页
@@ -11,7 +11,7 @@
         el-menu-item(index="/help") 帮助中心
         el-menu-item(index="/recruitment") 诚聘英才
         el-menu-item(index="/about") 联系我们
-        el-menu-item(index="/studymodel") 学习模块
+        el-menu-item(index="/study") 学习模块
     transition(enter-active-class="animated fadeIn")
         router-view
     .bottombox(v-if="$route.path != '/' && $route.path.substring(0,6) != '/admin'")
@@ -27,7 +27,7 @@ export default {
     data () {
         return {
             transitionName: '',
-            activeIndex: "/",
+            activeIndex: '/',
             hrefdata: [
                 [
                     {

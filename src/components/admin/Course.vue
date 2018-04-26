@@ -26,7 +26,7 @@
                     <el-input v-model="form.year" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="历程内容" :label-width="formLabelWidth">
-                    <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="form.content">
+                    <el-input type="textarea" :rows="5" v-model="form.content">
                     </el-input>
                 </el-form-item>
             </el-form>
@@ -72,8 +72,6 @@ export default {
                 type: "warning"
             })
                 .then(() => {
-                    axios.defaults.headers.common["Authorization"] =
-                        "BasicAuth " + localStorage.getItem("Ticket");
                     axios
                         .post("/course/DeleteCourse/" + row.Id)
                         .then(response => {
@@ -107,9 +105,6 @@ export default {
             this.dialogFormVisible = true;
         },
         createEntity () {
-            //console.log(this.form)
-            axios.defaults.headers.common["Authorization"] =
-                "BasicAuth " + localStorage.getItem("Ticket");
             axios
                 .post("/course/CreatedofModied", {
                     Id: this.form.id,

@@ -52,10 +52,10 @@ const router = new Router({
                 require(['../components/About'], resolve)
             }
         }, {
-            path: '/studymodel',
-            name: 'StudyModel',
+            path: '/study',
+            name: 'Study',
             component: (resolve) => {
-                require(['../components/StudyModel'], resolve)
+                require(['../components/Study'], resolve)
             }
         },
         {
@@ -133,6 +133,12 @@ const router = new Router({
                 name: 'Honor',
                 component: (resolve) => {
                     require(['../components/admin/Honor'], resolve)
+                }
+            }, {
+                path: '/admin/study',
+                name: 'Study',
+                component: (resolve) => {
+                    require(['../components/admin/Study'], resolve)
                 }
             }]
         }

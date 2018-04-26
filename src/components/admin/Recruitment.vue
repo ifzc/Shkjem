@@ -30,10 +30,10 @@
                     <el-input v-model="form.title" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="招聘内容" :label-width="formLabelWidth">
-                    <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="form.content">
+                    <el-input type="textarea" :rows="5" v-model="form.content">
                     </el-input>
                 </el-form-item>
-                <el-form-item label="新闻类别" :label-width="formLabelWidth">
+                <el-form-item label="招聘类别" :label-width="formLabelWidth">
                     <el-select v-model="form.type" placeholder="请选择招聘类型">
                         <el-option label="研发类" value="1"></el-option>
                         <el-option label="服务类" value="2"></el-option>
@@ -85,8 +85,6 @@ export default {
                 type: "warning"
             })
                 .then(() => {
-                    axios.defaults.headers.common["Authorization"] =
-                        "BasicAuth " + localStorage.getItem("Ticket");
                     axios
                         .post("/recruitment/DeleteRecruitment/" + row.Id)
                         .then(response => {
@@ -121,9 +119,6 @@ export default {
             this.dialogFormVisible = true;
         },
         createEntity () {
-            //console.log(this.form)
-            axios.defaults.headers.common["Authorization"] =
-                "BasicAuth " + localStorage.getItem("Ticket");
             axios
                 .post("/recruitment/CreateofModified", {
                     Id: this.form.id,

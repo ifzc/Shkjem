@@ -2,23 +2,13 @@
     <div id="adminnewsbox">
         <el-row style="margin-bottom: 10px">
             <el-button @click="createBtn" type="primary">新增</el-button>
-            <!-- <el-button @click="cleanBtn" type="warning">清除浏览器缓存</el-button> -->
-            <el-button @click="cleanuserBtn" type="danger">清除用户身份票据</el-button>
         </el-row>
         <el-row>
             <el-table :data="tableData" border style="width: 100%">
-                <el-table-column fixed prop="Id" label="#">
-                </el-table-column>
-                <el-table-column prop="LoginName" label="登录名">
-                </el-table-column>
-                <el-table-column prop="Password" label="密码">
-                </el-table-column>
-                <el-table-column prop="IsAction" label="是否激活">
-                    <template slot-scope="scope">
-                        {{ scope.row.IsAction ? '是':'否' }}
-                    </template>
-                </el-table-column>
-                <el-table-column fixed="right" label="操作" width="150">
+                <el-table-column fixed prop="Id" label="#" width="100"></el-table-column>
+                <el-table-column prop="Title" label="学习标题"></el-table-column>
+                <el-table-column prop="Content" label="学习内容"></el-table-column>
+                <el-table-column fixed="right" label="操作">
                     <template slot-scope="scope">
                         <el-button @click="handleClick(scope.row)" type="primary" icon="el-icon-edit"></el-button>
                         <el-button @click="deleteClick(scope.row)" type="danger" icon="el-icon-delete"></el-button>
@@ -28,17 +18,12 @@
         </el-row>
         <el-dialog v-bind:title="dialogTitle" :visible.sync="dialogFormVisible">
             <el-form :model="form">
-                <el-form-item label="用户名" :label-width="formLabelWidth">
-                    <el-input v-model="form.loginName" auto-complete="off"></el-input>
+                <el-form-item label="学习标题" :label-width="formLabelWidth">
+                    <el-input v-model="form.title" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" :label-width="formLabelWidth">
-                    <el-input v-model="form.password" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="是否启用" :label-width="formLabelWidth">
-                    <el-select v-model="form.isAction" placeholder="请选择新闻类型">
-                        <el-option label="启用" value="true"></el-option>
-                        <el-option label="禁用" value="false"></el-option>
-                    </el-select>
+                <el-form-item label="学习内容" :label-width="formLabelWidth">
+                    <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="form.content">
+                    </el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -59,41 +44,20 @@ export default {
             dialogFormVisible: false,
             form: {
                 id: 0,
-                loginName: "",
-                password: "",
-                isAction: ""
+                title: '',
+                content: ''
             },
             formLabelWidth: "120px",
-            tableData: [] //this.getdataall()
+            tableData: []
         };
     },
     methods: {
-        $_ (id) {
-            return document.getElementById(id);
-        },
-        gen_base64 () {
-            //判断浏览器是否支持FileRader接口
-            if (typeof FileReader == "undefined") {
-                alert("你的浏览器不支持FileReader");
-                //fileInput.setAttribute('disabled', 'disabled')
-                return;
-            }
-            var file = this.$_("upload_file").files[0];
-            let r = new FileReader(); //本地预览
-            r.onload = () => {
-                //console.log(r.result)
-                this.form.img = r.result;
-            };
-            r.readAsDataURL(file); //Base64
-        },
         handleClick (row) {
             console.log(row);
-            this.dialogTitle = "修改新闻";
+            this.dialogTitle = "修改荣誉";
             this.form.id = row.Id;
-            this.form.loginName = row.LoginName;
-            this.form.password = row.Password;
-            this.form.isAction = row.IsAction;
-
+            this.form.title = row.Title;
+            this.form.content = row.Content;
             this.dialogFormVisible = true;
         },
         deleteClick (row) {
@@ -105,7 +69,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/user/DeleteUser/" + row.Id)
+                        .post("/study/DeleteStudy/" + row.Id)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -130,21 +94,18 @@ export default {
                 });
         },
         createBtn () {
-            this.dialogTitle = "新增新闻";
+            this.dialogTitle = "新增学习模块";
             this.form.id = 0;
-            this.form.loginName = "";
-            this.form.password = "";
-            this.form.isAction = true;
-
+            this.form.title = "";
+            this.form.content = "";
             this.dialogFormVisible = true;
         },
         createEntity () {
             axios
-                .post("/user/CreateofModified", {
+                .post("/study/CreatedofModied", {
                     Id: this.form.id,
-                    LoginName: this.form.loginName,
-                    Password: this.form.password,
-                    IsAction: this.form.isAction
+                    Title: this.form.title,
+                    Content: this.form.content
                 })
                 .then(response => {
                     console.log(response.status);
@@ -160,23 +121,14 @@ export default {
             this.dialogFormVisible = false;
         },
         getdataall () {
-            axios.defaults.headers.common["Authorization"] =
-                "BasicAuth " + localStorage.getItem("Ticket");
             axios
-                .post("/user/GetUserAll")
+                .get("/study/GetStudyAll")
                 .then(response => {
                     this.tableData = response.data;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-        },
-        cleanBtn () {
-            sessionStorage.clear();
-        },
-        cleanuserBtn () {
-            localStorage.clear();
-            this.$router.push("/login");
         }
     },
     created: function () {

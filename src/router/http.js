@@ -27,6 +27,9 @@ axios.interceptors.request.use(config => {
         config.url.substring(0, 5) === '/recr') {
         return config
     }
+    config.headers = {
+        Authorization: "BasicAuth " + localStorage.getItem("Ticket")
+    }
     //console.log(config.url)
     // element ui Loading方法
     loadinginstace = Loading.service({

@@ -26,7 +26,7 @@
                     <h4 style="color: rgb(255, 111, 111);margin: 0">键是唯一的不可重复</h4>
                 </el-form-item>
                 <el-form-item label="数据值" :label-width="formLabelWidth">
-                    <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="form.content">
+                    <el-input type="textarea" :rows="5" v-model="form.content">
                     </el-input>
                 </el-form-item>
             </el-form>
@@ -72,8 +72,6 @@ export default {
                 type: "warning"
             })
                 .then(() => {
-                    axios.defaults.headers.common["Authorization"] =
-                        "BasicAuth " + localStorage.getItem("Ticket");
                     axios
                         .post("/DataDictionary/DeleteDataDictionary/" + row.Id)
                         .then(response => {
@@ -107,9 +105,6 @@ export default {
             this.dialogFormVisible = true;
         },
         createEntity () {
-            //console.log(this.form)
-            axios.defaults.headers.common["Authorization"] =
-                "BasicAuth " + localStorage.getItem("Ticket");
             axios
                 .post("/DataDictionary/CreatedofModied", {
                     Id: this.form.id,

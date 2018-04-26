@@ -39,7 +39,8 @@
                     <input accept="image/*" name="upimage" @change="upload" id="upload_file" type="file">
                 </el-form-item>
                 <el-form-item label="新闻内容" :label-width="formLabelWidth">
-                    <el-input v-model="form.content" auto-complete="off"></el-input>
+                    <el-input type="textarea" :rows="5" v-model="form.content">
+                    </el-input>
                 </el-form-item>
                 <el-form-item label="新闻类别" :label-width="formLabelWidth">
                     <el-select v-model="form.type" placeholder="请选择新闻类型">
@@ -119,8 +120,6 @@ export default {
                 type: "warning"
             })
                 .then(() => {
-                    axios.defaults.headers.common["Authorization"] =
-                        "BasicAuth " + localStorage.getItem("Ticket");
                     axios
                         .post("/news/DeleteNews/" + row.Id)
                         .then(response => {
@@ -156,9 +155,6 @@ export default {
             this.dialogFormVisible = true;
         },
         createEntity () {
-            //console.log(this.form)
-            axios.defaults.headers.common["Authorization"] =
-                "BasicAuth " + localStorage.getItem("Ticket");
             axios
                 .post("/news/CreatedofModied", {
                     Id: this.form.id,
