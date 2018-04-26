@@ -164,34 +164,25 @@ export default {
                 })
                 .then(response => {
                     this.hometitle = response.data[0].Content;
+                    axios
+                        .get("/DataDictionary/GetDataDictionaryAll", {
+                            params: {
+                                key: "首页副标题"
+                            }
+                        })
+                        .then(response => {
+                            this.hometitlesub = response.data[0].Content;
+                            axios
+                                .get("/DataDictionary/GetDataDictionaryAll", {
+                                    params: {
+                                        key: "首页副标题英文"
+                                    }
+                                })
+                                .then(response => {
+                                    this.hometitlesuben = response.data[0].Content;
+                                })
+                        })
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            axios
-                .get("/DataDictionary/GetDataDictionaryAll", {
-                    params: {
-                        key: "首页副标题"
-                    }
-                })
-                .then(response => {
-                    this.hometitlesub = response.data[0].Content;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            axios
-                .get("/DataDictionary/GetDataDictionaryAll", {
-                    params: {
-                        key: "首页副标题英文"
-                    }
-                })
-                .then(response => {
-                    this.hometitlesuben = response.data[0].Content;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
         }
     },
     created: function () {
