@@ -159,29 +159,13 @@ export default {
             axios
                 .get("/DataDictionary/GetDataDictionaryAll", {
                     params: {
-                        key: "首页主标题"
+                        key: "首页主标题,首页副标题,首页副标题英文"
                     }
                 })
                 .then(response => {
                     this.hometitle = response.data[0].Content;
-                    axios
-                        .get("/DataDictionary/GetDataDictionaryAll", {
-                            params: {
-                                key: "首页副标题"
-                            }
-                        })
-                        .then(response => {
-                            this.hometitlesub = response.data[0].Content;
-                            axios
-                                .get("/DataDictionary/GetDataDictionaryAll", {
-                                    params: {
-                                        key: "首页副标题英文"
-                                    }
-                                })
-                                .then(response => {
-                                    this.hometitlesuben = response.data[0].Content;
-                                })
-                        })
+                    this.hometitlesub = response.data[1].Content;
+                    this.hometitlesuben = response.data[2].Content;
                 })
         }
     },

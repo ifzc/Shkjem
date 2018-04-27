@@ -7,12 +7,12 @@
             <el-table :data="tableData" border style="width: 100%">
                 <el-table-column fixed prop="Id" label="#" width="100">
                 </el-table-column>
-                <el-table-column prop="Img" label="图片" width="220">
+                <el-table-column prop="Img" label="荣誉图片" width="220">
                     <template slot-scope="scope">
                         <img style="width:100%" :src="imgserver + scope.row.Img" alt="">
                     </template>
                 </el-table-column>
-                <el-table-column prop="Remark" label="备注">
+                <el-table-column prop="Remark" label="荣誉标题">
                 </el-table-column>
                 <el-table-column fixed="right" label="操作">
                     <template slot-scope="scope">
@@ -28,7 +28,7 @@
                     <el-input v-model="form.img" auto-complete="off" disabled></el-input>
                     <input accept="image/*" name="upimage" @change="upload" id="upload_file" type="file">
                 </el-form-item>
-                <el-form-item label="备注" :label-width="formLabelWidth">
+                <el-form-item label="荣誉标题" :label-width="formLabelWidth">
                     <el-input v-model="form.remark" auto-complete="off"></el-input>
                 </el-form-item>
             </el-form>

@@ -8,13 +8,14 @@
         el-menu-item(index="/product") 产品中心
         el-menu-item(index="/anli") 经典案例
         el-menu-item(index="/goto") 走进科建
-        el-menu-item(index="/help") 帮助中心
+        //- el-menu-item(index="/help") 帮助中心
         el-menu-item(index="/recruitment") 诚聘英才
-        el-menu-item(index="/about") 联系我们
+        //- el-menu-item(index="/about") 联系我们
         el-menu-item(index="/study") 学习模块
     transition(enter-active-class="animated fadeIn")
         router-view
-    .bottombox(v-if="$route.path != '/' && $route.path.substring(0,6) != '/admin'")
+    //- .bottombox(v-if="$route.path != '/' && $route.path.substring(0,6) != '/admin'")
+    .bottombox(v-if="$route.path.substring(0,6) != '/admin'")
         ul(v-for="hrefs in hrefdata")
             li(v-for="item in hrefs")
                 a(v-bind:href="item.href") {{ item.text }}
@@ -22,6 +23,8 @@
 </template>
 
 <script>
+import axios from "./router/http";
+
 export default {
     name: "App",
     data () {
@@ -31,57 +34,49 @@ export default {
             hrefdata: [
                 [
                     {
-                        href: "#",
+                        href: "#/goto",
                         text: "走进科建"
                     },
                     {
-                        href: "#",
-                        text: "公司简介"
-                    },
-                    {
-                        href: "#",
+                        href: "#/goto",
                         text: "发展历程"
                     },
                     {
-                        href: "#",
-                        text: "组织结构"
-                    },
-                    {
-                        href: "#",
+                        href: "#/goto",
                         text: "企业文化"
                     },
                     {
-                        href: "#",
+                        href: "#/goto",
                         text: "资质荣誉"
                     },
                     {
-                        href: "#",
+                        href: "#/goto",
                         text: "合作伙伴"
                     }
                 ],
                 [
                     {
-                        href: "#",
+                        href: "#/news",
                         text: "新闻资讯"
                     },
                     {
-                        href: "#",
+                        href: "#/news",
                         text: "公司新闻"
                     },
                     {
-                        href: "#",
+                        href: "#/news",
                         text: "行业动态"
                     }
                 ],
                 [
                     {
-                        href: "#",
+                        href: "#/product",
                         text: "产品中心"
                     }
                 ],
                 [
                     {
-                        href: "#",
+                        href: "#/anli",
                         text: "经典案例"
                     },
                     {
@@ -103,38 +98,27 @@ export default {
                 ],
                 [
                     {
-                        href: "#",
+                        href: "#/help",
                         text: "帮助中心"
                     },
                     {
-                        href: "#",
-                        text: "常见问题"
-                    },
-                    {
-                        href: "#",
-                        text: "技术支持"
+                        href: "#/about",
+                        text: "联系我们"
                     }
                 ],
                 [
+
                     {
-                        href: "#",
-                        text: "联系我们"
+                        href: null,
+                        text: ""
                     },
                     {
-                        href: "#",
-                        text: "邮箱:Smileioc@163.com"
+                        href: null,
+                        text: ""
                     },
                     {
-                        href: "#",
-                        text: "电话:182****2176"
-                    },
-                    {
-                        href: "#",
-                        text: "传真:182****2176"
-                    },
-                    {
-                        href: "#",
-                        text: "地址:上海市松花区新松江路909号丰源大厦16F"
+                        href: null,
+                        text: ""
                     }
                 ]
             ]
@@ -144,6 +128,17 @@ export default {
         //console.log( this.$route.path.substring(0,6))
         //let actionpath =
         //console.log(this.$route.path)
+        axios
+            .get("/DataDictionary/GetDataDictionaryAll", {
+                params: {
+                    key: "邮箱,电话,地址"
+                }
+            })
+            .then(response => {
+                this.hrefdata[5][0].text = "邮箱：" + response.data[0].Content
+                this.hrefdata[5][1].text = "电话：" + response.data[1].Content
+                this.hrefdata[5][2].text = "地址：" + response.data[2].Content
+            })
     },
     methods: {
         handleSelect (key) {
@@ -219,7 +214,7 @@ body {
   color: #89d0f9;
 }
 .bottomercode {
-  width: 150px;
+  width: 100px;
   position: absolute;
   right: 10%;
   margin-top: 16px;

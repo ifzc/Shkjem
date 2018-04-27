@@ -79,6 +79,7 @@ export default {
 .item {
   border-top: 1px solid #dcdcdc;
   padding: 2%;
+  transition: 0.4s;
 }
 .item:nth-of-type(2n + 1) {
   animation: bounceInLeft 1.2s;

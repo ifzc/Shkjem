@@ -11,6 +11,7 @@
             h4 功能模块
                 span
         el-main
+            video(width="100%",controls,loop,autoplay,v-bind:src="videourl")
             h2 模式的不足
             img.imgbottom(src="/static/tobottom.png")
             el-row(style="padding: 6%;")
@@ -41,22 +42,22 @@ import axios from "../router/http";
 export default {
     data () {
         return {
-            pagetitle: ''
+            pagetitle: '',
+            videourl: '',
+            videohtml: ''
         }
     },
     created: function () {
         axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
-                    key: "产品中心标题"
+                    key: "产品中心标题,产品视频链接"
                 }
             })
             .then(response => {
                 this.pagetitle = response.data[0].Content;
+                this.videourl = response.data[1].Content;
             })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
 };
 </script>

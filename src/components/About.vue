@@ -27,10 +27,9 @@
       el-col(:span="14",:offset="1")
         img.aboutimg(src="/static/address.jpg",style="width:95%")
       el-col(:span="8")
-        p 邮箱:Smileioc@163.com
-        p 电话:182****2176
-        p 传真:182****2176
-        p 地址:上海市松花区新松江路909号丰源大厦16F
+        p 邮箱:{{ emali }}
+        p 电话:{{ phone }}
+        p 地址:{{ address }}
 </template>
 <script>
 import axios from "../router/http";
@@ -39,6 +38,9 @@ export default {
     data () {
         return {
             pagetitle: '',
+            emali: '',
+            phone: '',
+            address: '',
             formInline: {
                 name: "",
                 phone: "",
@@ -49,7 +51,7 @@ export default {
             rules: {
                 name: [
                     { required: true, message: "请输入姓名", trigger: "blur" },
-                    { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+                    { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: "blur" }
                 ],
                 phone: [{ required: true, message: "请输入联系电话", trigger: "blur" }],
                 emali: [{ required: true, message: "请输入联系邮箱", trigger: "blur" }],
@@ -93,24 +95,21 @@ export default {
                         message: "留言成功!"
                     });
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
         }
     },
     created: function () {
         axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
-                    key: "联系我们标题"
+                    key: "联系我们标题,邮箱,电话,地址"
                 }
             })
             .then(response => {
                 this.pagetitle = response.data[0].Content;
+                this.emali = response.data[1].Content;
+                this.phone = response.data[2].Content;
+                this.address = response.data[3].Content;
             })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
 };
 </script>
@@ -139,8 +138,5 @@ p {
   width: 80%;
   margin: 0 auto;
   padding: 20px;
-}
-.aboutimg:hover {
-  animation: tada 1s;
 }
 </style>
