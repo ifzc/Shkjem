@@ -79,7 +79,7 @@ export default {
   width: 100%;
 }
 .imgbox img:hover {
-  animation: tada 1s;
+  animation: pulse 1s;
 }
 .imgbox {
   text-align: center;

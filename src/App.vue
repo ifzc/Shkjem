@@ -1,7 +1,7 @@
 <template lang="jade">
 #app
-    el-menu(:default-active="activeIndex",actionpath="$route.path",class="el-menu-demo",mode="horizontal",active-text-color="#409eff",v-bind:class="{ toppost : $route.path == '/' }",@select="handleSelect")
-        el-menu-item(index="logo",style="padding-left: 9%")
+    el-menu(:default-active="$route.path" ,class="el-menu-demo",mode="horizontal",active-text-color="#409eff",v-bind:class="{ toppost : $route.path == '/' }" router)
+        el-menu-item(index="",style="padding-left: 9%")
             img(src="static/toplogo.png",style="width: 280px")
         el-menu-item(index="/") 首页
         el-menu-item(index="/news") 新闻资讯
@@ -9,13 +9,14 @@
         el-menu-item(index="/anli") 经典案例
         el-menu-item(index="/goto") 走进科建
         //- el-menu-item(index="/help") 帮助中心
-        el-menu-item(index="/recruitment") 诚聘英才
+        //- el-menu-item(index="/recruitment") 诚聘英才
         //- el-menu-item(index="/about") 联系我们
-        el-menu-item(index="/study") 学习模块
-    transition(enter-active-class="animated fadeIn")
+        //- el-menu-item(index="/study") 学习模块
+        li.topdoli 
+            a(v-bind:href="appurl",download="app") 下载APP
+    transition(enter-active-class="animated")
         router-view
-    //- .bottombox(v-if="$route.path != '/' && $route.path.substring(0,6) != '/admin'")
-    .bottombox(v-if="$route.path.substring(0,6) != '/admin'")
+    .bottombox(v-if="$route.path != '/' && $route.path.substring(0,6) != '/admin'")
         ul(v-for="hrefs in hrefdata")
             li(v-for="item in hrefs")
                 a(v-bind:href="item.href") {{ item.text }}
@@ -29,6 +30,7 @@ export default {
     name: "App",
     data () {
         return {
+            appurl: '',
             transitionName: '',
             activeIndex: '/',
             hrefdata: [
@@ -80,20 +82,12 @@ export default {
                         text: "经典案例"
                     },
                     {
-                        href: "#",
-                        text: "高层办公楼"
+                        href: "#/recruitment",
+                        text: "诚聘英才"
                     },
                     {
-                        href: "#",
-                        text: "轨道交通"
-                    },
-                    {
-                        href: "#",
-                        text: "市政工程"
-                    },
-                    {
-                        href: "#",
-                        text: "城市综合体"
+                        href: "#/study",
+                        text: "学习模块"
                     }
                 ],
                 [
@@ -131,22 +125,26 @@ export default {
         axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {
-                    key: "邮箱,电话,地址"
+                    key: "邮箱,电话,地址,APP下载地址"
                 }
             })
             .then(response => {
                 this.hrefdata[5][0].text = "邮箱：" + response.data[0].Content
                 this.hrefdata[5][1].text = "电话：" + response.data[1].Content
                 this.hrefdata[5][2].text = "地址：" + response.data[2].Content
+                this.appurl = response.data[3].Content
             })
     },
     methods: {
         handleSelect (key) {
             //, keyPath
-            if (key == "logo") {
-                window.location = "http://www.smilef.cn";
-            }
-            this.$router.push(key);
+            //if (key == "logo") {
+            //    window.location = "http://www.smilef.cn";
+            //}
+            //this.$router.push(key);
+        },
+        ckdoli () {
+
         }
     }
 };
@@ -163,7 +161,8 @@ body {
 .pagetop {
   width: 100%;
   height: 500px;
-  background-size: 100% 100%;
+  background-size: cover;
+  background-position: center center;
 }
 .pagetop h1 {
   margin: 0;
@@ -218,5 +217,15 @@ body {
   position: absolute;
   right: 10%;
   margin-top: 16px;
+}
+.topdoli {
+  float: right;
+  line-height: 60px;
+  margin-right: 6%;
+}
+.topdoli a {
+  text-decoration: none;
+  color: #808080;
+  font-weight: 300;
 }
 </style>

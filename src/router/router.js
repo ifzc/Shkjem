@@ -124,7 +124,7 @@ const router = new Router({
                 }
             }, {
                 path: '/admin/dictionary',
-                name: 'Course',
+                name: 'Dictionary',
                 component: (resolve) => {
                     require(['../components/admin/DataDictionary'], resolve)
                 }
@@ -136,7 +136,7 @@ const router = new Router({
                 }
             }, {
                 path: '/admin/study',
-                name: 'Study',
+                name: 'AdminStudy',
                 component: (resolve) => {
                     require(['../components/admin/Study'], resolve)
                 }
