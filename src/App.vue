@@ -20,6 +20,7 @@
             li(v-for="item in hrefs")
                 a(v-bind:href="item.href") {{ item.text }}
         img.bottomercode(src="../static/ercode.png")
+      div.copyright 科建版权所有 @备案号
 </template>
 
 <script>
@@ -100,7 +101,10 @@ export default {
                     }
                 ],
                 [
-
+                    {
+                        href: '#/about',
+                        text: ""
+                    },
                     {
                         href: null,
                         text: ""
@@ -128,9 +132,10 @@ export default {
                 }
             })
             .then(response => {
-                this.hrefdata[5][0].text = "邮箱：" + response.data[0].Content
-                this.hrefdata[5][1].text = "电话：" + response.data[1].Content
-                this.hrefdata[5][2].text = "地址：" + response.data[2].Content
+                this.hrefdata[5][0].text = "联系我们"
+                this.hrefdata[5][1].text = "邮箱：" + response.data[0].Content
+                this.hrefdata[5][2].text = "电话：" + response.data[1].Content
+                this.hrefdata[5][3].text = "地址：" + response.data[2].Content
                 this.appurl = response.data[3].Content
             })
     },
@@ -252,6 +257,15 @@ a{
             display: block;
       }
 }
+      .el-menu-item{
+            font-size:16px !important;
+      }
+      .copyright{
+            background: #125688;
+            color: #fff;
+            text-align: center;
+            padding:10px 0;
+      }
 </style>
 
 <style scoped>
@@ -284,20 +298,35 @@ align-content: flex-start;
 .bottombox ul {
   float: left;
   list-style: none;
-  margin-left: 3%;
-  max-width: 230px;
+  padding:0 1.5%;
+min-height: 216px;
 }
 .bottombox ul:nth-of-type(1) {
-  margin-left: 5%;
+margin-left: 5%;
 }
 .bottombox ul li:first-child{
       margin-bottom:10px;
 }
+.bottombox ul li:first-child a:after{
+      content: '';
+      display: block;
+      width:20px;
+      height:2px;
+      background: #fff;
+}
+.bottombox ul:nth-child(6){
+      border-right:0;
+}
 .bottombox ul:nth-child(6) li:first-child{
       margin:0;
 }
+
 .bottombox ul li{
       line-height:36px;
+}
+.bottombox ul li:first-child a{
+      font-size:20px;
+      color: #d4edff;
 }
 .bottombox ul li a {
   text-decoration: none;
@@ -312,6 +341,9 @@ align-content: flex-start;
       position: absolute;
       right: 10%;
       margin-top: 10px;
+      padding:15px;
+      background: #fff;
+      border:2px solid #125688;
 }
 .topdoli {
   float: right;

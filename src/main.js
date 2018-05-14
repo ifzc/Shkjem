@@ -7,9 +7,8 @@ import VideoPlayer from 'vue-video-player'
 import http from './router/http'
 import './../static/js/jquery-1.8.3.min'
 import './../static/js/main'
-require('video.js/dist/video-js.css')
-require('vue-video-player/src/custom-theme.css')
-
+import "video.js/dist/video-js.css"
+import "vue-video-player/src/custom-theme.css"
 import '../node_modules/element-ui/lib/theme-chalk/index.css'
 import 'animate.css'
 

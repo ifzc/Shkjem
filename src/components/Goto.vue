@@ -65,23 +65,32 @@
             el-row.ani-view.fade-in-up(:gutter="20",style="width:100%")
                 el-col(:span='4',:offset='2')
                     img(src="../../static/hz_1.png",style="width:100%")
+                    p logo文字
                 el-col(:span='4')
                     img(src="../../static/hz_2.png",style="width:100%")
+                    p logo文字
                 el-col(:span='4')
                     img(src="../../static/hz_3.png",style="width:100%")
+                    p logo文字
                 el-col(:span='4')
                     img(src="../../static/hz_4.png",style="width:100%")
+                    p logo文字
                 el-col(:span='4')
                     img(src="../../static/hz_5.png",style="width:100%")
+                    p logo文字
             el-row.ani-view.fade-in-down(:gutter="20",style="width:100%;margin-bottom: 60px")
                 el-col(:span='4',:offset='4')
                     img(src="../../static/hz_6.png",style="width:100%")
+                    p logo文字
                 el-col(:span='4')
                     img(src="../../static/hz_7.png",style="width:100%")
+                    p logo文字
                 el-col(:span='4')
                     img(src="../../static/hz_8.png",style="width:100%")
+                    p logo文字
                 el-col(:span='4')
                     img(src="../../static/hz_9.png",style="width:100%")
+                    p logo文字
 </template>
 <script>
 import '../../static/js/jquery-1.8.3.min'
@@ -215,11 +224,13 @@ export default {
 }
 .jianjie h2{
       margin-bottom:20px;
+      margin-top:0;
 }
 .jianjie h1,
 .jianjie h2{
       margin-left:6%;
       color: #e13834;
+      font-family: '宋体';
 }
 .jianjie p.one {
   /* margin-top: 4%; */
@@ -228,6 +239,7 @@ export default {
   font-weight: 400;
       font-size:14px;
       line-height:30px;
+      text-indent: 25px;
 }
 .topimgbox {
   width: 400px;
@@ -396,10 +408,13 @@ export default {
 .wenhua h1,
 .wenhua h2 {
   color: #3c6088;
+      font-size:26px;
+      margin:5px 0;
 }
 .wenhua h3 {
   font-weight: 400;
-      line-height:42px;
+      line-height:36px;
+      font-size: 18px;
 }
 .rongyu {
   text-align: center;
@@ -441,5 +456,10 @@ export default {
 }
 .hezuo .el-row .el-col {
   padding: 1%;
+}
+.hezuo .el-row .el-col{
+      text-align: center;
+      font-size: 16px;
+      line-height:40px;
 }
 </style>

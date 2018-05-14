@@ -10,7 +10,7 @@
                 h4 {{ rdata.Title }}
                 p {{ rdata.Content }}
                 h5 MORE 
-                i.el-icon-caret-right
+                  i.el-icon-caret-right
             el-col(:span="7",:offset="2",v-if="(index + 1) % 2 == 0")
                 h4 {{ rdata.Title }}
                 p {{ rdata.Content }}
@@ -88,7 +88,7 @@ export default {
   animation: flipInX 1s;
 }
 .el-col h4 {
-  font-size: 16px;
+  font-size: 22px;
   color: #4e4e4e;
   transition: 0.4s;
 }
@@ -99,6 +99,10 @@ export default {
   color: #484848;
   font-size: 15px;
   transition: 0.4s;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 6;
+overflow: hidden;
 }
 .el-col p:hover {
   color: #14679f;

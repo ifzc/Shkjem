@@ -118,6 +118,8 @@ export default {
   padding: 0px 10px;
   border-left: 1px solid #15669e;
   color: #15669e;
+      font-size:22px;
+      margin:20px 0;
 }
 .newcontent {
   font-size: 14px;

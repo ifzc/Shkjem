@@ -6,6 +6,9 @@
         h1.toptitle {{ hometitle }}
         h2.toptitlesub {{ hometitlesub }}
         h2.toptitleen(style="font-family:'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif") {{ hometitlesuben }}
+        div.topshare
+              h1 科建股份
+              p Factory stock
         div.toptitleup(style="transform: scale(0.5)")
             div.mouse
         p.mousep 鼠标滚动
@@ -347,6 +350,19 @@ export default {
       }
 </style>
 <style scoped>
+      .topshare{
+            padding:0 30px;
+            position: absolute;
+            top:80px;
+            left:20px;
+      }
+      .topshare h1{
+            margin-bottom:5px;
+      }
+      .topshare p{
+            margin:0;
+            font-size: 18px;
+      }
 .anliimgs {
   padding: 0 30%;
 }
@@ -399,6 +415,15 @@ export default {
 }
 .newsbox .el-col p:nth-of-type(3) {
   text-align: right;
+}
+.newsbox .el-col p:nth-child(2){
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      overflow: hidden;
+}
+.newsbox .el-col p:first-child{
+      font-size:22px;
 }
 .newsbox img {
   width: 100%;
@@ -464,6 +489,7 @@ export default {
   animation-duration: 1s;
   /* animation-delay: 0.5s; */
   font-weight: 400;
+      font-size:4em;
 }
 .toptitlesub {
   animation-name: bounceInLeft;
