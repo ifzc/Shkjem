@@ -1,6 +1,6 @@
 <template lang="jade">
 #anlibox
-    .pagetop(style="background-image: url(/static/anlitop.jpg)")
+    .pagetop(style="background-image: url(./static/anlitop.jpg)")
         h1 {{ pagetitle }}
     #conbox
         el-row(v-for="(rdata,index) in tbdata",:key="rdata.Id")
@@ -70,10 +70,9 @@ export default {
   background-color: rgb(20, 103, 159);
 }
 #conbox {
-  width: 85%;
-  margin: 0 auto;
-  background-image: url(/static/waitanbg.png);
-  background-color: #fff;
+      width: 85%;
+      margin: 0 auto;
+      background: #fff url(../../static/waitanbg.png) no-repeat bottom center;
 }
 .topimg {
   width: 100%;

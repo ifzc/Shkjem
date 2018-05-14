@@ -1,9 +1,9 @@
 <template lang="jade">
 #app
-    el-menu(:default-active="$route.path" ,class="el-menu-demo",mode="horizontal",active-text-color="#409eff",v-bind:class="{ toppost : $route.path == '/' }" router)
-        el-menu-item(index="",style="padding-left: 9%")
+    el-menu(:default-active="$route.path" style="min-width:1320px;" ,class="el-menu-demo",mode="horizontal",active-text-color="#409eff",v-bind:class="{ toppost : $route.path == '/' }" router)
+        el-menu-item(index="",style="padding-left: 16%")
             img(src="static/toplogo.png",style="width: 280px")
-        el-menu-item(index="/") 首页
+        el-menu-item(index="/",style="margin-left:10%") 首页
         el-menu-item(index="/news") 新闻资讯
         el-menu-item(index="/product") 产品中心
         el-menu-item(index="/anli") 经典案例
@@ -12,8 +12,7 @@
         //- el-menu-item(index="/recruitment") 诚聘英才
         //- el-menu-item(index="/about") 联系我们
         //- el-menu-item(index="/study") 学习模块
-        li.topdoli 
-            a(v-bind:href="appurl",download="app") 下载APP
+        el-menu-item(index="/appDownload") 下载APP
     transition(enter-active-class="animated")
         router-view
     .bottombox(v-if="$route.path != '/' && $route.path.substring(0,6) != '/admin'")
@@ -150,13 +149,39 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
+      @import "./../static/css/public.min.css";
 body {
   padding: 0;
   margin: 0;
 }
-* {
-  font-family: "Helvetica";
+html,body,div,span,iframe,
+blockquote,pre,a,address,big,cite,code,del,em,font,img,ins,small,strong,var,b,u,i,center,
+dl,dt,dd,ol,ul,li,
+fieldset,form,label,legend{margin:0;padding:0;}
+li,ol,ul{list-style:none outside}
+:focus{outline:0;}
+a img{border:0;}
+a{text-decoration: none;}
+img{vertical-align:middle;}
+table{empty-cells:show;}
+ins{text-decoration:none;}
+del{text-decoration:line-through;}
+em{font-style:normal;}
+button::-moz-focus-inner,
+input[type=reset]::-moz-focus-inner,
+input[type=button]::-moz-focus-inner,
+input[type=submit]::-moz-focus-inner,
+input[type=file]>input[type=button]::-moz-focus-inner{border:0;padding:0;}
+a{
+      transition: color .4s ease-in-out;
+      -moz-transition: color .4s ease-in-out;
+      -webkit-transition: color .4s ease-in-out;
+      -o-transition: color .4s ease-in-out;
+}
+*{
+      font-family: "Helvetica";
+      box-sizing: border-box;
 }
 .pagetop {
   width: 100%;
@@ -171,6 +196,61 @@ body {
   color: #fff;
   font-size: 45px;
   font-weight: 400;
+}
+.pull-left{
+      float: left;
+}
+.pull-right{
+      float: right;
+}
+.pos_r{
+      position: relative;
+}
+.pos_a{
+      position: absolute;
+}
+.text-right{
+      text-align: right;
+}
+.text-left{
+      text-align: left;
+}
+.overh{
+      overflow: hidden;
+}
+.line-group{
+>h3{
+      font-size:34px;
+      font-weight:normal;
+      color: #333333;
+      text-align: center;
+      margin:20px 0;
+}
+}
+.top-cover{
+      padding-top: 9%;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      min-width:1320px;
+      h1{
+            font-size: 42px;
+            color: #FFF;
+      }
+      span{
+            width: 165px;
+            height: 1px;
+            background-color: #FFF;
+            display: block;
+            margin:16px auto 0;
+      }
+      p{
+            font-size: 22px;
+            color: #FFF;
+            margin-top: 32px;
+            display: block;
+      }
 }
 </style>
 
@@ -194,6 +274,12 @@ body {
   width: 100%;
   overflow: hidden;
   background-color: rgb(23, 103, 161);
+display: flex;
+flex-direction:row;
+flex-wrap: nowrap;
+align-items:flex-start;
+align-content: flex-start;
+      padding:1.4% 3%;
 }
 .bottombox ul {
   float: left;
@@ -204,6 +290,15 @@ body {
 .bottombox ul:nth-of-type(1) {
   margin-left: 5%;
 }
+.bottombox ul li:first-child{
+      margin-bottom:10px;
+}
+.bottombox ul:nth-child(6) li:first-child{
+      margin:0;
+}
+.bottombox ul li{
+      line-height:36px;
+}
 .bottombox ul li a {
   text-decoration: none;
   color: #f7f7f7;
@@ -213,10 +308,10 @@ body {
   color: #89d0f9;
 }
 .bottomercode {
-  width: 100px;
-  position: absolute;
-  right: 10%;
-  margin-top: 16px;
+      width: 170px;
+      position: absolute;
+      right: 10%;
+      margin-top: 10px;
 }
 .topdoli {
   float: right;

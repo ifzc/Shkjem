@@ -1,74 +1,51 @@
 <template lang="jade">
 #goto
-    .pagetop(style="background-image: url(/static/gotokejiantop.jpg)")
+    .pagetop(style="background-image: url(./static/gotokejiantop.jpg)")
         h1 {{ pagetitle }}
     #conbox
         .jianjie
-            h1(style="color: #e13834") 公司简介
-            h2(style="color: #e13834;margin: 0;") ABOUT US
-            p.one 
-                {{ showlang ? jianjiecn : jianjieen }}
+            h1 公司简介
+            h2 ABOUT US
+            p.one.ani-view.fade-in-left {{ showlang ? jianjiecn : jianjieen }}
                 el-button(type="text",@click="showlang = !showlang",style="padding: 0;") 中文/English
             .topimgbox
-                img(src="/static/jianjietopmin.jpg",style="width: 100%")
+                img(src="../../static/jianjietopmin.jpg",style="width: 100%")
             //- .titlestyle
                 .colorbox
         .zaifenge
             i.el-icon-arrow-down
         el-row.fazhan
             el-col(:span='3')
-                img(src='/static/lc_l.png',style="width: 100%")
+                img(src='../../static/lc_l.png',style="width: 100%")
             el-col.fazhancon(:span='18')
-                h1 发展历程
-                h2 DEVELOPMENT
-                .hrstyle
-                el-row.lichengtext(:gutter="20")
-                    el-col(:span="6",:offset="3")
-                        p {{ courses[0].Content }}
-                    el-col(:span="6")
-                        p(style="background-color: #e13834;") {{ courses[1].Content }}
-                    el-col(:span="6")
-                        p {{ courses[2].Content }}
-                .fenge
-                    span
-                    span
-                    span
-                    span
-                    span
-                    span
-                    span
-                el-row.lichengtext(:gutter="20")
-                    el-col(:span="5",:offset="2")
-                        p {{ courses[3].Content }}
-                    el-col(:span="5")
-                        p {{ courses[4].Content }}
-                    el-col(:span="5")
-                        p {{ courses[5].Content }}
-                    el-col(:span="5")
-                        p {{ courses[6].Content }}
+                h1.ani-view.fade-in-up 发展历程
+                h2.ani-view.fade-in-box DEVELOPMENT
+                .hrstyle.ani-view.fade-in-down
+                div
+                  div.fishBoneDiv
             el-col(:span='3')
-                img(src='/static/lc_r.png',style="width: 100%")
+                img(src='../../static/lc_r.png',style="width: 100%")
         .wenhua 
-            h1 企业文化
-            h2 CULTURE
-            h1 我们只专注一件事情——工程项目管理
-            h3 确保工程无重大安全事故
-            h3 确保工程施工单位不返工
-            h3 确保工程施工材料无伪劣品
-            h3 确保工程管理留下痕迹、实施过程可追溯
+            h1.ani-view.fade-in-box 企业文化
+            h2.ani-view.fade-in-box CULTURE
+            h1.ani-view.fade-in-box(style="margin-bottom:20px;") 我们只专注一件事情——工程项目管理
+            h3.ani-view.fade-in-right 确保工程无重大安全事故
+            h3.ani-view.fade-in-right 确保工程施工单位不返工
+            h3.ani-view.fade-in-right 确保工程施工材料无伪劣品
+            h3.ani-view.fade-in-right 确保工程管理留下痕迹、实施过程可追溯
         .rongyu
             el-dialog(:title="dialogTitle",width="50%",:visible.sync="dialogVisible")
                 img(v-bind:src="dialogUrl",style="width:100%")
-            h1 公司荣誉
-            h2 HONOR
-            el-row(:gutter="0")
+            h1.ani-view.fade-in-up 公司荣誉
+            h2.ani-view.fade-in-down HONOR
+            el-row.ani-view.fade-in-up(:gutter="0")
                 el-col(:span="6",:offset="3",style="padding: 1%")
                     img(v-bind:src="imgserver + honorimgs[0].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[0].Remark")
                 el-col(:span="6",style="padding: 1%")
                     img(v-bind:src="imgserver + honorimgs[1].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[1].Remark")
                 el-col(:span="6",style="padding: 1%")
                     img(v-bind:src="imgserver + honorimgs[2].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[2].Remark")
-            el-row(:gutter="0")
+            el-row.ani-view.fade-in-down(:gutter="0")
                 el-col(:span="6",:offset="3",style="padding: 1%")
                     img(v-bind:src="imgserver + honorimgs[3].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[3].Remark")
                 el-col(:span="6",style="padding: 1%")
@@ -77,36 +54,39 @@
                     img(v-bind:src="imgserver + honorimgs[5].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[5].Remark")
             h2(style="margin: 0;font-size: 16px;") 点击查看大图
         .tuandui
-            h1 团队风采
-            h2 TEAM
+            h1.ani-view.fade-in-up 团队风采
+            h2.ani-view.fade-in-down TEAM
             el-carousel(:interval="2000",type="card",height="400px")
                 el-carousel-item(v-for="item in fencaiimgs",:key="item.Id")
                     img(v-bind:src="imgserver + item.Img",style="width:100%")
         .hezuo
-            h1 合作伙伴
-            h2 RARTNERS
-            el-row(:gutter="20",style="width:100%")
+            h1.ani-view.fade-in-up 合作伙伴
+            h2.ani-view.fade-in-down RARTNERS
+            el-row.ani-view.fade-in-up(:gutter="20",style="width:100%")
                 el-col(:span='4',:offset='2')
-                    img(src="/static/hz_1.png",style="width:100%")
+                    img(src="../../static/hz_1.png",style="width:100%")
                 el-col(:span='4')
-                    img(src="/static/hz_2.png",style="width:100%")
+                    img(src="../../static/hz_2.png",style="width:100%")
                 el-col(:span='4')
-                    img(src="/static/hz_3.png",style="width:100%")
+                    img(src="../../static/hz_3.png",style="width:100%")
                 el-col(:span='4')
-                    img(src="/static/hz_4.png",style="width:100%")
+                    img(src="../../static/hz_4.png",style="width:100%")
                 el-col(:span='4')
-                    img(src="/static/hz_5.png",style="width:100%")
-            el-row(:gutter="20",style="width:100%;margin-bottom: 60px")
+                    img(src="../../static/hz_5.png",style="width:100%")
+            el-row.ani-view.fade-in-down(:gutter="20",style="width:100%;margin-bottom: 60px")
                 el-col(:span='4',:offset='4')
-                    img(src="/static/hz_6.png",style="width:100%")
+                    img(src="../../static/hz_6.png",style="width:100%")
                 el-col(:span='4')
-                    img(src="/static/hz_7.png",style="width:100%")
+                    img(src="../../static/hz_7.png",style="width:100%")
                 el-col(:span='4')
-                    img(src="/static/hz_8.png",style="width:100%")
+                    img(src="../../static/hz_8.png",style="width:100%")
                 el-col(:span='4')
-                    img(src="/static/hz_9.png",style="width:100%")
+                    img(src="../../static/hz_9.png",style="width:100%")
 </template>
 <script>
+import '../../static/js/jquery-1.8.3.min'
+import '../../static/js/fishBone'
+import '../../static/js/jquery.SuperSlide.2.1.1'
 import axios from "../router/http";
 export default {
     data () {
@@ -164,6 +144,9 @@ export default {
             ]
         };
     },
+      mounted: function () {
+            this.getdataall();
+      },
     methods: {
         getdataall () {
             axios
@@ -177,6 +160,7 @@ export default {
             axios
                 .get("/honor/GetHonorAll")
                 .then(response => {
+                    console.log(response)
                     this.honorimgs = response.data;
                 })
                 .catch(function (error) {
@@ -185,7 +169,7 @@ export default {
             axios
                 .get("/course/GetCourseAll")
                 .then(response => {
-                    this.courses = response.data;
+                    $(".fishBoneDiv").fishBone(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -203,21 +187,19 @@ export default {
                     this.jianjieen = response.data[2].Content;
                 })
         }
-    },
-    created: function () {
-        this.getdataall();
     }
 };
 </script>
+
 <style scoped>
+@import "../../static/css/fishBone.css";
 #goto {
   background-color: rgb(20, 103, 159);
 }
 #conbox {
   width: 85%;
-  background: #fff;
   margin: 0 auto;
-  background-image: url(/static/waitanbg.png);
+  background: #fff url(../../static/waitanbg.png) no-repeat bottom center;
 }
 .jianjie {
   position: relative;
@@ -229,14 +211,23 @@ export default {
 .jianjie p {
   width: 50%;
   padding: 0 2%;
-  text-align: center;
   font-weight: 400;
+}
+.jianjie h2{
+      margin-bottom:20px;
+}
+.jianjie h1,
+.jianjie h2{
+      margin-left:6%;
+      color: #e13834;
 }
 .jianjie p.one {
   /* margin-top: 4%; */
   margin-left: 2%;
   color: #14679f;
   font-weight: 400;
+      font-size:14px;
+      line-height:30px;
 }
 .topimgbox {
   width: 400px;
@@ -312,6 +303,7 @@ export default {
 .fazhancon h2 {
   color: #3c6088;
   font-weight: 400;
+      margin:20px 0;
 }
 .hrstyle {
   border-bottom: #3c6088 1px solid;
@@ -374,18 +366,19 @@ export default {
   position: relative;
 }
 .zaifenge i {
-  display: block;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  font-weight: 600;
-  border: #3c6088 2px solid;
-  border-radius: 50%;
-  background: rgb(238, 245, 251);
-  left: 49%;
-  color: #3c6088;
-  font-size: 20px;
-  top: -10px;
+      display: block;
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      line-height: 23px;
+      font-weight: 600;
+      border: #3c6088 2px solid;
+      border-radius: 50%;
+      background: rgb(238, 245, 251);
+      left: 49%;
+      color: #3c6088;
+      font-size: 20px;
+      top: -14px;
 }
 .jiegou {
   text-align: center;
@@ -406,6 +399,7 @@ export default {
 }
 .wenhua h3 {
   font-weight: 400;
+      line-height:42px;
 }
 .rongyu {
   text-align: center;
@@ -417,6 +411,9 @@ export default {
   color: #3c6088;
   font-weight: 400;
 }
+.rongyu h2{
+      margin-bottom: 20px;
+}
 
 .tuandui {
   padding: 5% 10%;
@@ -427,6 +424,9 @@ export default {
   text-align: center;
   font-weight: 400;
 }
+.tuandui h2{
+      margin-bottom:20px;
+}
 .hezuo {
   padding: 10%;
 }
@@ -435,6 +435,9 @@ export default {
   color: #3c6088;
   text-align: center;
   font-weight: 400;
+}
+.hezuo h2{
+      margin-bottom:20px;
 }
 .hezuo .el-row .el-col {
   padding: 1%;

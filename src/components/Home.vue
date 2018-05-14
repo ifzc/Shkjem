@@ -2,46 +2,25 @@
 //- .fullpage-container
   .fullpage-wp(v-fullpage="opts")
 #fullpage
-    .section(style="background-image: url(/static/home_top.jpg)")
+    .section(style="background-image: url(./static/home_top.jpg)")
         h1.toptitle {{ hometitle }}
         h2.toptitlesub {{ hometitlesub }}
         h2.toptitleen(style="font-family:'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif") {{ hometitlesuben }}
         div.toptitleup(style="transform: scale(0.5)")
             div.mouse
         p.mousep 鼠标滚动
-    .section(style="background-image: url(/static/home_do.jpg)")
+    .section(style="background-image: url(./static/home_do.jpg)")
         h2(style="font-weight: 400") 经典案例
         h3(style="font-weight: 400") Suecessful Cass
-        el-row.newsbox.anli(:gutter="0",style="margin-top: 20px")
-            el-col(:span="8")
-                div.imgcss
-                    img(v-bind:src="imgserver + tableDataan[0].Img")
-                    p(style="width: 100%;height: 210px;",@click="$router.push({ path: '/anli' })")
-                        span 查看详情
-                        i.el-icon-caret-right
-                div.divbox(style="background-color: #14679f;margin-top: 5px;")
-                    p {{ tableDataan[0].Title }}
-                    p {{ tableDataan[0].Content }}
-            el-col(:span="8")
-                div.divbox
-                    p {{ tableDataan[1].Title }}
-                    p {{ tableDataan[1].Content }}
-                div.imgcss
-                    img(v-bind:src="imgserver + tableDataan[1].Img")
-                    p(style="width: 100%;height: 210px;",@click="$router.push({ path: '/anli' })")
-                        span 查看详情
-                        i.el-icon-caret-right
-            el-col(:span="8")
-                div.imgcss
-                    img(v-bind:src="imgserver + tableDataan[2].Img")
-                    p(style="width: 100%;height: 210px;",@click="$router.push({ path: '/anli' })")
-                        span 查看详情
-                        i.el-icon-caret-right
-                div.divbox(style="background-color: #14679f;margin-top: 5px;")
-                    p {{ tableDataan[2].Title }}
-                    p {{ tableDataan[2].Content }}
+        div.case
+              div.view.view-first(@click="$router.push({ path: '/anli' })",v-for="item in tableDataan")
+                    img(:src="imgserver+item.Img")
+                    div.mask
+                          h2 {{item.Title}}
+                          p {{item.Content}}
+                          a.info MORE
         p.mousep 鼠标滚动
-    .section(style="background-image: url(/static/home_anli.jpg)")
+    .section(style="background-image: url(./static/home_anli.jpg)")
         h2(style="font-weight: 400") 最新资讯
         h3(style="font-weight: 400") Latest News
         el-row.newsbox(:gutter="0",style="margin-top: 20px")
@@ -196,6 +175,177 @@ export default {
 };
 </script>
 
+<style lang="less">
+      .case{
+            width:70%;
+            overflow: hidden;
+            margin:34px auto 0;
+      }
+      .view{
+            width: 95/3%;
+            height: 248px;
+            margin: 10px;
+            display: inline;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            cursor: default;
+      img{
+            display: block;
+            position: relative;
+      }
+      h2{
+            text-transform: uppercase;
+            color: #fff;
+            text-align: left;
+            position: relative;
+            font-size: 17px;
+            padding: 10px;
+            margin: 20px 0 0 0;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            font-weight:normal;
+      }
+      p{
+            font-size: 12px;
+            position: relative;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+            line-height:26px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+      }
+      a.info{
+            position: relative;
+            text-align: left;
+            font-size:20px;
+            width:100%;
+            padding: 7px 14px;
+            color: #fff;
+            text-transform: uppercase;
+            display: inline-block;
+      }
+      }
+      .view-first{
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            -ms-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            margin: 12/2px 12/2px;
+      .mask{
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            filter: alpha(opacity=0);
+            opacity: 0;
+            background-color: rgba(225,56,52, 0.7);
+            -webkit-transition: all 0.4s ease-in-out;
+            -moz-transition: all 0.4s ease-in-out;
+            -o-transition: all 0.4s ease-in-out;
+            -ms-transition: all 0.4s ease-in-out;
+            transition: all 0.4s ease-in-out;
+      }
+      img{
+            width:100%;
+            height:100%;
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            -ms-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+      }
+      h2{
+            -webkit-transform: translateY(-100px);
+            -moz-transform: translateY(-100px);
+            -o-transform: translateY(-100px);
+            -ms-transform: translateY(-100px);
+            transform: translateY(-100px);
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            filter: alpha(opacity=0);
+            opacity: 0;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+      }
+      p{
+            -webkit-transform: translateY(100px);
+            -moz-transform: translateY(100px);
+            -o-transform: translateY(100px);
+            -ms-transform: translateY(100px);
+            transform: translateY(100px);
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            filter: alpha(opacity=0);
+            opacity: 0;
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            -ms-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+      }
+      }
+      .view-first:hover img {
+            -webkit-transform: scale(1.1,1.1);
+            -moz-transform: scale(1.1,1.1);
+            -o-transform: scale(1.1,1.1);
+            -ms-transform: scale(1.1,1.1);
+            transform: scale(1.1,1.1);
+      }
+      .view-first a.info {
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            filter: alpha(opacity=0);
+            opacity: 0;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+      }
+      .view-first:hover .mask {
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+            filter: alpha(opacity=100);
+            opacity: 1;
+      }
+      .view-first:hover h2,
+      .view-first:hover p,
+      .view-first:hover a.info {
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+            filter: alpha(opacity=100);
+            opacity: 1;
+            -webkit-transform: translateY(0px);
+            -moz-transform: translateY(0px);
+            -o-transform: translateY(0px);
+            -ms-transform: translateY(0px);
+            transform: translateY(0px);
+      }
+      .view-first:hover p {
+            -webkit-transition-delay: 0.1s;
+            -moz-transition-delay: 0.1s;
+            -o-transition-delay: 0.1s;
+            -ms-transition-delay: 0.1s;
+            transition-delay: 0.1s;
+      }
+      .view-first:hover a.info {
+            -webkit-transition-delay: 0.2s;
+            -moz-transition-delay: 0.2s;
+            -o-transition-delay: 0.2s;
+            -ms-transition-delay: 0.2s;
+            transition-delay: 0.2s;
+      }
+      .view .mask, .view .content{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+      }
+</style>
 <style scoped>
 .anliimgs {
   padding: 0 30%;
@@ -805,4 +955,6 @@ p.mousep {
     color: #ffffff;
   }
 }
+
+
 </style>

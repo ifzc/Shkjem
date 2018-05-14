@@ -1,6 +1,6 @@
 <template lang="jade">
 #news
-    .pagetop(style="background-image: url(/static/news_top.jpg)")
+    .pagetop(style="background-image: url(./static/news_top.jpg)")
         h1 {{ pagetitle }}
     .topbtn
         p.p-1(@click="cktopbtn(1)").action 公司新闻
@@ -74,9 +74,7 @@ export default {
 
 <style scoped>
 #news {
-  background-image: url(/static/waitanbg.png);
-  /* background-color: rgba(105, 200, 245, 0.2); */
-  background-color: #14679f;
+  background: #14679f url(../../static/waitanbg.png) no-repeat bottom center;
 }
 .topbtn {
   position: relative;
@@ -102,7 +100,7 @@ export default {
   box-sizing: border-box;
   width: 85%;
   margin: 0 auto;
-  background-image: url(/static/waitanbg.png);
+  background-image: url(../../static/waitanbg.png);
 }
 .new-item {
   padding: 20px;

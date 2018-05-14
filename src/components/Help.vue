@@ -1,6 +1,6 @@
 <template lang="jade">
 #helpbox
-  .pagetop(style="background-image: url(/static/helptop.jpg)")
+  .pagetop(style="background-image: url(./static/helptop.jpg)")
         h1 {{ pagetitle }}
   #conboxx
     h1 留言板
@@ -100,8 +100,7 @@ export default {
   background-color: rgb(20, 103, 159);
 }
 #conboxx {
-  background-color: #fff;
-  background-image: url(/static/waitanbg.png);
+  background: #fff url(../../static/waitanbg.png) no-repeat bottom center;
   width: 85%;
   margin: 0 auto;
   padding-top: 25px;

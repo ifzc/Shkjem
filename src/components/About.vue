@@ -1,6 +1,6 @@
 <template lang="jade">
 #about
-  .pagetop(style="background-image: url(/static/abouttop.jpg)")
+  .pagetop(style="background-image: url(./static/abouttop.jpg)")
         h1 {{ pagetitle }}
   #conbox
     h1 您的需求
@@ -20,12 +20,12 @@
             el-input(type="textarea",v-model="formInline.content")
             el-button(type="primary",@click="onSubmit('formInline')",style="margin-top: 10px") 发送
       el-col(:span='12')
-        img(src="/static/xuqui.jpg",style="width:100%;height: 369px")
+        img(src="../../static/xuqui.jpg",style="width:100%;height: 369px")
     h1(style="margin-top: 100px") 我们的地址
     h3 ADDRESS
     el-row(style="padding: 5%")
       el-col(:span="14",:offset="1")
-        img.aboutimg(src="/static/address.jpg",style="width:95%")
+        img.aboutimg(src="../../static/address.jpg",style="width:95%")
       el-col(:span="8")
         p 邮箱:{{ emali }}
         p 电话:{{ phone }}
@@ -119,8 +119,7 @@ export default {
 }
 #conbox {
   width: 85%;
-  background-color: #fff;
-  background-image: url(/static/waitanbg.png);
+  background: #fff url(../../static/waitanbg.png) no-repeat bottom center;
   margin: 0 auto;
   padding-top: 100px;
 }

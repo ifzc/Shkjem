@@ -1,6 +1,6 @@
 <template lang="jade">
 #rec
-  .pagetop(style="background-image: url(/static/zhaopin.jpg)")
+  .pagetop(style="background-image: url(./static/zhaopin.jpg)")
         h1 {{ pagetitle }}
   .topbtn
     p.p-1.action(@click="cktopbtn(1)") 研发类
@@ -71,8 +71,7 @@ export default {
   background-color: #14679f;
 }
 #conbox {
-  background-image: url(/static/waitanbg.png);
-  background-color: #fff;
+  background: #fff url(../../static/waitanbg.png) no-repeat bottom center;
   width: 85%;
   margin: 0 auto;
 }

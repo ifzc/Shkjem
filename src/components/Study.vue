@@ -1,6 +1,6 @@
 <template lang="jade">
     .box
-        .pagetop(style="background-image: url(/static/study.png)")
+        .pagetop(style="background-image: url(./static/study.png)")
             h1 {{ pagetitle }}
         .content
             .item(v-for="item in items")
@@ -54,7 +54,7 @@ export default {
   background-color: #14679f;
 }
 .content {
-  background-image: url(/static/waitanbg.png);
+  background-image: url(../../static/waitanbg.png);
   /* background-color: rgba(105, 200, 245, 0.2); */
   background-color: #fff;
   width: 82%;

@@ -1,255 +1,127 @@
-<template lang="jade">
-#porbox
-    .pagetop(style="background-image: url(/static/pro_top.jpg)")
-        h1 {{ pagetitle }}
-    el-container
-        el-aside(width="20%")
-            h4.action 模式的不同
-                span
-            h4 平台目标
-                span
-            h4 功能模块
-                span
-        el-main
-            video(width="100%",controls,loop,autoplay,v-bind:src="videourl")
-            h2 模式的不足
-            img.imgbottom(src="/static/tobottom.png")
-            el-row(style="padding: 6%;")
-                el-col(:span="8")
-                    .boxitem
-                        img(src="/static/model1.png")
-                        p 质量检查、安全检查以抽查为主、难免存在遗漏，留下安全隐患
-                el-col(:span="8")
-                    .boxitem
-                        img(src="/static/model2.png")
-                        p 数据统计、数据分析的缺失，无法为统计、分析、项目评估等工作提供数据支撑
-                el-col(:span="8")
-                    .boxitem
-                        img(src="/static/model3.png")
-                        p 检查工作和检查记录文件脱节，无法做到同步对应；缺少镜像文档，无法做到可追溯性
-            h2(style="margin-top: 80px") 平台目标
-            h2 TARGET
-            img.imgbottom(src="/static/tobottom.png")
-            img.imgsanjiao(src="/static/sanjiao.png")
-            h2 功能模块
-            h2 MODULAR
-            img.imgbottom(src="/static/tobottom.png")
-            .gongnen(style="text-align: center;")
-                img(src="/static/denpao.png",style="width: 60%;margin: 50px 0;margin-left: -3%;") 
+<template>
+      <div>
+            <div class="pagetop" style="background-image: url(./static/pro_top.jpg);"><h1>产品中心</h1></div>
+            <div class="container overh">
+                  <div class="main">
+                        <div class="pull-left left-nav">
+                              <div class="nav-list">
+                                    <div v-for="(item, index) in leftNavData" @click="navActive(index)" :isContTab="index" :class="isContTab === index?'active':''"><strong>{{item}}</strong> <span></span></div>
+                              </div>
+                        </div>
+                        <div class="pull-right right-content">
+                              <div class="line-group group_1">
+                                    <video-player  class="video-player vjs-custom-skin"
+                                                   ref="videoPlayer"
+                                                   :playsinline="true"
+                                                   :options="playerOptions" ></video-player>
+                              </div>
+                              <div class="line-group group_2">
+                                    <h3 class="ani-view fade-in-box">模式的不足</h3>
+                                    <div class="triangle-facing-down ani-view fade-in-down"></div>
+                                    <div class="m_auto ani-view fade-in-down">
+                                          <div class="group-div ani-view fade-in-left">
+                                                <span><img src="../../static/product/product-group-icon_1.png" alt=""></span>
+                                                <p>质量检查、安全检查以抽查为主，难免存在遗漏，留下质量安全隐患。</p>
+                                          </div>
+                                          <div class="group-div ani-view fade-in-box">
+                                                <span><img src="../../static/product/product-group-icon_2.png" alt=""></span>
+                                                <p>数据统计、数据分析的缺失，无法为统计、分析、项目评估等工作提供数据支撑。</p>
+                                          </div>
+                                          <div class="group-div ani-view fade-in-right">
+                                                <span><img src="../../static/product/product-group-icon_3.png" alt=""></span>
+                                                <p>检查工作和检查记录文件脱节，无法做到同步对应；缺少影像文档，无法做到可追溯性。
+                                                </p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="line-group group_3">
+                                    <h3 class="ani-view fade-in-up">平台目标</h3>
+                                    <h3 class="ani-view fade-in-box">TARGET</h3>
+                                    <div class="triangle-facing-down ani-view fade-in-down"></div>
+                                    <div class="group_img ani-view fade-in-box">
+                                          <img src="../../static/product_group_3_img.png" alt="">
+                                    </div>
+                              </div>
+                              <div class="line-group group_4">
+                                    <h3 class="ani-view fade-in-up">功能模块</h3>
+                                    <h3 class="ani-view fade-in-box">MODULAR</h3>
+                                    <div class="triangle-facing-down ani-view fade-in-down"></div>
+                                    <div class="group-div">
+                                          <ul style="margin-left: 10%">
+                                                <li class=" ani-view fade-in-right"><span><img src="../../static/product/product-group_4-icon_1.png" alt=""></span>质量控制模块</li>
+                                                <li class=" ani-view fade-in-right"><span><img src="../../static/product/product-group_4-icon_2.png" alt=""></span>知识库模块</li>
+                                                <li class=" ani-view fade-in-right"><span><img src="../../static/product/product-group_4-icon_3.png" alt=""></span>信息流程模块</li>
+                                                <li class=" ani-view fade-in-right"><span><img src="../../static/product/product-group_4-icon_4.png" alt=""></span>定位复核模块</li>
+                                          </ul>
+                                          <ul class=" ani-view fade-in-box" style="width: 35%;">
+                                                <img src="../../static/product_group_4_img.png" style="width: 100%;" alt="">
+                                          </ul>
+                                          <ul style="margin-right: 10%">
+                                                <li class=" ani-view fade-in-left">信息处理模块<span><img src="../../static/product/product-group_4-icon_5.png" alt=""></span></li>
+                                                <li class=" ani-view fade-in-left">材料设备模块<span><img src="../../static/product/product-group_4-icon_6.png" alt=""></span></li>
+                                                <li class=" ani-view fade-in-left">进度控制模块<span><img src="../../static/product/product-group_4-icon_7.png" alt=""></span></li>
+                                                <li class=" ani-view fade-in-left">安全管理模块<span><img src="../../static/product/product-group_4-icon_8.png" alt=""></span></li>
+                                          </ul>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
 </template>
-<script>
-import axios from "../router/http";
-export default {
-    data () {
-        return {
-            pagetitle: '',
-            videourl: '',
-            videohtml: ''
-        }
-    },
-    created: function () {
-        axios
-            .get("/DataDictionary/GetDataDictionaryAll", {
-                params: {
-                    key: "产品中心标题,产品视频链接"
-                }
-            })
-            .then(response => {
-                this.pagetitle = response.data[0].Content;
-                this.videourl = response.data[1].Content;
-            })
-    }
-};
-</script>
-<style scoped>
-#porbox {
-  background-color: #14679f;
-}
-.topimg {
-  width: 100%;
-}
-.el-container {
-  margin-top: -5px;
-  background-image: url(/static/waitanbg.png);
-  background-color: rgba(105, 200, 245, 0.2);
-  background-repeat: no-repeat;
-  background-position-y: 4900px;
-  width: 85%;
-  margin: 0 auto;
-  background-color: #fff;
-}
-.el-aside {
-  border-right: 2px #1866a0 solid;
-}
-.el-aside h4 {
-  text-align: right;
-  font-weight: 400;
-  width: 50%;
-  margin-left: 50%;
-}
-.el-aside h4 span {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border: 2px #1866a0 solid;
-  border-radius: 50%;
-  position: relative;
-  background-color: #fff;
-  top: 3px;
-  right: -8px;
-  z-index: 9999;
-}
-.el-aside h4.action {
-  background-color: rgb(225, 56, 52);
-  border-radius: 10px 0px 0px 10px;
-  color: #fff;
-}
-.el-main h2 {
-  color: #1866a0;
-  font-weight: 400;
-  text-align: center;
-}
-.imgbottom {
-  display: block;
-  margin: 0 auto;
-  width: 28px;
-}
-.boxitem {
-  width: 250px;
-  height: 250px;
-  background-color: #15669e;
-  margin: 0 auto;
-  margin-top: 20px;
-  border: #ffffff solid 2px;
-  color: #fff;
-}
-.boxitem img {
-  display: block;
-  margin: 0 auto;
-  margin-top: 20px;
-}
-.boxitem p {
-  padding: 22px;
-  font-size: 14px;
-}
 
-.imgsanjiao {
-  width: 60%;
-  display: block;
-  margin: 40px auto;
-}
-.gongnen {
-  text-align: center;
-  margin-top: 10px;
-}
-.xitong {
-  margin-top: 20px;
-  position: relative;
-  transform: scale(0.8);
-}
-.xitong p {
-  position: absolute;
-  width: 200px;
-}
-.xitong p:nth-of-type(1) {
-  top: 278px;
-  left: 813px;
-}
-.xitong p:nth-of-type(2) {
-  top: 359px;
-  left: 452px;
-}
-.xitong p:nth-of-type(3) {
-  top: 292px;
-  left: 67px;
-}
-.server {
-  margin-left: 40px;
-}
-.server h2 {
-  text-align: left;
-  margin-top: 80px;
-  font-size: 23px;
-}
-.server h3 {
-  font-weight: 400;
-}
-.server.noe h2 {
-  margin-top: 20px;
-}
-.server p {
-  font-weight: 400;
-}
-.fanwei {
-  position: relative;
-  transform: scale(0.8);
-}
-.fanwei h4 {
-  position: absolute;
-  font-size: 28px;
-  font-weight: 400;
-  color: #fff;
-}
-.fanwei h4:nth-of-type(1) {
-  top: 48px;
-  left: 107px;
-}
-.fanwei h4:nth-of-type(2) {
-  top: 200px;
-  left: 20px;
-}
-.fanwei h4:nth-of-type(3) {
-  top: 324px;
-  left: 100px;
-}
-.fanwei h4:nth-of-type(4) {
-  top: 46px;
-  left: 885px;
-}
-.fanwei h4:nth-of-type(5) {
-  top: 200px;
-  left: 938px;
-}
-.fanwei h4:nth-of-type(6) {
-  top: 328px;
-  left: 885px;
-}
-.youshi {
-  position: relative;
-  height: 500px;
-  transform: scale(0.8);
-}
-.youshi img {
-  position: absolute;
-}
-.youshi img:nth-of-type(1) {
-  left: 22px;
-}
-.youshi img:nth-of-type(2) {
-  top: 300px;
-  left: 100px;
-}
-.youshi img:nth-of-type(3) {
-  left: 547px;
-  top: 219px;
-}
-.youshi img:nth-of-type(4) {
-  top: 64px;
-  left: 251px;
-}
-.youshi img:nth-of-type(5) {
-  top: 0;
-  left: 547px;
-}
-.youshi img:nth-of-type(6) {
-  top: 49px;
-  left: 750px;
-}
-.bottomtext h2 {
-  text-align: left;
-  margin-top: 20px;
-}
-.bottomtext h3 {
-  font-weight: 400;
-}
+<script>
+    import Img from '../../static/pro_top.jpg'
+
+    const leftNav = ['视频播放','模式的不同','平台目标','功能模块']
+    export default {
+        data() {
+            return {
+                img: Img,
+                leftNavData:[],
+                isContTab: 0,
+                playerOptions : {
+                    playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
+                    autoplay: true, //如果true,浏览器准备好时开始回放。
+                    muted: false, // 默认情况下将会消除任何音频。
+                    loop: false, // 导致视频一结束就重新开始。
+                    preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+                    language: 'zh-CN',
+                    aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+                    fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+                    sources: [{
+                        type: "",
+                        src: "https://www.apple.com/105/media/cn/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-cn-20170912_1280x720h.mp4" //url地址
+                    }],
+                    poster: "../../assets/images/case_head_bg.jpg", //你的封面地址
+                    // width: document.documentElement.clientWidth,
+                    notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+                    controlBar: {
+                        timeDivider: true,
+                        durationDisplay: true,
+                        remainingTimeDisplay: false,
+                        fullscreenToggle: true  //全屏按钮
+                    }
+                }
+            }
+        },
+        mounted(){
+            this.leftNavData = leftNav
+        },
+        methods: {
+            navActive(i){
+                this.isContTab = i
+            }
+        },
+        components: {
+        }
+    }
+</script>
+
+<style scoped lang="less">
+      @import "product";
+      .main{
+            width: 80.82%;
+            margin:0 auto;
+      }
 </style>

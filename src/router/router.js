@@ -64,6 +64,13 @@ const router = new Router({
             component: (resolve) => {
                 require(['../components/Login'], resolve)
             }
+        },
+        {
+            path: '/appDownload',
+            name: 'appDownload',
+            component: (resolve) => {
+                require(['../components/appDownload'], resolve)
+            }
         }, {
             path: '/admin',
             name: 'Admin',
