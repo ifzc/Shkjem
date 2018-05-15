@@ -67,6 +67,7 @@ export default {
     name: "Home",
     data () {
         return {
+            // 结构复杂 只能定义空数组
             tableData: [
                 {
                     Img: "",
@@ -87,23 +88,7 @@ export default {
                     CreateTime: ""
                 }
             ],
-            tableDataan: [
-                {
-                    Img: "",
-                    Title: "",
-                    Content: ""
-                },
-                {
-                    Img: "",
-                    Title: "",
-                    Content: ""
-                },
-                {
-                    Img: "",
-                    Title: "",
-                    Content: ""
-                }
-            ],
+            tableDataan: [],
             hometitle: "",
             hometitlesub: "",
             hometitlesuben: ""
@@ -123,54 +108,36 @@ export default {
             // }
         })
     },
-    methods: {
-        getdataall () {
-
-            this.findtext();
-            axios
-                .get("/news/GetNewsAll", {
-                    params: {
-                        type: 0,
-                        num: 3
-                    }
-                })
-                .then(response => {
-                    this.tableData = response.data;
-                    //console.log(this.tableData);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-            axios
-                .get("/cases/GetCasesAll")
-                .then(response => {
-                    this.tableDataan = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-        },
-        findtext () {
-            axios
-                .get("/DataDictionary/GetDataDictionaryAll", {
-                    params: {
-                        key: "首页主标题,首页副标题,首页副标题英文"
-                    }
-                })
-                .then(response => {
-                    this.hometitle = response.data[0].Content;
-                    this.hometitlesub = response.data[1].Content;
-                    this.hometitlesuben = response.data[2].Content;
-                })
-        }
+    methods: {},
+    created () {
+        axios.all(
+            [
+                axios
+                    .get("/news/GetNewsAll", {
+                        params: {
+                            type: 0,
+                            num: 3
+                        }
+                    }),
+                axios
+                    .get("/cases/GetCasesAll"),
+                axios
+                    .get("/DataDictionary/GetDataDictionaryAll", {
+                        params: {
+                            key: "首页主标题,首页副标题,首页副标题英文"
+                        }
+                    })
+            ])
+            .then(axios.spread((a, b, c) => {
+                //全部请求正确时候触发
+                this.tableData = a.data;
+                this.tableDataan = b.data;
+                this.hometitle = c.data[0].Content;
+                this.hometitlesub = c.data[1].Content;
+                this.hometitlesuben = c.data[2].Content;
+            }))
     },
-    created: function () {
-        console.log("联系开发者: #Source https://github.com/Smileioc");
-        this.getdataall();
-    },
-    destroyed: function () {
+    destroyed () {
         document.querySelector('#fullpage').style.transition = 'unset'
         $.fn.fullpage.destroy('all');
     }
