@@ -10,7 +10,7 @@
             img(v-bind:src='imgserver + newdata.Img')
             h4.newtitle {{ newdata.Title }}
             p.newcontent {{ newdata.Content }}
-            p 
+            p.btn(@click='$router.push({ path: `/newsdel/${newdata.Id}` })')
                 i.el-icon-caret-right
                 span.newsbtn MORE
 </template>
@@ -118,8 +118,8 @@ export default {
   padding: 0px 10px;
   border-left: 1px solid #15669e;
   color: #15669e;
-      font-size:22px;
-      margin:20px 0;
+  font-size: 22px;
+  margin: 20px 0;
 }
 .newcontent {
   font-size: 14px;
@@ -129,6 +129,9 @@ export default {
   margin: 0;
   padding: 0;
   color: #e13834;
+}
+.btn {
+  cursor: pointer;
 }
 </style>
 

@@ -16,6 +16,12 @@ const router = new Router({
                 require(['../components/News'], resolve)
             }
         }, {
+            path: '/newsdel/:id',
+            name: 'Newsdel',
+            component: (resolve) => {
+                require(['../components/Newsdel'], resolve)
+            }
+        }, {
             path: '/product',
             name: 'Product',
             component: (resolve) => {
@@ -26,6 +32,12 @@ const router = new Router({
             name: 'Anli',
             component: (resolve) => {
                 require(['../components/Anli'], resolve)
+            }
+        }, {
+            path: '/anlidel/:id',
+            name: 'Anlidel',
+            component: (resolve) => {
+                require(['../components/Anlidel'], resolve)
             }
         }, {
             path: '/goto',
@@ -69,7 +81,7 @@ const router = new Router({
             path: '/appDownload',
             name: 'appDownload',
             component: (resolve) => {
-                require(['../components/appDownload'], resolve)
+                require(['../components/AppDownload'], resolve)
             }
         }, {
             path: '/admin',
