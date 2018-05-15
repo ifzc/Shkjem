@@ -4,6 +4,7 @@
             <el-button @click="createBtn" type="primary">新增</el-button>
         </el-row>
         <el-row>
+            <h4 style="color: rgb(255, 111, 111);margin: 0">请保留三条以上数据（首页需加载）</h4>
             <el-table :data="tableData" border style="width: 100%">
                 <el-table-column fixed prop="Id" label="#" width="100">
                 </el-table-column>
