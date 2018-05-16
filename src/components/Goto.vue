@@ -34,24 +34,13 @@
             h3.ani-view.fade-in-right 确保工程施工材料无伪劣品
             h3.ani-view.fade-in-right 确保工程管理留下痕迹、实施过程可追溯
         .rongyu
-            el-dialog(:title="dialogTitle",width="50%",:visible.sync="dialogVisible")
-                img(v-bind:src="dialogUrl",style="width:100%")
+            el-dialog(:title="dialogTitle",width="50%",style="",:visible.sync="dialogVisible")
+                img(v-bind:src="dialogUrl",style="width:80%")
             h1.ani-view.fade-in-up 公司荣誉
             h2.ani-view.fade-in-down HONOR
-            el-row.ani-view.fade-in-up(:gutter="0")
-                el-col(:span="6",:offset="3",style="padding: 1%")
-                    img(v-bind:src="imgserver + honorimgs[0].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[0].Remark")
-                el-col(:span="6",style="padding: 1%")
-                    img(v-bind:src="imgserver + honorimgs[1].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[1].Remark")
-                el-col(:span="6",style="padding: 1%")
-                    img(v-bind:src="imgserver + honorimgs[2].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[2].Remark")
-            el-row.ani-view.fade-in-down(:gutter="0")
-                el-col(:span="6",:offset="3",style="padding: 1%")
-                    img(v-bind:src="imgserver + honorimgs[3].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[3].Remark")
-                el-col(:span="6",style="padding: 1%")
-                    img(v-bind:src="imgserver + honorimgs[4].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[4].Remark")
-                el-col(:span="6",style="padding: 1%")
-                    img(v-bind:src="imgserver + honorimgs[5].Img",style="width:100%",@click="dialogVisible = true;dialogUrl = imgserver + honorimgs[0].Img;dialogTitle= honorimgs[5].Remark")
+            el-row.ani-view.fade-in-up(:gutter="20",style="width: 80%;margin: 0 auto;")
+                el-col(v-for="item in honorimgs",:key="item.Id",:span="8")
+                    img(v-bind:src="imgserver + item.Img",style="width:100%;margin-bottom: 20px;",@click="dialogVisible = true;dialogUrl = imgserver + item.Img;dialogTitle= item.Remark")
             h2(style="margin: 0;font-size: 16px;") 点击查看大图
         .tuandui
             h1.ani-view.fade-in-up 团队风采
@@ -108,93 +97,36 @@ export default {
             dialogTitle: '',
             pagetitle: '',
             fencaiimgs: [],
-            honorimgs: [
-                {
-                    Img: ""
-                },
-                {
-                    Img: ""
-                },
-                {
-                    Img: ""
-                },
-                {
-                    Img: ""
-                },
-                {
-                    Img: ""
-                },
-                {
-                    Img: ""
-                }
-            ],
-            courses: [
-                {
-                    Content: ""
-                },
-                {
-                    Content: ""
-                },
-                {
-                    Content: ""
-                },
-                {
-                    Content: ""
-                },
-                {
-                    Content: ""
-                },
-                {
-                    Content: ""
-                },
-                {
-                    Content: ""
-                }
-            ]
+            honorimgs: []
         };
     },
-      mounted: function () {
-            this.getdataall();
-      },
+    mounted: function () {
+        this.getdataall();
+    },
     methods: {
         getdataall () {
-            axios
-                .get("/team/GetTeamAll")
-                .then(response => {
-                    this.fencaiimgs = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            axios
-                .get("/honor/GetHonorAll")
-                .then(response => {
-                    console.log(response)
-                    this.honorimgs = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            axios
-                .get("/course/GetCourseAll")
-                .then(response => {
-                    $(".fishBoneDiv").fishBone(response.data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-            axios
-                .get("/DataDictionary/GetDataDictionaryAll", {
-                    params: {
-                        key: "走进科健标题,公司简介中文,公司简介英文"
-                    }
-                })
-                .then(response => {
-                    this.pagetitle = response.data[0].Content;
-                    this.jianjiecn = response.data[1].Content;
-                    this.jianjieen = response.data[2].Content;
-                })
+            axios.all([
+                axios
+                    .get("/team/GetTeamAll"),
+                axios
+                    .get("/honor/GetHonorAll"),
+                axios
+                    .get("/course/GetCourseAll"),
+                axios
+                    .get("/DataDictionary/GetDataDictionaryAll", {
+                        params: {
+                            key: "走进科健标题,公司简介中文,公司简介英文"
+                        }
+                    })
+            ])
+                .then(axios.spread((a, b, c, d) => {
+                    this.fencaiimgs = a.data;
+                    this.honorimgs = b.data;
+                    $(".fishBoneDiv").fishBone(c.data);
+                    this.pagetitle = d.data[0].Content;
+                    this.jianjiecn = d.data[1].Content;
+                    this.jianjieen = d.data[2].Content;
+                }))
         }
     }
 };
@@ -222,24 +154,24 @@ export default {
   padding: 0 2%;
   font-weight: 400;
 }
-.jianjie h2{
-      margin-bottom:20px;
-      margin-top:0;
+.jianjie h2 {
+  margin-bottom: 20px;
+  margin-top: 0;
 }
 .jianjie h1,
-.jianjie h2{
-      margin-left:6%;
-      color: #e13834;
-      font-family: '宋体';
+.jianjie h2 {
+  margin-left: 6%;
+  color: #e13834;
+  font-family: "宋体";
 }
 .jianjie p.one {
   /* margin-top: 4%; */
   margin-left: 2%;
   color: #14679f;
   font-weight: 400;
-      font-size:14px;
-      line-height:30px;
-      text-indent: 25px;
+  font-size: 14px;
+  line-height: 30px;
+  text-indent: 25px;
 }
 .topimgbox {
   width: 400px;
@@ -315,7 +247,7 @@ export default {
 .fazhancon h2 {
   color: #3c6088;
   font-weight: 400;
-      margin:20px 0;
+  margin: 20px 0;
 }
 .hrstyle {
   border-bottom: #3c6088 1px solid;
@@ -378,19 +310,19 @@ export default {
   position: relative;
 }
 .zaifenge i {
-      display: block;
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      line-height: 23px;
-      font-weight: 600;
-      border: #3c6088 2px solid;
-      border-radius: 50%;
-      background: rgb(238, 245, 251);
-      left: 49%;
-      color: #3c6088;
-      font-size: 20px;
-      top: -14px;
+  display: block;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  line-height: 23px;
+  font-weight: 600;
+  border: #3c6088 2px solid;
+  border-radius: 50%;
+  background: rgb(238, 245, 251);
+  left: 49%;
+  color: #3c6088;
+  font-size: 20px;
+  top: -14px;
 }
 .jiegou {
   text-align: center;
@@ -408,13 +340,13 @@ export default {
 .wenhua h1,
 .wenhua h2 {
   color: #3c6088;
-      font-size:26px;
-      margin:5px 0;
+  font-size: 26px;
+  margin: 5px 0;
 }
 .wenhua h3 {
   font-weight: 400;
-      line-height:36px;
-      font-size: 18px;
+  line-height: 36px;
+  font-size: 18px;
 }
 .rongyu {
   text-align: center;
@@ -426,8 +358,8 @@ export default {
   color: #3c6088;
   font-weight: 400;
 }
-.rongyu h2{
-      margin-bottom: 20px;
+.rongyu h2 {
+  margin-bottom: 20px;
 }
 
 .tuandui {
@@ -439,8 +371,8 @@ export default {
   text-align: center;
   font-weight: 400;
 }
-.tuandui h2{
-      margin-bottom:20px;
+.tuandui h2 {
+  margin-bottom: 20px;
 }
 .hezuo {
   padding: 10%;
@@ -451,15 +383,15 @@ export default {
   text-align: center;
   font-weight: 400;
 }
-.hezuo h2{
-      margin-bottom:20px;
+.hezuo h2 {
+  margin-bottom: 20px;
 }
 .hezuo .el-row .el-col {
   padding: 1%;
 }
-.hezuo .el-row .el-col{
-      text-align: center;
-      font-size: 16px;
-      line-height:40px;
+.hezuo .el-row .el-col {
+  text-align: center;
+  font-size: 16px;
+  line-height: 40px;
 }
 </style>
