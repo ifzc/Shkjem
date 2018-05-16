@@ -161,7 +161,7 @@ export default {
         },
         getdataall () {
             axios.defaults.headers.common["Authorization"] =
-                "BasicAuth " + localStorage.getItem("Ticket");
+                "BasicAuth " + sessionStorage.getItem("Ticket");
             axios
                 .post("/user/GetUserAll")
                 .then(response => {
@@ -175,7 +175,7 @@ export default {
             sessionStorage.clear();
         },
         cleanuserBtn () {
-            localStorage.clear();
+            sessionStorage.clear();
             this.$router.push("/login");
         }
     },

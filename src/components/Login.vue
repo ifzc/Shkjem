@@ -7,7 +7,7 @@ el-card.box-card
         el-form-item(label="AdminId")
             el-input(v-model="form.name")
         el-form-item(label="PassWord")
-            el-input(v-model="form.passwrod")
+            el-input(type="password",v-model="form.passwrod")
         el-form-item
             el-button(type="primary",@click="onSubmit") 立即登录
 </template>
@@ -35,7 +35,9 @@ export default {
                 })
                 .then(response => {
                     if (response.data.bRes) {
-                        localStorage.setItem("Ticket", response.data.Ticket);
+                        sessionStorage.setItem("Ticket", response.data.Ticket)
+                        axios.defaults.headers.common["Authorization"] =
+                            "BasicAuth " + response.data.Ticket;
                         if (this.$route.query.length > 0) {
                             this.$router.push(this.$route.query.redirect);
                         } else {

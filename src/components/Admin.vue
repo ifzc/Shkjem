@@ -1,7 +1,7 @@
 <template lang="jade">
 el-container(v-if="islogin",style="height: 1000px; border: 1px solid #eee")
     el-aside(width="200px",style="background-color: rgb(238, 241, 246)")
-        el-menu(:default-openeds="['3']",@select="handleSelect")
+        el-menu(:default-openeds="['3']",@select="handleSelect",:default-active="$route.path" )
             el-menu-item(index="/admin/user")
                 template(slot="title")
                     i.el-icon-star-off 
@@ -65,22 +65,10 @@ export default {
     created: function () { },
     methods: {
         handleSelect (key) {
-            //, keyPath
-            if (key == "logo") {
-                window.location.href = "http://localhost:8080";
-            }
-            /*
-            if(key == "/"){
-              this.isShow = false;
-            }else{
-              this.isShow = true;
-            }
-            */
             this.$router.push(key);
         }
     }
 };
 </script>
 <style scoped>
-
 </style>

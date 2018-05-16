@@ -94,6 +94,12 @@ const router = new Router({
                 require(['../components/Admin'], resolve)
             },
             children: [{
+                path: '/admin/user',
+                name: 'User',
+                component: (resolve) => {
+                    require(['../components/admin/User'], resolve)
+                }
+            }, {
                 path: '/admin/news',
                 name: 'AdminNews',
                 component: (resolve) => {
@@ -116,12 +122,6 @@ const router = new Router({
                 name: 'Demand',
                 component: (resolve) => {
                     require(['../components/admin/Demand'], resolve)
-                }
-            }, {
-                path: '/admin/user',
-                name: 'User',
-                component: (resolve) => {
-                    require(['../components/admin/User'], resolve)
                 }
             }, {
                 path: '/admin/cases',
@@ -168,7 +168,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     if (to.matched.some(res => res.meta.requireAuth)) {
         // 判断是否需要登录权限
-        if (localStorage.getItem('Ticket')) {
+        if (sessionStorage.getItem('Ticket')) {
             // 判断是否登录
             next()
         } else {

@@ -27,9 +27,9 @@ axios.interceptors.request.use(config => {
         config.url.substring(0, 5) === '/recr') {
         return config
     }
-    if (localStorage.getItem("Ticket") != null) {
+    if (sessionStorage.getItem("Ticket") != null) {
         config.headers = {
-            "Authorization": "BasicAuth " + localStorage.getItem("Ticket")
+            "Authorization": "BasicAuth " + sessionStorage.getItem("Ticket")
         }
     }
     //console.log(config.url)
