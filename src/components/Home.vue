@@ -3,11 +3,11 @@
   .fullpage-wp(v-fullpage="opts")
 #fullpage
     .section(style="background-image: url(./static/home_top.jpg)")
+        div.topshare
+             img(src="../../static/kejian.png")
         h1.toptitle {{ hometitle }}
         h2.toptitlesub {{ hometitlesub }}
         h2.toptitleen(style="font-family:'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif") {{ hometitlesuben }}
-        div.topshare
-              img(src="../../static/kejian.png")
         div.toptitleup(style="transform: scale(0.5)")
             div.mouse
         p.mousep 鼠标滚动
@@ -334,9 +334,6 @@ export default {
 <style scoped>
 .topshare {
   padding: 0 30px;
-  position: absolute;
-  top: 100px;
-  left: 20px;
 }
 .topshare img{
       width:150px;
@@ -409,7 +406,7 @@ export default {
 }
 .bar-row {
   border-bottom: 2px #fff solid;
-  width: 80%;
+  width: 74%;
   margin: 10px auto;
   position: relative;
 }
