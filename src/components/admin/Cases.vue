@@ -80,7 +80,7 @@ export default {
             let config = {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    Authorization: "BasicAuth " + localStorage.getItem("Ticket")
+                    Authorization: "BasicAuth " + sessionStorage.getItem("Ticket")
                 }
             };
             //axios.defaults.headers.common["Authorization"] =
@@ -88,6 +88,12 @@ export default {
             axios.post("/UpLoad/UploadImage", param, config).then(response => {
                 //console.log(response.data)
                 this.form.img = response.data;
+                let fileinput = document.getElementById('upload_file');
+                if (fileinput.outerHTML) {
+                    fileinput.outerHTML = fileinput.outerHTML;
+                } else { // FF(包括3.5)
+                    fileinput.value = "";
+                }
             });
         },
         handleClick (row) {
