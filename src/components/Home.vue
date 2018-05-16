@@ -7,25 +7,23 @@
         h2.toptitlesub {{ hometitlesub }}
         h2.toptitleen(style="font-family:'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif") {{ hometitlesuben }}
         div.topshare
-              h1 科建股份
-              p Factory stock
+              img(src="../../static/kejian.png")
         div.toptitleup(style="transform: scale(0.5)")
             div.mouse
         p.mousep 鼠标滚动
     .section(style="background-image: url(./static/home_do.jpg)")
-        h2(style="font-weight: 400") 经典案例
-        h3(style="font-weight: 400") Suecessful Cass
+        h2(style="font-weight: 400;font-size:2.4em;margin:10px 0 0") 经典案例
+        h3(style="font-weight: 400;font-size:2em;margin:0") Suecessful Cass
         div.case
               div.view.view-first(@click="$router.push({ path: '/anli' })",v-for="item in tableDataan")
                     img(:src="imgserver+item.Img")
                     div.mask
                           h2 {{item.Title}}
-                          p {{item.Content}}
                           a.info MORE
         p.mousep 鼠标滚动
     .section(style="background-image: url(./static/home_anli.jpg)")
-        h2(style="font-weight: 400") 最新资讯
-        h3(style="font-weight: 400") Latest News
+        h2(style="font-weight: 400;font-size:2.4em;margin-bottom:10px;") 最新资讯
+        h3(style="font-weight: 400;font-size:2em;margin:0") Latest News
         el-row.newsbox(:gutter="0",style="margin-top: 20px")
             el-col(:span="6",:offset="3")
                 div.imgcss
@@ -150,6 +148,7 @@ export default {
   overflow: hidden;
   margin: 34px auto 0;
 }
+
 .view {
   width: 95/3%;
   height: 248px;
@@ -167,16 +166,28 @@ export default {
   h2 {
     text-transform: uppercase;
     color: #fff;
-    text-align: left;
+    text-align: center;
     position: relative;
-    font-size: 17px;
+    font-size: 18px;
     padding: 10px;
-    margin: 20px 0 0 0;
+    margin: 40px 0 0 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: normal;
   }
+      h2:after{
+            content: '';
+            display: block;
+            position: absolute;
+            top:50%;
+            left:50%;
+            margin-top:20px;
+            margin-left:-60/2px;
+            width:60px;
+            height:2px;
+            background: #fff;
+      }
   p {
     font-size: 12px;
     position: relative;
@@ -190,14 +201,18 @@ export default {
     overflow: hidden;
   }
   a.info {
-    position: relative;
-    text-align: left;
+    position: absolute;
+    bottom:40px;
+        left:50%;
+        margin-left:-94/2px;
+    text-align: center;
     font-size: 20px;
-    width: 100%;
+    width: 94px;
     padding: 7px 14px;
     color: #fff;
     text-transform: uppercase;
     display: inline-block;
+        border:2px solid #fff;
   }
 }
 .view-first {
@@ -320,15 +335,11 @@ export default {
 .topshare {
   padding: 0 30px;
   position: absolute;
-  top: 80px;
+  top: 100px;
   left: 20px;
 }
-.topshare h1 {
-  margin-bottom: 5px;
-}
-.topshare p {
-  margin: 0;
-  font-size: 18px;
+.topshare img{
+      width:150px;
 }
 .anliimgs {
   padding: 0 30%;

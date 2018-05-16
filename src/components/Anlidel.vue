@@ -48,8 +48,13 @@ export default {
   background-position-y: bottom;
   background-position-x: center;
 }
+#content img{
+      padding:6%;
+}
 p {
   font-size: 1.2rem;
+      line-height:30px;
+      text-indent: 2.4rem;
 }
 h2 {
   color: #e13834;
