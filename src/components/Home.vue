@@ -15,7 +15,7 @@
         h2(style="font-weight: 400;font-size:2.4em;margin:10px 0 0") 经典案例
         h3(style="font-weight: 400;font-size:2em;margin:0") Suecessful Cass
         div.case
-              div.view.view-first(@click="$router.push({ path: '/anli' })",v-for="item in tableDataan")
+              div.view.view-first(@click="$router.push({ path: `/anlidel/${item.Id}` })",v-for="item in tableDataan")
                     img(:src="imgserver+item.Img")
                     div.mask
                           h2 {{item.Title}}
@@ -176,18 +176,18 @@ export default {
     white-space: nowrap;
     font-weight: normal;
   }
-      h2:after{
-            content: '';
-            display: block;
-            position: absolute;
-            top:50%;
-            left:50%;
-            margin-top:20px;
-            margin-left:-60/2px;
-            width:60px;
-            height:2px;
-            background: #fff;
-      }
+  h2:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: 20px;
+    margin-left: -60/2px;
+    width: 60px;
+    height: 2px;
+    background: #fff;
+  }
   p {
     font-size: 12px;
     position: relative;
@@ -202,9 +202,9 @@ export default {
   }
   a.info {
     position: absolute;
-    bottom:40px;
-        left:50%;
-        margin-left:-94/2px;
+    bottom: 40px;
+    left: 50%;
+    margin-left: -94/2px;
     text-align: center;
     font-size: 20px;
     width: 94px;
@@ -212,7 +212,7 @@ export default {
     color: #fff;
     text-transform: uppercase;
     display: inline-block;
-        border:2px solid #fff;
+    border: 2px solid #fff;
   }
 }
 .view-first {
@@ -335,8 +335,8 @@ export default {
 .topshare {
   padding: 0 30px;
 }
-.topshare img{
-      width:150px;
+.topshare img {
+  width: 150px;
 }
 .anliimgs {
   padding: 0 30%;

@@ -53,33 +53,33 @@
             h2.ani-view.fade-in-down RARTNERS
             el-row.ani-view.fade-in-up(:gutter="20",style="width:100%")
                 el-col(:span='4',:offset='2')
-                    img(src="../../static/hz_1.png",style="width:100%")
-                    p logo文字
+                    img(:src="imgserver + enterprises[0].Img",style="width:100%")
+                    p {{ enterprises[0].Remark }}
                 el-col(:span='4')
-                    img(src="../../static/hz_2.png",style="width:100%")
-                    p logo文字
+                    img(:src="imgserver + enterprises[1].Img",style="width:100%")
+                    p {{ enterprises[1].Remark }}
                 el-col(:span='4')
-                    img(src="../../static/hz_3.png",style="width:100%")
-                    p logo文字
+                    img(:src="imgserver + enterprises[2].Img",style="width:100%")
+                    p {{ enterprises[2].Remark }}
                 el-col(:span='4')
-                    img(src="../../static/hz_4.png",style="width:100%")
-                    p logo文字
+                    img(:src="imgserver + enterprises[3].Img",style="width:100%")
+                    p {{ enterprises[3].Remark }}
                 el-col(:span='4')
-                    img(src="../../static/hz_5.png",style="width:100%")
-                    p logo文字
+                    img(:src="imgserver + enterprises[4].Img",style="width:100%")
+                    p {{ enterprises[4].Remark }}
             el-row.ani-view.fade-in-down(:gutter="20",style="width:100%;margin-bottom: 60px")
                 el-col(:span='4',:offset='4')
-                    img(src="../../static/hz_6.png",style="width:100%")
-                    p logo文字
+                    img(:src="imgserver + enterprises[5].Img",style="width:100%")
+                    p {{ enterprises[5].Remark }}
                 el-col(:span='4')
-                    img(src="../../static/hz_7.png",style="width:100%")
-                    p logo文字
+                    img(:src="imgserver + enterprises[6].Img",style="width:100%")
+                    p {{ enterprises[6].Remark }}
                 el-col(:span='4')
-                    img(src="../../static/hz_8.png",style="width:100%")
-                    p logo文字
+                    img(:src="imgserver + enterprises[7].Img",style="width:100%")
+                    p {{ enterprises[7].Remark }}
                 el-col(:span='4')
-                    img(src="../../static/hz_9.png",style="width:100%")
-                    p logo文字
+                    img(:src="imgserver + enterprises[8].Img",style="width:100%")
+                    p {{ enterprises[8].Remark }}
 </template>
 <script>
 import '../../static/js/jquery-1.8.3.min'
@@ -97,7 +97,35 @@ export default {
             dialogTitle: '',
             pagetitle: '',
             fencaiimgs: [],
-            honorimgs: []
+            honorimgs: [],
+            enterprises: [{
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }]
         };
     },
     mounted: function () {
@@ -113,19 +141,30 @@ export default {
                 axios
                     .get("/course/GetCourseAll"),
                 axios
+                    .get("/enterprise/GetEnterpriseAll"),
+                axios
                     .get("/DataDictionary/GetDataDictionaryAll", {
                         params: {
                             key: "走进科健标题,公司简介中文,公司简介英文"
                         }
                     })
             ])
-                .then(axios.spread((a, b, c, d) => {
+                .then(axios.spread((a, b, c, e, d) => {
                     this.fencaiimgs = a.data;
                     this.honorimgs = b.data;
                     $(".fishBoneDiv").fishBone(c.data);
+                    this.enterprises = e.data;
                     this.pagetitle = d.data[0].Content;
                     this.jianjiecn = d.data[1].Content;
                     this.jianjieen = d.data[2].Content;
+
+
+                    for (let i = this.enterprises.length; i < 9; i++) {
+                        this.enterprises.push({
+                            Img: '',
+                            Remark: ''
+                        })
+                    }
                 }))
         }
     }

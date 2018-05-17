@@ -159,6 +159,12 @@ const router = new Router({
                 component: (resolve) => {
                     require(['../components/admin/Study'], resolve)
                 }
+            }, {
+                path: '/admin/enterprise',
+                name: 'Adminenterprise',
+                component: (resolve) => {
+                    require(['../components/admin/Enterprise'], resolve)
+                }
             }]
         }
     ]

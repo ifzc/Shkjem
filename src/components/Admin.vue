@@ -30,6 +30,10 @@ el-container(v-if="islogin",style="height: 1000px; border: 1px solid #eee")
                 template(slot="title")
                     i.el-icon-edit 
                     span 学习模块管理
+            el-menu-item(index="/admin/enterprise")
+                template(slot="title")
+                    i.el-icon-edit-outline 
+                    span 合作企业管理
             el-menu-item(index="/admin/honor")
                 template(slot="title")
                     i.el-icon-edit-outline 
