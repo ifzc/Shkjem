@@ -1,6 +1,6 @@
 <template lang="jade">
     .box
-        .pagetop(style="background-image: url(./static/study.png)")
+        .pagetop(style="background-image: url(./static/study.jpg)")
             h1 {{ pagetitle }}
         .content
             .item(v-for="item in items")

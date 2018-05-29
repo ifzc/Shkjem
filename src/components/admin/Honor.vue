@@ -80,12 +80,6 @@ export default {
             axios.post("/UpLoad/UploadImage", param, config).then(response => {
                 //console.log(response.data)
                 this.form.img = response.data;
-                let fileinput = document.getElementById('upload_file');
-                if (fileinput.outerHTML) {
-                    fileinput.outerHTML = fileinput.outerHTML;
-                } else { // FF(包括3.5)
-                    fileinput.value = "";
-                }
             });
         },
         handleClick (row) {

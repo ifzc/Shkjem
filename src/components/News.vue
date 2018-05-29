@@ -6,8 +6,9 @@
         p.p-1(@click="cktopbtn(1)").action 公司新闻
         p.p-2(@click="cktopbtn(2)") 行业动态
     el-row.content
-        el-col.new-item(:span="7",v-for="newdata in newsdata",:key="newdata.Id")
-            img(v-bind:src='imgserver + newdata.Img')
+        el-col.new-item(:span="7",v-for="newdata in newsdata",:key="newdata.Id",@click='$router.push({ path: `/newsdel/${newdata.Id}` })')
+            div(:style="'background:url(' + imgserver + newdata.Img +') center center;height: 12rem;'")
+            //- img(v-bind:src='imgserver + newdata.Img')
             h4.newtitle {{ newdata.Title }}
             p.newcontent {{ newdata.Content }}
             p.btn(@click='$router.push({ path: `/newsdel/${newdata.Id}` })')
@@ -101,6 +102,7 @@ export default {
   width: 85%;
   margin: 0 auto;
   background-image: url(../../static/waitanbg.png);
+  /* perspective: 800px; */
 }
 .new-item {
   padding: 20px;
@@ -108,7 +110,27 @@ export default {
   border: 1px solid #15669e;
   min-height: 390px;
   margin-bottom: 15px;
-  animation: flipInY 1s;
+  transition: 0.4s;
+  animation: newsitem 0.6s;
+  /* perspective-origin: 50% 50%; */
+}
+.new-item:hover {
+  border: 1px solid #fff;
+  box-shadow: #bfd3e0 0 0 5px 2px;
+  transform: translate(0px, -2px);
+}
+.new-item:hover .newsbtn {
+  color: #f18c8a;
+}
+@keyframes newsitem {
+  0% {
+    transform: translate(0px, 60px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0px, 0px);
+    opacity: 1;
+  }
 }
 .new-item img {
   width: 100%;
@@ -129,6 +151,7 @@ export default {
   margin: 0;
   padding: 0;
   color: #e13834;
+  transition: 0.4s;
 }
 .btn {
   cursor: pointer;

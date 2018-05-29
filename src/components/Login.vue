@@ -41,7 +41,7 @@ export default {
                         if (this.$route.query.length > 0) {
                             this.$router.push(this.$route.query.redirect);
                         } else {
-                            this.$router.push("/admin/news");
+                            this.$router.push("/admin/user");
                         }
                     } else {
                         Message.error({
