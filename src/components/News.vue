@@ -7,7 +7,7 @@
         p.p-2(@click="cktopbtn(2)") 行业动态
     el-row.content
         el-col.new-item(:span="7",v-for="newdata in newsdata",:key="newdata.Id",@click='$router.push({ path: `/newsdel/${newdata.Id}` })')
-            div(:style="'background:url(' + imgserver + newdata.Img +') center center;height: 12rem;'")
+            div(:style="'background:url(' + imgserver + newdata.Img +');height: 12rem;height: 13rem;background-repeat: no-repeat;background-size: 100% 100%;'")
             //- img(v-bind:src='imgserver + newdata.Img')
             h4.newtitle {{ newdata.Title }}
             p.newcontent {{ newdata.Content }}
