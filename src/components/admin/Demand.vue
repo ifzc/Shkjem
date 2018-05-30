@@ -29,7 +29,11 @@
 <script>
 import axios from "../../router/http";
 import { Message } from "element-ui";
-
+let config = {
+    headers: {
+        Authorization: "BasicAuth " + sessionStorage.getItem("Ticket")
+    }
+};
 export default {
     data () {
         return {
@@ -54,7 +58,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/message/DeleteMessage/" + row.Id)
+                        .post("/message/DeleteMessage/" + row.Id,'',config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -84,7 +88,7 @@ export default {
                     params: {
                         ismess: false
                     }
-                })
+                },config)
                 .then(response => {
                     this.tableData = response.data;
                 })

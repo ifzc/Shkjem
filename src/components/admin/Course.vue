@@ -40,7 +40,11 @@
 <script>
 import axios from "../../router/http";
 import { Message } from "element-ui";
-
+let config = {
+    headers: {
+        Authorization: "BasicAuth " + sessionStorage.getItem("Ticket")
+    }
+};
 export default {
     data () {
         return {
@@ -73,7 +77,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/course/DeleteCourse/" + row.Id)
+                        .post("/course/DeleteCourse/" + row.Id,'',config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -110,7 +114,7 @@ export default {
                     Id: this.form.id,
                     Year: this.form.year,
                     Content: this.form.content
-                })
+                },config)
                 .then(response => {
                     console.log(response.status);
                     this.$message({
@@ -126,7 +130,7 @@ export default {
         },
         getdataall () {
             axios
-                .get("/course/GetCourseAll")
+                .get("/course/GetCourseAll",'',config)
                 .then(response => {
                     this.tableData = response.data;
                 })

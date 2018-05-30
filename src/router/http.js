@@ -16,7 +16,7 @@ axios.defaults.baseURL = 'http://120.79.76.250/api/'
 //设置超时时间
 axios.defaults.timeout = 5000
 
-// 指定允许其他域名访问    
+// 指定允许其他域名访问
 
 //http 拦截器
 var loadinginstace
@@ -27,6 +27,7 @@ axios.interceptors.request.use(config => {
         config.url.substring(0, 5) === '/recr') {
         return config
     }
+    console.log(sessionStorage.getItem("Ticket") != null)
     if (sessionStorage.getItem("Ticket") != null) {
         config.headers = {
             "Authorization": "BasicAuth " + sessionStorage.getItem("Ticket")

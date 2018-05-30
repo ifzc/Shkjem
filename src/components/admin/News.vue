@@ -61,7 +61,11 @@
 import axios from "../../router/http";
 import { Message } from "element-ui";
 import "../../../static/bli/jquery-1.8.3.min.js";
-
+let config = {
+    headers: {
+        Authorization: "BasicAuth " + sessionStorage.getItem("Ticket")
+    }
+};
 export default {
     data () {
         return {
@@ -96,6 +100,7 @@ export default {
                     Authorization: "BasicAuth " + sessionStorage.getItem("Ticket")
                 }
             };
+            console.log(config)
             //axios.defaults.headers.common["Authorization"] =
             //  "BasicAuth " + localStorage.getItem("Ticket");
             axios.post("/UpLoad/UploadImage", param, config).then(response => {
@@ -115,6 +120,7 @@ export default {
         },
         deleteClick (row) {
             console.log(row);
+
             this.$confirm('删除"' + row.Title + '", 是否继续?', "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
@@ -122,7 +128,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/news/DeleteNews/" + row.Id)
+                        .post("/news/DeleteNews/" + row.Id,'',config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -156,6 +162,11 @@ export default {
             this.dialogFormVisible = true;
         },
         createEntity () {
+            let config = {
+                headers: {
+                    Authorization: "BasicAuth " + sessionStorage.getItem("Ticket")
+                }
+            };
             axios
                 .post("/news/CreatedofModied", {
                     Id: this.form.id,
@@ -163,7 +174,7 @@ export default {
                     Img: this.form.img,
                     Content: this.form.content,
                     Type: this.form.type
-                })
+                },config)
                 .then(response => {
                     console.log(response.status);
                     this.$message({
@@ -184,7 +195,7 @@ export default {
                         type: 0,
                         num: 12
                     }
-                })
+                },config)
                 .then(response => {
                     this.tableData = response.data;
                 })

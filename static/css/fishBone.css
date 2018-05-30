@@ -55,8 +55,19 @@
 /*.fishBone .item.bottom{*/
   /*left:-361px;*/
  /*}*/
-
-        .fishBone .item .first {
+.line-time{
+    font-size: 18px;
+    line-height: 32px;
+    background: #1667a0;
+    color: #fff;
+}
+.top .line-time{
+    padding-top: 10px;
+}
+.bottom .line-time{
+    padding-bottom:10px;
+}
+.fishBone .item .first {
             line-height: 2em;
         }
 

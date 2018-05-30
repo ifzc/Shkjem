@@ -124,6 +124,7 @@ $.fn.fishBone = function(data) {
         $(data).each(function (index) {
             var colorIndex = sourceDataColor[data[index].colorLevel] === undefined ? 7 : sourceDataColor[data[index].colorLevel];
             var colorDirection = sourceDataColorDirection[data[index].colorLevel] === undefined ? "bottom" : sourceDataColorDirection[data[index].colorLevel];
+            console.log()
             var itemclass = itemClass(index);//显示在轴上方或下方标识 top/bottom
             var color = getColor(colorIndex);
             var lineFirstY = getLineFirstY(colorIndex);
@@ -140,6 +141,8 @@ $.fn.fishBone = function(data) {
                         var postionC = colorDirection != "top" ? "colorD" : "";
                         //var vlist = value.split('=');
                         //var li = $("<li>" + vlist[0]+"<br/>" + vlist[1] + "</li>").css("margin", "0px 0px 0px -42px").css("height", "22px").css("line-height", "15px").css("text-align","center");//9是原计算结果的偏移量，显示位置正合适
+                        var time = $("<li class='line-time'>" + data[index].Year + "</li>")
+                        time.appendTo(ul)
                         var li = $("<li class='line-text'>" + value + "</li>")//9是原计算结果的偏移量，显示位置正合适
                         li.appendTo(ul);
                         var li2 = $("<li class='line-first'>&nbsp;</li>").addClass(postionC);
@@ -163,6 +166,8 @@ $.fn.fishBone = function(data) {
                         //var li = $("<li>" + vlist[1] + "<br/>" + vlist[0] + "</li>").css("margin", "0px 0px 0px -42px").css("height", "22px").css("line-height", "15px").css("text-align", "center");//9是原计算结果的偏移量，显示位置正合适
                         var li = $("<li class='line-text'>" + value + "</li>")//9是原计算结果的偏移量，显示位置正合适
                         li.appendTo(ul);
+                        var time = $("<li class='line-time'>" + data[index].Year + "</li>")
+                        time.appendTo(ul)
                         return;
                     }
                 });

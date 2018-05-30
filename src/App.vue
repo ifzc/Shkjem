@@ -1,9 +1,9 @@
 <template lang="jade">
 #app
     el-menu(:default-active="$route.path" style="min-width:1320px;" ,class="el-menu-demo",mode="horizontal",active-text-color="#409eff",v-bind:class="{ toppost : $route.path == '/' }" router)
-        el-menu-item(index="",style="padding-left: 16%")
+        el-menu-item(index="",style="padding-left: 3%")
             img(src="static/toplogo.png",style="width: 280px")
-        el-menu-item(index="/",style="margin-left:10%") 首页
+        el-menu-item(index="/",style="margin-left:23%") 首页
         el-menu-item(index="/news") 新闻资讯
         el-menu-item(index="/product") 产品中心
         el-menu-item(index="/anli") 经典案例
