@@ -6,7 +6,7 @@
         <el-row>
             <h4 style="color: rgb(255, 111, 111);margin: 0">页面将会按照年份展示前7项</h4>
             <el-table :data="tableData" border style="width: 100%">
-                <el-table-column fixed prop="Id" label="#" width="100">
+                <el-table-column fixed type="index" :index="index" label="序号" width="150" align="center">
                 </el-table-column>
                 <el-table-column prop="Year" label="历程年份" width="220">
                 </el-table-column>
@@ -77,7 +77,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/course/DeleteCourse/" + row.Id,'',config)
+                        .post("/course/DeleteCourse/" + row.Id, '', config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -114,7 +114,7 @@ export default {
                     Id: this.form.id,
                     Year: this.form.year,
                     Content: this.form.content
-                },config)
+                }, config)
                 .then(response => {
                     console.log(response.status);
                     this.$message({
@@ -130,7 +130,7 @@ export default {
         },
         getdataall () {
             axios
-                .get("/course/GetCourseAll",'',config)
+                .get("/course/GetCourseAll", '', config)
                 .then(response => {
                     this.tableData = response.data;
                 })

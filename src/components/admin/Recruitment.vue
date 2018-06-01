@@ -5,7 +5,7 @@
         </el-row>
         <el-row>
             <el-table :data="tableData" border style="width: 100%">
-                <el-table-column fixed prop="Id" label="#" width="100">
+                <el-table-column fixed type="index" :index="index" label="序号" width="150" align="center">
                 </el-table-column>
                 <el-table-column prop="Title" label="招聘标题" width="220">
                 </el-table-column>
@@ -90,7 +90,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/recruitment/DeleteRecruitment/" + row.Id,'',config)
+                        .post("/recruitment/DeleteRecruitment/" + row.Id, '', config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -129,7 +129,7 @@ export default {
                     Title: this.form.title,
                     Content: this.form.content,
                     Type: this.form.type
-                },config)
+                }, config)
                 .then(response => {
                     console.log(response.status);
                     this.$message({
@@ -149,7 +149,7 @@ export default {
                     params: {
                         type: 0
                     }
-                },config)
+                }, config)
                 .then(response => {
                     this.tableData = response.data;
                 })

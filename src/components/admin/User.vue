@@ -7,7 +7,7 @@
         </el-row>
         <el-row>
             <el-table :data="tableData" border style="width: 100%">
-                <el-table-column fixed prop="Id" label="#">
+                <el-table-column fixed type="index" :index="index" label="序号" width="150" align="center">
                 </el-table-column>
                 <el-table-column prop="LoginName" label="登录名">
                 </el-table-column>
@@ -109,7 +109,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/user/DeleteUser/" + row.Id,'',config)
+                        .post("/user/DeleteUser/" + row.Id, '', config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -149,7 +149,7 @@ export default {
                     LoginName: this.form.loginName,
                     Password: this.form.password,
                     IsAction: this.form.isAction
-                },config)
+                }, config)
                 .then(response => {
                     console.log(response.status);
                     this.$message({
@@ -165,7 +165,7 @@ export default {
         },
         getdataall () {
             axios
-                .post("/user/GetUserAll",'',config)
+                .post("/user/GetUserAll", '', config)
                 .then(response => {
                     this.tableData = response.data;
                 })

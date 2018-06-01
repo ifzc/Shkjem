@@ -5,7 +5,7 @@
         </el-row>
         <el-row>
             <el-table :data="tableData" border style="width: 100%">
-                <el-table-column fixed prop="Id" label="#" width="100">
+                <el-table-column fixed type="index" :index="index" label="序号" width="150" align="center">
                 </el-table-column>
                 <el-table-column prop="Img" label="图片" width="220">
                     <template slot-scope="scope">
@@ -103,7 +103,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/team/DeleteTeam/" + row.Id,'',config)
+                        .post("/team/DeleteTeam/" + row.Id, '', config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -140,7 +140,7 @@ export default {
                     Id: this.form.id,
                     Img: this.form.img,
                     Remark: this.form.remark
-                },config)
+                }, config)
                 .then(response => {
                     console.log(response.status);
                     this.$message({
@@ -156,7 +156,7 @@ export default {
         },
         getdataall () {
             axios
-                .get("/team/GetTeamAll",'',config)
+                .get("/team/GetTeamAll", '', config)
                 .then(response => {
                     this.tableData = response.data;
                 })

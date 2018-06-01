@@ -6,7 +6,7 @@
         <el-row>
             <h4 style="color: rgb(255, 111, 111);margin: 0">请保留三条以上数据（首页需加载）</h4>
             <el-table :data="tableData" border style="width: 100%">
-                <el-table-column fixed prop="Id" label="#" width="100">
+                <el-table-column fixed type="index" :index="index" label="序号" width="150" align="center">
                 </el-table-column>
                 <el-table-column prop="Title" label="新闻标题">
                 </el-table-column>
@@ -128,7 +128,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/news/DeleteNews/" + row.Id,'',config)
+                        .post("/news/DeleteNews/" + row.Id, '', config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -174,7 +174,7 @@ export default {
                     Img: this.form.img,
                     Content: this.form.content,
                     Type: this.form.type
-                },config)
+                }, config)
                 .then(response => {
                     console.log(response.status);
                     this.$message({
@@ -195,7 +195,7 @@ export default {
                         type: 0,
                         num: 12
                     }
-                },config)
+                }, config)
                 .then(response => {
                     this.tableData = response.data;
                 })

@@ -5,7 +5,7 @@
         </el-row>
         <el-row>
             <el-table :data="tableData" border style="width: 100%">
-                <el-table-column fixed prop="Id" label="#">
+                <el-table-column fixed type="index" :index="index" label="序号" width="150" align="center">
                 </el-table-column>
                 <el-table-column prop="Name" label="姓名">
                 </el-table-column>
@@ -56,7 +56,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/message/DeleteMessage/" + row.Id,'',config)
+                        .post("/message/DeleteMessage/" + row.Id, '', config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -86,7 +86,7 @@ export default {
                     params: {
                         ismess: true
                     }
-                },config)
+                }, config)
                 .then(response => {
                     this.tableData = response.data;
                 })

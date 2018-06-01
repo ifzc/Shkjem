@@ -30,8 +30,8 @@
             h2.ani-view.fade-in-box CULTURE
             h1.ani-view.fade-in-box(style="margin-bottom:20px;") 我们只专注一件事情——工程项目管理
             h3.ani-view.fade-in-right 确保工程无重大安全事故
-            h3.ani-view.fade-in-right 确保工程施工单位不返工
-            h3.ani-view.fade-in-right 确保工程施工材料无伪劣品
+            h3.ani-view.fade-in-right 确保工程施工单位无大面积返工
+            h3.ani-view.fade-in-right 确保工程材料及设备无伪劣产品
             h3.ani-view.fade-in-right 确保工程管理留下痕迹、实施过程可追溯
         .rongyu
             el-dialog(:title="dialogTitle",width="50%",style="",:visible.sync="dialogVisible")
@@ -98,34 +98,7 @@ export default {
             pagetitle: '',
             fencaiimgs: [],
             honorimgs: [],
-            enterprises: [{
-                Img: '',
-                Remark: ''
-            }, {
-                Img: '',
-                Remark: ''
-            }, {
-                Img: '',
-                Remark: ''
-            }, {
-                Img: '',
-                Remark: ''
-            }, {
-                Img: '',
-                Remark: ''
-            }, {
-                Img: '',
-                Remark: ''
-            }, {
-                Img: '',
-                Remark: ''
-            }, {
-                Img: '',
-                Remark: ''
-            }, {
-                Img: '',
-                Remark: ''
-            }]
+            enterprises: []
         };
     },
     mounted: function () {

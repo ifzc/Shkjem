@@ -5,7 +5,8 @@
         </el-row>
         <el-row>
             <el-table :data="tableData" border style="width: 100%">
-                <el-table-column fixed prop="Id" label="#" width="100"></el-table-column>
+                <el-table-column fixed type="index" :index="index" label="序号" width="150" align="center">
+                </el-table-column>
                 <el-table-column prop="Title" label="学习标题"></el-table-column>
                 <el-table-column prop="Content" label="学习内容"></el-table-column>
                 <el-table-column fixed="right" label="操作">
@@ -73,7 +74,7 @@ export default {
             })
                 .then(() => {
                     axios
-                        .post("/study/DeleteStudy/" + row.Id,'',config)
+                        .post("/study/DeleteStudy/" + row.Id, '', config)
                         .then(response => {
                             console.log(response.status);
                             this.$message({
@@ -110,7 +111,7 @@ export default {
                     Id: this.form.id,
                     Title: this.form.title,
                     Content: this.form.content
-                },config)
+                }, config)
                 .then(response => {
                     console.log(response.status);
                     this.$message({
@@ -126,7 +127,7 @@ export default {
         },
         getdataall () {
             axios
-                .get("/study/GetStudyAll",'',config)
+                .get("/study/GetStudyAll", '', config)
                 .then(response => {
                     this.tableData = response.data;
                 })
