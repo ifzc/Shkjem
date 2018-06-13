@@ -98,7 +98,34 @@ export default {
             pagetitle: '',
             fencaiimgs: [],
             honorimgs: [],
-            enterprises: []
+            enterprises: [{
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }, {
+                Img: '',
+                Remark: ''
+            }]
         };
     },
     mounted: function () {

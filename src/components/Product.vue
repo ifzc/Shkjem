@@ -106,7 +106,8 @@ export default {
                 fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
                 sources: [{
                     type: "",
-                    src: "https://www.apple.com/105/media/cn/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-cn-20170912_1280x720h.mp4" //url地址
+                    //src: "https://www.apple.com/105/media/cn/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-cn-20170912_1280x720h.mp4" //url地址
+                    src: "../../static/ProductVideo.mp4"
                 }],
                 poster: "../../assets/images/case_head_bg.jpg", //你的封面地址
                 // width: document.documentElement.clientWidth,
