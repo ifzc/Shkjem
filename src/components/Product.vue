@@ -85,10 +85,13 @@
 </template>
 
 <script>
+import axios from "../router/http";
 import Img from '../../static/pro_top.jpg'
 
 const leftNav = ['视频播放', '模式的不同', '平台目标', '功能模块']
 const heights = [560, 1150, 1600, 2350]
+
+
 export default {
     data () {
         return {
@@ -106,8 +109,10 @@ export default {
                 fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
                 sources: [{
                     type: "",
-                    //src: "https://www.apple.com/105/media/cn/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-cn-20170912_1280x720h.mp4" //url地址
-                    src: "../../static/ProductVideo.mp4"
+
+                    // 默认SRC
+                    src: 'https://www.apple.com/105/media/cn/iphone-8/2017/95d4d604-018c-4bb3-a900-2d84eb37a5d7/tv-spots/portraits-of-her/iphone-8-portraits-of-her-cn-20171002_1280x720h.mp4',
+
                 }],
                 poster: "../../assets/images/case_head_bg.jpg", //你的封面地址
                 // width: document.documentElement.clientWidth,
@@ -123,6 +128,19 @@ export default {
     },
     mounted () {
         this.leftNavData = leftNav
+        axios
+            .get("/DataDictionary/GetDataDictionaryAll", {
+                params: {
+                    key: "产品视频链接"
+                }
+            })
+            .then(response => {
+                let videourl = response.data[0].Content;
+                this.playerOptions.sources[0].src = videourl
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     },
     methods: {
         navActive (i) {

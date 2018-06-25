@@ -18,7 +18,7 @@
     .bottombox(v-if="$route.path != '/' && $route.path.substring(0,6) != '/admin'")
         ul(v-for="hrefs in hrefdata")
             li(v-for="item in hrefs")
-                a(v-bind:href="item.href") {{ item.text }}
+                router-link(:to="item.href == null ? '#' : item.href") {{ item.text }}
         img.bottomercode(src="../static/ercode.png")
       div.copyright 科建版权所有 @备案号
 </template>
@@ -36,73 +36,73 @@ export default {
             hrefdata: [
                 [
                     {
-                        href: "#/goto",
+                        href: "/goto",
                         text: "走进科建"
                     },
                     {
-                        href: "#/goto",
+                        href: "/goto",
                         text: "发展历程"
                     },
                     {
-                        href: "#/goto",
+                        href: "/goto",
                         text: "企业文化"
                     },
                     {
-                        href: "#/goto",
+                        href: "/goto",
                         text: "资质荣誉"
                     },
                     {
-                        href: "#/goto",
+                        href: "/goto",
                         text: "合作伙伴"
                     }
                 ],
                 [
                     {
-                        href: "#/news",
+                        href: "/news",
                         text: "新闻资讯"
                     },
                     {
-                        href: "#/news",
+                        href: "/news",
                         text: "公司新闻"
                     },
                     {
-                        href: "#/news",
+                        href: "/news",
                         text: "行业动态"
                     }
                 ],
                 [
                     {
-                        href: "#/product",
+                        href: "/product",
                         text: "产品中心"
                     }
                 ],
                 [
                     {
-                        href: "#/anli",
+                        href: "/anli",
                         text: "经典案例"
                     },
                     {
-                        href: "#/recruitment",
+                        href: "/recruitment",
                         text: "诚聘英才"
                     },
                     {
-                        href: "#/study",
+                        href: "/study",
                         text: "学习模块"
                     }
                 ],
                 [
                     {
-                        href: "#/help",
+                        href: "/help",
                         text: "帮助中心"
                     },
                     {
-                        href: "#/about",
+                        href: "/about",
                         text: "联系我们"
                     }
                 ],
                 [
                     {
-                        href: '#/about',
+                        href: '/about',
                         text: ""
                     },
                     {
@@ -122,9 +122,6 @@ export default {
         };
     },
     created: function () {
-
-        console.log("联系开发者: #Source https://github.com/Smileioc");
-
         axios
             .get("/DataDictionary/GetDataDictionaryAll", {
                 params: {

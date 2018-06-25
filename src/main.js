@@ -19,10 +19,10 @@ import '../node_modules/element-ui/lib/theme-chalk/index.css'
 import 'animate.css'
 
 // 服务器地址
-Vue.prototype.serverpath = 'http://120.79.76.250/api/'
+Vue.prototype.serverpath = 'http://shkjgw.shkjem.com/api'
 
 // 图片服务器地址
-Vue.prototype.imgserver = 'http://120.79.76.250/'
+Vue.prototype.imgserver = 'http://shkjgw.shkjem.com/'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, {
