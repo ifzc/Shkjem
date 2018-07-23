@@ -71,7 +71,7 @@
                 el-col(:span='4',:offset='4')
                     img(:src="imgserver + enterprises[5].Img",style="width:100%")
                     p {{ enterprises[5].Remark }}
-                el-col(:span='4')
+                el-col(:span='4',v-show="enterprises[6].Img != ''")
                     img(:src="imgserver + enterprises[6].Img",style="width:100%")
                     p {{ enterprises[6].Remark }}
                 el-col(:span='4')

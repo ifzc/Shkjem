@@ -9,9 +9,7 @@ import {
     Message
 } from 'element-ui'
 
-axios.defaults.baseURL = 'http://120.79.76.250/api/'
-
-//axios.defaults.baseURL = "http://192.168.1.13/api/"
+axios.defaults.baseURL = 'http://shkjgw.shkjem.com/api'
 
 //设置超时时间
 axios.defaults.timeout = 5000
