@@ -12,7 +12,7 @@
 4. Jade
 5. Axios
 
-## 静态引用
+## 静态引用
 
 1. animate.css
 2. fullPage.js
