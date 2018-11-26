@@ -25,9 +25,16 @@ export default {
         cktopbtn: function (i) {
             //console.log(i)
             var ps = document.querySelectorAll(".topbtn p");
+            // 兼容TMD IE
+            for (let index = 0; index < ps.length; index++) {
+                const element = ps[index];
+                element.classList.remove("action");
+            }
+            /*
             ps.forEach(element => {
                 element.classList.remove("action");
             });
+            */
             let p = document.querySelector(".p-" + i);
             p.classList.add("action");
 

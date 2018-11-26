@@ -10,10 +10,11 @@
             div(:style="'background:url(' + imgserver + newdata.Img +');height: 12rem;height: 13rem;background-repeat: no-repeat;background-size: 100% 100%;'")
             //- img(v-bind:src='imgserver + newdata.Img')
             h4.newtitle {{ newdata.Title }}
-            p.newcontent {{ newdata.Content }}
+            p.newcontent {{ newdata.Content.length > 80 ? newdata.Content.substring(0,80) + '...' : newdata.Content }}
             p.btn(@click='$router.push({ path: `/newsdel/${newdata.Id}` })')
                 i.el-icon-caret-right
-                span.newsbtn MORE
+                router-link(:to="'/newsdel/'+ newdata.Id")
+                    span.newsbtn MORE
 </template>
 
 <script>
@@ -29,11 +30,18 @@ export default {
     },
     methods: {
         cktopbtn: function (i) {
-            //console.log(i);
+            console.log(i);
             var ps = document.querySelectorAll(".topbtn p");
+            // 兼容TMD IE
+            for (let index = 0; index < ps.length; index++) {
+                const element = ps[index];
+                element.classList.remove("action");
+            }
+            /*
             ps.forEach(element => {
                 element.classList.remove("action");
             });
+            */
             let p = document.querySelector(".p-" + i);
             p.classList.add("action");
 

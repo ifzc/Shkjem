@@ -51,35 +51,10 @@
         .hezuo
             h1.ani-view.fade-in-up 合作伙伴
             h2.ani-view.fade-in-down RARTNERS
-            el-row.ani-view.fade-in-up(:gutter="20",style="width:100%")
-                el-col(:span='4',:offset='2')
-                    img(:src="imgserver + enterprises[0].Img",style="width:100%")
-                    p {{ enterprises[0].Remark }}
-                el-col(:span='4')
-                    img(:src="imgserver + enterprises[1].Img",style="width:100%")
-                    p {{ enterprises[1].Remark }}
-                el-col(:span='4')
-                    img(:src="imgserver + enterprises[2].Img",style="width:100%")
-                    p {{ enterprises[2].Remark }}
-                el-col(:span='4')
-                    img(:src="imgserver + enterprises[3].Img",style="width:100%")
-                    p {{ enterprises[3].Remark }}
-                el-col(:span='4')
-                    img(:src="imgserver + enterprises[4].Img",style="width:100%")
-                    p {{ enterprises[4].Remark }}
-            el-row.ani-view.fade-in-down(:gutter="20",style="width:100%;margin-bottom: 60px")
-                el-col(:span='4',:offset='4')
-                    img(:src="imgserver + enterprises[5].Img",style="width:100%")
-                    p {{ enterprises[5].Remark }}
-                el-col(:span='4',v-show="enterprises[6].Img != ''")
-                    img(:src="imgserver + enterprises[6].Img",style="width:100%")
-                    p {{ enterprises[6].Remark }}
-                el-col(:span='4')
-                    img(:src="imgserver + enterprises[7].Img",style="width:100%")
-                    p {{ enterprises[7].Remark }}
-                el-col(:span='4')
-                    img(:src="imgserver + enterprises[8].Img",style="width:100%")
-                    p {{ enterprises[8].Remark }}
+            el-row.ani-view.fade-in-up(:gutter="60")
+                el-col(:span='4',v-for="item in enterprises",:key="item.Id")
+                    img(:src="imgserver + item.Img",style="width:100%;border: solid 1px #c2daeb;")
+                    p(style="margin: 0;") {{ item.Remark }}
 </template>
 <script>
 import '../../static/js/jquery-1.8.3.min'
@@ -415,6 +390,7 @@ export default {
 }
 .hezuo {
   padding: 10%;
+  padding-top: 0px;
 }
 .hezuo h1,
 .hezuo h2 {

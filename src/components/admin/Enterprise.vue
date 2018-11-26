@@ -4,7 +4,6 @@
             <el-button @click="createBtn" type="primary">新增</el-button>
         </el-row>
         <el-row>
-            <h4 style="color: rgb(255, 111, 111);margin: 0">显示前9条数据</h4>
             <el-table :data="tableData" border style="width: 100%">
                 <el-table-column fixed type="index" :index="index" label="序号" width="150" align="center">
                 </el-table-column>

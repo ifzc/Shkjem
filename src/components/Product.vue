@@ -18,7 +18,7 @@
                         <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true" :options="playerOptions"></video-player>
                     </div>
                     <div class="line-group group_2">
-                        <h3 class="ani-view fade-in-box">模式的不足</h3>
+                        <h3 class="ani-view fade-in-box">传统管理模式不足</h3>
                         <div class="triangle-facing-down ani-view fade-in-down"></div>
                         <div class="m_auto ani-view fade-in-down">
                             <div class="group-div ani-view fade-in-left">
@@ -144,44 +144,51 @@ export default {
     },
     methods: {
         navActive (i) {
-            clearInterval(prsetinterval);
+            if (window.ActiveXObject || "ActiveXObject" in window) {
+                console.log("ie")
+                this.isContTab = i
+            } else {
+                console.log("not ie")
 
-            this.isContTab = i
-            let height = heights[i]
-            let he = window.scrollY
-            console.log(he)
-            if (he == height) {
-                return;
-            }
-            let isup = he < height
-            // 通过需要滚动距离取绝对值 得到滚动速度
-            let spi = Math.abs(he - height) / 100
-            // 取整 向上保留
-            spi = Math.ceil(spi)
-            // 取整 四舍五入 Math.round(spi)
-            console.log(spi)
-            // 开始操纵滚动条
-            let count = 0
-            var prsetinterval = setInterval((function () {
-                return function () {
-                    if (he > height - (spi / 2) - 1 && he < height + (spi / 2) + 1) {
-                        clearInterval(prsetinterval);
-                    }
-                    if (isup) {
-                        he = he + spi
-                        window.scrollTo(0, he)
-                    }
-                    else {
-                        he = he - spi
-                        window.scrollTo(0, he)
-                    }
-                    // 防止因为兼容性导致的死循环
-                    count++
-                    if (count > 2500) {
-                        clearInterval(prsetinterval);
-                    }
+                clearInterval(prsetinterval);
+
+                this.isContTab = i
+                let height = heights[i]
+                let he = window.scrollY
+                console.log(he)
+                if (he == height) {
+                    return;
                 }
-            })(), 1)
+                let isup = he < height
+                // 通过需要滚动距离取绝对值 得到滚动速度
+                let spi = Math.abs(he - height) / 100
+                // 取整 向上保留
+                spi = Math.ceil(spi)
+                // 取整 四舍五入 Math.round(spi)
+                console.log(spi)
+                // 开始操纵滚动条
+                let count = 0
+                var prsetinterval = setInterval((function () {
+                    return function () {
+                        if (he > height - (spi / 2) - 1 && he < height + (spi / 2) + 1) {
+                            clearInterval(prsetinterval);
+                        }
+                        if (isup) {
+                            he = he + spi
+                            window.scrollTo(0, he)
+                        }
+                        else {
+                            he = he - spi
+                            window.scrollTo(0, he)
+                        }
+                        // 防止因为兼容性导致的死循环
+                        count++
+                        if (count > 2500) {
+                            clearInterval(prsetinterval);
+                        }
+                    }
+                })(), 1)
+            }
         }
     },
     components: {

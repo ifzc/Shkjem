@@ -4,7 +4,9 @@
 #fullpage
     .section(style="background-image: url(./static/home_top.jpg)")
         div.topshare
-             img(src="../../static/kejian.png")
+            p(style="margin: 5px;font-size: 30px;") 科建股份
+            p(style="margin: 5px;font-size: 20px;") KeJian Stock
+            //img(src="../../static/kejian.png")
         h1.toptitle {{ hometitle }}
         h2.toptitlesub {{ hometitlesub }}
         h2.toptitleen(style="font-family:'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif") {{ hometitlesuben }}
@@ -12,45 +14,47 @@
             div.mouse
         p.mousep 鼠标滚动
     .section(style="background-image: url(./static/home_do.jpg)")
-        h2(style="font-weight: 400;font-size:2.4em;margin:10px 0 0") 经典案例
-        h3(style="font-weight: 400;font-size:2em;margin:0") Suecessful Cass
-        div.case
-              div.view.view-first(@click="$router.push({ path: `/anlidel/${item.Id}` })",v-for="item in tableDataan")
+        div(:style="bh > 720 ? '' : bh > 620 ? 'margin-top: -60px;transform: scale(0.8)' : 'margin-top: -70px;transform: scale(0.75)'")
+            h2(style="font-weight: 400;font-size:2.4em;margin:10px 0 0") 经典案例
+            h3(style="font-weight: 400;font-size:2em;margin:0") Suecessful Cass
+            div.case
+                div.view.view-first(@click="$router.push({ path: `/anlidel/${item.Id}` })",v-for="(item,index) in tableDataan",v-if="index < 6")
                     img(:src="imgserver+item.Img")
                     div.mask
-                          h2 {{item.Title}}
-                          a.info MORE
+                        h2 {{item.Title}}
+                        a.info MORE
         p.mousep 鼠标滚动
     .section(style="background-image: url(./static/home_anli.jpg)")
-        h2(style="font-weight: 400;font-size:2.4em;margin-bottom:10px;") 最新资讯
-        h3(style="font-weight: 400;font-size:2em;margin:0") Latest News
-        el-row.newsbox(:gutter="0",style="margin-top: 20px")
-            el-col(:span="6",:offset="3")
-                div.imgcss
-                    img(v-bind:src="imgserver + tableData[0].Img")
-            el-col(:span="6")
-                p {{ tableData[1].Title }}
-                p {{ tableData[1].Content }}
-                p {{ tableData[1].CreateTime.substring(0,10) }}
-            el-col(:span="6")
-                div.imgcss
-                    img(v-bind:src="imgserver + tableData[2].Img")
-        .bar-row
-            span
-            span
-            span
-        el-row.newsbox(:gutter="0")
-            el-col(:span="6",:offset="3")
-                p {{ tableData[0].Title }}
-                p {{ tableData[0].Content }}
-                p {{ tableData[0].CreateTime.substring(0,10) }}
-            el-col(:span="6")
-                div.imgcss
-                    img(v-bind:src="imgserver + tableData[1].Img")
-            el-col(:span="6")
-                p {{ tableData[2].Title }}
-                p {{ tableData[2].Content }}
-                p {{ tableData[2].CreateTime.substring(0,10) }}
+        div(:style="bh > 720 ? '' : bh > 620 ? 'margin-top: -60px;transform: scale(0.8)' : 'margin-top: -95px;transform: scale(0.75)'")
+            h2(style="font-weight: 400;font-size:2.4em;margin-bottom:10px;") 最新资讯
+            h3(style="font-weight: 400;font-size:2em;margin:0") Latest News
+            el-row.newsbox(:gutter="0",style="margin-top: 20px")
+                el-col(:span="6",:offset="3")
+                    div.imgcss
+                        img(v-bind:src="imgserver + tableData[0].Img",@click="$router.push({ path: `/newsdel/${tableData[0].Id}` })")
+                el-col(:span="6")
+                    p {{ tableData[1].Title }}
+                    p {{ tableData[1].Content.length > 100 ? tableData[1].Content.substring(0,100) + '...' : tableData[1].Content }}
+                    p {{ tableData[1].CreateTime.substring(0,10) }}
+                el-col(:span="6")
+                    div.imgcss
+                        img(v-bind:src="imgserver + tableData[2].Img",@click="$router.push({ path: `/newsdel/${tableData[2].Id}` })")
+            .bar-row
+                span
+                span
+                span
+            el-row.newsbox(:gutter="0")
+                el-col(:span="6",:offset="3")
+                    p {{ tableData[0].Title }}
+                    p {{ tableData[0].Content.length > 100 ? tableData[0].Content.substring(0,100) + '...' : tableData[0].Content }}
+                    p {{ tableData[0].CreateTime.substring(0,10) }}
+                el-col(:span="6")
+                    div.imgcss
+                        img(v-bind:src="imgserver + tableData[1].Img",@click="$router.push({ path: `/newsdel/${tableData[1].Id}` })")
+                el-col(:span="6")
+                    p {{ tableData[2].Title }}
+                    p {{ tableData[2].Content.length > 100 ? tableData[2].Content.substring(0,100) + '...' : tableData[2].Content }}
+                    p {{ tableData[2].CreateTime.substring(0,10) }}
         p.mousep 鼠标滚动
 </template>
 
@@ -65,6 +69,7 @@ export default {
     name: "Home",
     data () {
         return {
+            bh: document.documentElement.clientHeight,
             // 结构复杂 只能定义空数组
             tableData: [
                 {
@@ -99,12 +104,13 @@ export default {
             loopBottom: true,
             navigation: true,
             navigationPosition: 'right',
-            navigationTooltips: ['科健欢迎您', '经典案例', '新闻资讯'],
+            navigationTooltips: ['科建欢迎您', '经典案例', '新闻资讯'],
             // afterLoad: function (anchorLink, index) {
             // },
             // onLeave: function (index, nextIndex, direction) {
             // }
         })
+
     },
     methods: {},
     created () {
@@ -141,7 +147,10 @@ export default {
                         CreateTime: ""
                     })
                 }
+                let anlis = document.querySelectorAll(".view-first")
+                console.log(anlis.length)
             }))
+        console.log("xx" + document.documentElement.clientHeight);
     },
     destroyed () {
         document.querySelector('#fullpage').style.transition = 'unset'
@@ -410,7 +419,7 @@ export default {
 }
 .newsbox img {
   width: 100%;
-  height: 210px;
+  height: 230px;
 }
 .bar-row {
   border-bottom: 2px #fff solid;
@@ -450,9 +459,9 @@ export default {
 .imgcss p {
   margin: 0;
   width: 100%;
-  height: 210px;
+  height: 230px;
   background-color: rgba(0, 0, 0, 0.5);
-  line-height: 210px;
+  line-height: 230px;
   position: absolute;
   top: 0;
   opacity: 0;

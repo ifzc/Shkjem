@@ -20,7 +20,7 @@
             li(v-for="item in hrefs")
                 router-link(:to="item.href == null ? '#' : item.href") {{ item.text }}
         img.bottomercode(src="../static/ercode.png")
-      div.copyright 科建版权所有 @备案号
+      div.copyright 科建版权所有
 </template>
 
 <script>
@@ -182,6 +182,23 @@ label,
 legend {
   margin: 0;
   padding: 0;
+}
+html,
+body,
+div,
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+li,
+ol,
+ul,
+strong,
+span {
+  font-family: "微软雅黑";
 }
 li,
 ol,

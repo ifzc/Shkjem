@@ -27,9 +27,10 @@
       el-col(:span="14",:offset="1")
         img.aboutimg(src="../../static/address.jpg",style="width:95%")
       el-col(:span="8")
-        p 邮箱:{{ emali }}
-        p 电话:{{ phone }}
-        p 地址:{{ address }}
+        p 企业：上海科建工程管理股份有限公司
+        p 邮箱：{{ emali }}
+        p 电话：{{ phone }}
+        p 地址：{{ address }}
 </template>
 <script>
 import axios from "../router/http";
