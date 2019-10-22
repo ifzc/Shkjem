@@ -1,39 +1,48 @@
-# keJian
+# kejian
 
+> 科健工程管理有限公司企业官网 前端    
+> 一个业余时间（三周）的外包项目 最终成品：    
+> 主分支已更新至新版，老版本源码移至 Release 链接 http://www.shkjem.com    
 
-> 科健工程管理有限公司企业官网 前端
-
-> 一个业余时间（三周）的外包项目 最终成品：http://www.shkjem.com
-
+## 新版本改进
+1. 代码优化
+2. 整体重构，结构升级为最新 vue-cli
+3. 图片加载加入懒加载，整体性能提升很大
+4. 视频采用 vue-video-player 处理兼容性
+5. 首页全屏滚动样式由静态文件 fullpage.js 改为 vue-awesome-swiper
+6. 样式调整，提升了自适应能力
 
 ## 组件列表
 
-1. Vue
-2. Vue-Router
-3. Element-UI
-4. Jade
-5. Axios
+1. vue-router
+2. element-ui
+3. axios
+4. vue-video-player (视频组件)
+5. vue-awesome-swiper (首页滚动组件)
+6. vue-lazyload (图片懒加载)
 
-## 静态引用
-
-1. animate.css
-2. fullPage.js
-
-## Build Setup
-
-``` bash
-# install dependencies
+## Project setup
+```
 npm install
-
-# serve with hot reload at localhost:8000
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-## 新版
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
