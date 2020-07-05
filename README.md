@@ -3,7 +3,8 @@
 
 一个业余时间（三周）的外包项目 最终成品：http://www.shkjem.com    
 主分支已更新至改进版，老版本源码移至 Release  
-如果是学习的话推荐学习新版本 链接 http://kejian.smilef.cn/     
+
+如果是学习的话推荐学习新版本 链接 http://kejian.filog.cn/    
 另外有些同学在问后端的代码 这里 https://github.com/ifzc/ShkjemApi 
 
 ## 新版本改进
